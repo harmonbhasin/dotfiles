@@ -39,7 +39,25 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-	use ("wbthomason/packer.nvim") -- Have packer manage itself
+  -- Packer can manage itself
+	use ("wbthomason/packer.nvim")
+
+  -- dashboard
+  use ("glepnir/dashboard-nvim")
+
+  -- Fuzzy search
+  use ("nvim-telescope/telescope.nvim")
+
+  -- Statusline
+  use ("famiu/feline.nvim")
+
+  -- Navigation
+  use ("kyazdani42/nvim-tree.lua")
+
+  -- LSP
+  use ("github/copilot.vim")
+  use ("nvim-treesitter/nvim-treesitter")
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end
