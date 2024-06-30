@@ -57,6 +57,11 @@ return packer.startup(function(use)
   -- LSP
   use ("github/copilot.vim")
   use ("nvim-treesitter/nvim-treesitter")
+  use ("nvim-lua/lsp-status.nvim")
+  use ("nvim-lua/plenary.nvim")
+
+  -- Colors
+  use ("folke/tokyonight.nvim")
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
