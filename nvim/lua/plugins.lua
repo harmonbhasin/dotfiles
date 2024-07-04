@@ -42,6 +42,12 @@ return packer.startup(function(use)
   -- Packer can manage itself
 	use ("wbthomason/packer.nvim")
 
+  -- Icons
+  use ("nvim-tree/nvim-web-devicons")
+
+  -- Syntax highlighting for nextflow
+  use ("LukeGoodsell/nextflow-vim")
+
   -- dashboard
   use ("glepnir/dashboard-nvim")
 
@@ -59,9 +65,16 @@ return packer.startup(function(use)
   use ("nvim-treesitter/nvim-treesitter")
   use ("nvim-lua/lsp-status.nvim")
   use ("nvim-lua/plenary.nvim")
+  use ("BurntSushi/ripgrep")
 
   -- Colors
   use ("folke/tokyonight.nvim")
+
+  -- Quarto installation extra
+  use ("neovim/nvim-lspconfig")
+  use ("quarto-dev/quarto-nvim")
+  use ("jmbuhr/otter.nvim")
+  use ("hrsh7th/nvim-cmp")
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
