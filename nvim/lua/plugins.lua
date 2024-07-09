@@ -46,7 +46,7 @@ return packer.startup(function(use)
   use ("nvim-tree/nvim-web-devicons")
 
   -- Syntax highlighting for nextflow
-  use ("LukeGoodsell/nextflow-vim")
+  use ("Mxrcon/nextflow-vim")
 
   -- dashboard
   use ("glepnir/dashboard-nvim")
@@ -66,6 +66,7 @@ return packer.startup(function(use)
   use ("nvim-lua/lsp-status.nvim")
   use ("nvim-lua/plenary.nvim")
   use ("BurntSushi/ripgrep")
+  use ("sharkdp/fd")
 
   -- Colors
   use ("folke/tokyonight.nvim")
