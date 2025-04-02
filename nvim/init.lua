@@ -18,6 +18,23 @@ require("nvim-tree").setup()
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeOpen<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>t', ':tabnew<CR>', { noremap = true, silent = true })
 
+-- Obsidian
+require("obsidian").setup({
+  workspaces = {
+  {
+  name = "personal",
+  path = "~/personal/obsidian/main",
+  },
+  },
+  completion = {
+  -- Set to false to disable completion.
+  nvim_cmp = true,
+  -- Trigger completion at 2 chars.
+  min_chars = 2,
+  },
+})
+vim.opt.conceallevel = 1
+
 
 require("telescope").setup()
 local builtin = require('telescope.builtin')
@@ -49,6 +66,8 @@ require('dashboard').setup{
 
 -- LSP configuration
 require('lsp-config')
+vim.keymap.set('n', '<leader>d]', vim.diagnostic.open_float, {desc = "Show diagnostic under cursor"})
+
 
 -- Dap for python
 require('python-dap')

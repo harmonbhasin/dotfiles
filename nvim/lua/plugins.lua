@@ -97,6 +97,9 @@ return packer.startup(function(use)
   use 'mfussenegger/nvim-dap'
   use {'Vigemus/iron.nvim'}
 
+  -- Obsidian
+  use "epwalsh/obsidian.nvim"
+    
   -- R
   use ("R-nvim/R.nvim")
 
