@@ -42,6 +42,8 @@ return packer.startup(function(use)
   -- Packer can manage itself
 	use ("wbthomason/packer.nvim")
 
+  
+
   -- Icons
   use ("nvim-tree/nvim-web-devicons")
 
@@ -85,7 +87,10 @@ return packer.startup(function(use)
 
   use("yetone/avante.nvim")
 
-    -- LSP Configuration
+  -- Codeium auto-complete
+  use 'Exafunction/codeium.vim'
+
+  -- LSP Configuration
   use 'neovim/nvim-lspconfig'           -- Required for LSP
   use 'hrsh7th/cmp-nvim-lsp'            -- LSP source for nvim-cmp
   use 'hrsh7th/cmp-buffer'              -- Buffer source for nvim-cmp
@@ -102,7 +107,6 @@ return packer.startup(function(use)
     
   -- R
   use ("R-nvim/R.nvim")
-
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
