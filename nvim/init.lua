@@ -18,6 +18,20 @@ require("nvim-tree").setup()
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeOpen<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>t', ':tabnew<CR>', { noremap = true, silent = true })
 
+
+-- Allow copying to keyboard from remote
+-- Enable OSC52 clipboard support
+vim.api.nvim_exec([[
+  function! s:osc52_copy(text)
+    let encoded = system('base64', a:text)
+    let encoded = substitute(encoded, '\n$', '', '')
+    let encoded = '\033]52;c;' . encoded . '\033\\'
+    call writefile([encoded], '/dev/tty', 'b')
+  endfunction
+
+  vnoremap <silent> "+y y:call <SID>osc52_copy(@0)<CR>
+]], false)
+
 -- Obsidian
 require("obsidian").setup({
   workspaces = {
