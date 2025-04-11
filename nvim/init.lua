@@ -115,7 +115,6 @@ vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'
 vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
 ------------------------------------------------------------
 
-
 require("telescope").setup()
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -125,16 +124,7 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 require("render-markdown").setup()
 
--- AVANTE CONFIG
-require("avante").setup({
-  provider = "claude",
-  claude = {
-    endpoint = "https://api.anthropic.com",
-    model = "claude-3-5-sonnet-20241022",
-    temperature = 0,
-    max_tokens = 4096,
-  }
-})
+
 
 -- Iron REPL
 local iron = require("iron.core")
@@ -367,4 +357,24 @@ require("nvim-treesitter.configs").setup{
     additional_vim_regex_highlighting = false,
   },
 }
+---------------------------------------------
+
+-- Avante
+require("avante").setup({
+  provider = "gemini",
+  gemini = {
+    -- @see https://ai.google.dev/gemini-api/docs/models/gemini
+    model = "gemini-2.5-pro-exp-03-25",
+    temperature = 0,
+    max_tokens = 4096,
+  },
+-- provider = "claude",
+-- claude = {
+--   endpoint = "https://api.anthropic.com",
+--   model = "claude-3-5-sonnet-20241022",
+--   temperature = 0,
+--   max_tokens = 4096,
+-- }
+})
+vim.opt.laststatus = 3
 ---------------------------------------------

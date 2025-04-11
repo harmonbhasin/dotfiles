@@ -74,12 +74,12 @@ return packer.startup(function(use)
   use ("folke/tokyonight.nvim")
 
   -- AI
+  use("yetone/avante.nvim")
   use ("stevearc/dressing.nvim")
   use ("MunifTanjim/nui.nvim")
   use ("MeanderingProgrammer/render-markdown.nvim")
   use ("hrsh7th/nvim-cmp")
 
-  use("yetone/avante.nvim")
 
   -- Codeium auto-complete
   use 'Exafunction/codeium.vim'
