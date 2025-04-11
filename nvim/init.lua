@@ -13,6 +13,10 @@ vim.opt.syntax = "on"     -- Enable syntax highlighting
 vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
 vim.cmd 'colorscheme tokyonight-night' -- Add theme
 
+-- Terminal
+vim.api.nvim_set_keymap('t', '<Esc><Esc>', [[<C-\><C-n>]], {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>t', ':terminal<CR>', {noremap = true, silent = true})
+
 -- Statusline
 require("feline").setup()
 
@@ -32,7 +36,7 @@ require("nvim-tree").setup({
   },
 })
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeOpen<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>t', ':tabnew<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tn', ':tabnew<CR>', { noremap = true, silent = true })
 
 -- Quarto
 require('quarto').setup{
