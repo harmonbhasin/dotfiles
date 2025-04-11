@@ -76,7 +76,7 @@ require("obsidian").setup({
   },
   completion = {
     -- Set to false to disable completion.
-    nvim_cmp = true,
+    nvim_cmp = false,
     -- Trigger completion at 2 chars.
     min_chars = 2,
   },
@@ -267,7 +267,8 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'buffer' },
+-- Prevents autocomplete from showing up normal text suggestions, this way everything else works
+--    { name = 'buffer' },
     { name = 'path' },
   }),
 })
