@@ -42,6 +42,17 @@ return packer.startup(function(use)
   -- Packer can manage itself
 	use ("wbthomason/packer.nvim")
 
+  -- Manager
+  -- use "williamboman/mason.nvim"
+
+  -- Toggle terminal
+  -- use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+  -- require("toggleterm").setup()
+  -- end}
+  
+  -- Diffs
+  use "sindrets/diffview.nvim"
+
   -- Icons
   use ("nvim-tree/nvim-web-devicons")
 
@@ -106,6 +117,9 @@ return packer.startup(function(use)
   use "quarto-dev/quarto-nvim"
   use "jmbuhr/otter.nvim"
 
+  -- Remember keys
+  use "folke/which-key.nvim"
+  use "folke/flash.nvim"
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

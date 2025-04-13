@@ -9,19 +9,26 @@ vim.g.mapleader = " "
 vim.opt.tabstop = 2       -- Number of spaces that a <Tab> in the file counts for
 vim.opt.shiftwidth = 2    -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true  -- Use spaces instead of tabs
+vim.opt.smartindent = true -- Make indenting smarter again
+vim.opt.autoindent = true -- Auto indent
 vim.opt.syntax = "on"     -- Enable syntax highlighting
 vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
 vim.cmd 'colorscheme tokyonight-night' -- Add theme
 
 -- Terminal
 vim.api.nvim_set_keymap('t', '<Esc><Esc>', [[<C-\><C-n>]], {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>t', ':terminal<CR>', {noremap = true, silent = true})
 
 -- Statusline
 require("feline").setup()
 
+-- Which Key
+require("which-key").setup()
+
 -- Tree navigator
 require("nvim-tree").setup({
+  git = {
+    ignore = false,  -- <- this is the key part
+  },
   sort = {
     sorter = "case_sensitive",
   },
@@ -76,7 +83,7 @@ require("obsidian").setup({
   },
   completion = {
     -- Set to false to disable completion.
-    nvim_cmp = false,
+    nvim_cmp = true,
     -- Trigger completion at 2 chars.
     min_chars = 2,
   },
