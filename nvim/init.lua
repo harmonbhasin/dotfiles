@@ -43,6 +43,7 @@ require("nvim-tree").setup({
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeOpen<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tn', ':tabnew<CR>', { noremap = true, silent = true })
 
+-- For quarto
 require('otter')
 
 -- Quarto

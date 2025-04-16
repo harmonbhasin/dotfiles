@@ -113,12 +113,16 @@ return packer.startup(function(use)
   -- R
   use ("R-nvim/R.nvim")
 
+  -- Nextflow
+  use "LukeGoodsell/nextflow-vim"
+
   -- Quarto
   use "quarto-dev/quarto-nvim"
   use "jmbuhr/otter.nvim"
 
   -- Git
   use 'tpope/vim-fugitive'
+  use 'pwntester/octo.nvim'
 
   -- Remember keys
   use {
