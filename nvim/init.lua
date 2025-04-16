@@ -71,50 +71,67 @@ require('quarto').setup{
 vim.keymap.set('n', '<Leader>ql', ':QuartoSendLine<CR>', { desc = 'Quarto Send Line' })
 vim.keymap.set('n', '<Leader>qr', ':QuartoSendRange<CR>', { desc = 'Quarto Send Range' })
 
+-- Get the home directory path and construct the full path to check
+local home = os.getenv("HOME")
+local obsidian_path = home .. "/personal/obsidian/main"
+
+-- Function to check if path exists
+local function path_exists(path)
+  local file = io.open(path, "r")
+  if file then
+    file:close()
+    return true
+  else
+    return false
+  end
+end
+
 -- Obsidian
-require("obsidian").setup({
-  workspaces = {
-    {
-      name = "personal",
-      path = "~/personal/obsidian/main",
+if path_exists(obsidian_path) then
+  require("obsidian").setup({
+    workspaces = {
+      {
+        name = "personal",
+        path = "~/personal/obsidian/main",
+      },
     },
-  },
-  completion = {
-    -- Set to false to disable completion.
-    nvim_cmp = true,
-    -- Trigger completion at 2 chars.
-    min_chars = 2,
-  },
-  daily_notes = {
-    folder = "Root/Daily note"
-  },
-  new_notes_location = "Zettlekasten",
-  -- Optional, alternatively you can customize the frontmatter data.
-  ---@return table
-  note_frontmatter_func = function(note)
-    -- Add the title of the note as an alias.
-    if note.title then
-      note:add_alias(note.title)
-    end
-
-    local out = {aliases = note.aliases, tags = note.tags }
-
-    -- `note.metadata` contains any manually added fields in the frontmatter.
-    -- So here we just make sure those fields are kept in the frontmatter.
-    if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-      for k, v in pairs(note.metadata) do
-        out[k] = v
+    completion = {
+      -- Set to false to disable completion.
+      nvim_cmp = true,
+      -- Trigger completion at 2 chars.
+      min_chars = 2,
+    },
+    daily_notes = {
+      folder = "Root/Daily note"
+    },
+    new_notes_location = "Zettlekasten",
+    -- Optional, alternatively you can customize the frontmatter data.
+    ---@return table
+    note_frontmatter_func = function(note)
+      -- Add the title of the note as an alias.
+      if note.title then
+        note:add_alias(note.title)
       end
-    end
 
-    return out
-  end,
-})
-vim.opt.conceallevel = 1
-vim.keymap.set('n', '<Leader>og', ':ObsidianSearch<CR>', { desc = 'Obsidian Search' })
-vim.keymap.set('n', '<Leader>os', ':ObsidianQuickSwitch<CR>', { desc = 'Obsidian Quick Switch' })
-vim.keymap.set('n', '<Leader>od', ':ObsidianToday<CR>', { desc = 'Obsidian Today' })
-vim.keymap.set('n', '<Leader>ofl', ':ObsidianFollowLink<CR>', { desc = 'Obsidian Follow Link' })
+      local out = {aliases = note.aliases, tags = note.tags }
+
+      -- `note.metadata` contains any manually added fields in the frontmatter.
+      -- So here we just make sure those fields are kept in the frontmatter.
+      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+        for k, v in pairs(note.metadata) do
+          out[k] = v
+        end
+      end
+
+      return out
+    end,
+  })
+  vim.opt.conceallevel = 1
+  vim.keymap.set('n', '<Leader>og', ':ObsidianSearch<CR>', { desc = 'Obsidian Search' })
+  vim.keymap.set('n', '<Leader>os', ':ObsidianQuickSwitch<CR>', { desc = 'Obsidian Quick Switch' })
+  vim.keymap.set('n', '<Leader>od', ':ObsidianToday<CR>', { desc = 'Obsidian Today' })
+  vim.keymap.set('n', '<Leader>ofl', ':ObsidianFollowLink<CR>', { desc = 'Obsidian Follow Link' })
+end
 
 --------------------------------------------------------------
 --- Codeium stuff
