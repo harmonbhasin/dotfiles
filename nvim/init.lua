@@ -43,6 +43,8 @@ require("nvim-tree").setup({
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeOpen<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tn', ':tabnew<CR>', { noremap = true, silent = true })
 
+require('otter')
+
 -- Quarto
 require('quarto').setup{
   debug = false,
@@ -68,8 +70,15 @@ require('quarto').setup{
   },
 }
 
-vim.keymap.set('n', '<Leader>ql', ':QuartoSendLine<CR>', { desc = 'Quarto Send Line' })
-vim.keymap.set('n', '<Leader>qr', ':QuartoSendRange<CR>', { desc = 'Quarto Send Range' })
+local runner = require("quarto.runner")
+vim.keymap.set("n", "<localleader>qc", runner.run_cell,  { desc = "run cell", silent = true })
+vim.keymap.set("n", "<localleader>qa", runner.run_above, { desc = "run cell and above", silent = true })
+vim.keymap.set("n", "<localleader>qA", runner.run_all,   { desc = "run all cells", silent = true })
+vim.keymap.set("n", "<localleader>ql", runner.run_line,  { desc = "run line", silent = true })
+vim.keymap.set("v", "<localleader>q",  runner.run_range, { desc = "run visual range", silent = true })
+vim.keymap.set("n", "<localleader>RA", function()
+  runner.run_all(true)
+end, { desc = "run all cells of all languages", silent = true })
 
 -- Get the home directory path and construct the full path to check
 local home = os.getenv("HOME")
@@ -184,7 +193,7 @@ iron.setup {
     end,
     -- How the repl window will be displayed
     -- See below for more information
-    repl_open_cmd = view.right(40),
+    repl_open_cmd = view.right(100),
 
     -- repl_open_cmd can also be an array-style table so that multiple 
     -- repl_open_commands can be given.
