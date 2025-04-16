@@ -17,12 +17,10 @@ vim.cmd 'colorscheme tokyonight-night' -- Add theme
 
 -- Terminal
 vim.api.nvim_set_keymap('t', '<Esc><Esc>', [[<C-\><C-n>]], {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>t', ':terminal<CR>', {noremap = true, silent = true})
 
 -- Statusline
 require("feline").setup()
-
--- Which Key
-require("which-key").setup()
 
 -- Tree navigator
 require("nvim-tree").setup({

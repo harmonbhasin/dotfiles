@@ -118,7 +118,9 @@ return packer.startup(function(use)
   use "jmbuhr/otter.nvim"
 
   -- Remember keys
-  use "folke/which-key.nvim"
+  use {
+    "folke/which-key.nvim", 
+  }
   use "folke/flash.nvim"
 
 	if PACKER_BOOTSTRAP then
