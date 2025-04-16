@@ -117,6 +117,9 @@ return packer.startup(function(use)
   use "quarto-dev/quarto-nvim"
   use "jmbuhr/otter.nvim"
 
+  -- Git
+  use 'tpope/vim-fugitive'
+
   -- Remember keys
   use {
     "folke/which-key.nvim", 
