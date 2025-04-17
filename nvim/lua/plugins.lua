@@ -1,136 +1,59 @@
-local fn = vim.fn-- Automatically install packer
-
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
-	"git",
-	"clone",
-	"--depth",
-	"1",
-	"https://github.com/wbthomason/packer.nvim",
-	install_path,
-	})
-	print("Installing packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-	augroup packer_user_config
-	autocmd!
-	autocmd BufWritePost plugins.lua source <afile> | PackerSync
-	augroup end
-	]])
+local plugins = {
+	'wbthomason/packer.nvim',
+  'sindrets/diffview.nvim',
+  'nvim-tree/nvim-web-devicons',
+  'glepnir/dashboard-nvim',
+  'nvim-telescope/telescope.nvim',
+  'nvim-lua/plenary.nvim',
+  'famiu/feline.nvim',
+  'kyazdani42/nvim-tree.lua',
+  'nvim-treesitter/nvim-treesitter',
+  'nvim-lua/lsp-status.nvim',
+  'BurntSushi/ripgrep',
+  'sharkdp/fd',
+  'folke/tokyonight.nvim',
+  'yetone/avante.nvim',
+  'stevearc/dressing.nvim',
+  'MunifTanjim/nui.nvim',
+  'MeanderingProgrammer/render-markdown.nvim',
+  'hrsh7th/nvim-cmp',
+  'Exafunction/codeium.vim',
+  'neovim/nvim-lspconfig',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'L3MON4D3/LuaSnip',
+  'saadparwaiz1/cmp_luasnip',
+  'mfussenegger/nvim-dap',
+  'Vigemus/iron.nvim',
+  'epwalsh/obsidian.nvim',
+  'R-nvim/R.nvim',
+  'LukeGoodsell/nextflow-vim',
+  'quarto-dev/quarto-nvim',
+  'jmbuhr/otter.nvim',
+  'tpope/vim-fugitive',
+  'pwntester/octo.nvim',
+  'folke/which-key.nvim',
+  'folke/flash.nvim'
+}
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	return
-end
+local opts = {}
 
--- Have packer use a popup window
-packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
-})
-
--- Install your plugins here
-return packer.startup(function(use)
-  -- Packer can manage itself
-	use ("wbthomason/packer.nvim")
-
-  -- Manager
-  -- use "williamboman/mason.nvim"
-
-  -- Toggle terminal
-  -- use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-  -- require("toggleterm").setup()
-  -- end}
-  
-  -- Diffs
-  use "sindrets/diffview.nvim"
-
-  -- Icons
-  use ("nvim-tree/nvim-web-devicons")
-
-  -- dashboard
-  use ("glepnir/dashboard-nvim")
-
-  -- Fuzzy search
-  use ("nvim-telescope/telescope.nvim")
-  use ("nvim-lua/plenary.nvim")
-
-  -- Statusline
-  use ("famiu/feline.nvim")
-
-  -- Navigation
-  use ("kyazdani42/nvim-tree.lua")
-
-  -- LSP
-  use {
-      'nvim-treesitter/nvim-treesitter',
-      run = function()
-          local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-          ts_update()
-      end,
-  }  
-  use ("nvim-lua/lsp-status.nvim")
-  use ("BurntSushi/ripgrep")
-  use ("sharkdp/fd")
-
-  -- Colors
-  use ("folke/tokyonight.nvim")
-
-  -- AI
-  use("yetone/avante.nvim")
-  use ("stevearc/dressing.nvim")
-  use ("MunifTanjim/nui.nvim")
-  use ("MeanderingProgrammer/render-markdown.nvim")
-  use ("hrsh7th/nvim-cmp")
-
-
-  -- Codeium auto-complete
-  use 'Exafunction/codeium.vim'
-
-  -- LSP Configuration
-  use 'neovim/nvim-lspconfig'           -- Required for LSP
-  use 'hrsh7th/cmp-nvim-lsp'            -- LSP source for nvim-cmp
-  use 'hrsh7th/cmp-buffer'              -- Buffer source for nvim-cmp
-  use 'hrsh7th/cmp-path'                -- Path source for nvim-cmp
-  use 'L3MON4D3/LuaSnip'                -- Snippet engine
-  use 'saadparwaiz1/cmp_luasnip'        -- Snippet source for nvim-cmp
-
-  -- Python
-  use 'mfussenegger/nvim-dap'
-  use {'Vigemus/iron.nvim'}
-
-  -- Obsidian
-  use "epwalsh/obsidian.nvim"
-    
-  -- R
-  use ("R-nvim/R.nvim")
-
-  -- Nextflow
-  use "LukeGoodsell/nextflow-vim"
-
-  -- Quarto
-  use "quarto-dev/quarto-nvim"
-  use "jmbuhr/otter.nvim"
-
-  -- Git
-  use 'tpope/vim-fugitive'
-  use 'pwntester/octo.nvim'
-
-  -- Remember keys
-  use {
-    "folke/which-key.nvim", 
-  }
-  use "folke/flash.nvim"
-
-	if PACKER_BOOTSTRAP then
-		require("packer").sync()
-	end
-end)
+require("lazy").setup(plugins,opts)

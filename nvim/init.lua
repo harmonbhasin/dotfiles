@@ -158,7 +158,9 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
-require("render-markdown").setup()
+require("render-markdown").setup({
+  file_types = {'markdown', 'quarto'}
+})
 
 
 
