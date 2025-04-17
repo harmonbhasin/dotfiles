@@ -194,7 +194,7 @@ iron.setup {
     end,
     -- How the repl window will be displayed
     -- See below for more information
-    repl_open_cmd = view.right(100),
+    repl_open_cmd = "vertical botright 80 split"
 
     -- repl_open_cmd can also be an array-style table so that multiple 
     -- repl_open_commands can be given.
@@ -320,6 +320,10 @@ lspconfig.ts_ls.setup{
   capabilities = require('cmp_nvim_lsp').default_capabilities(),
 }
 
+lspconfig.r_language_server.setup {
+  capabilities = require('cmp_nvim_lsp').default_capabilities(), 
+}
+
 vim.keymap.set('n', '<leader>d]', vim.diagnostic.open_float, {desc = "Show diagnostic under cursor"})
 ---------------------------------------------
 
@@ -355,7 +359,7 @@ end
 -- TREE SITTER CONFIG
 require("nvim-treesitter.configs").setup{
   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "r" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
