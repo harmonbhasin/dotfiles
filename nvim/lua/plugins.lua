@@ -16,7 +16,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-	'wbthomason/packer.nvim',
   'sindrets/diffview.nvim',
   'nvim-tree/nvim-web-devicons',
   'glepnir/dashboard-nvim',
