@@ -28,7 +28,20 @@ local plugins = {
   'BurntSushi/ripgrep',
   'sharkdp/fd',
   'folke/tokyonight.nvim',
-  'yetone/avante.nvim',
+   {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false,
+    config = function()
+      require("config.avante")
+    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+  },
   'stevearc/dressing.nvim',
   'MunifTanjim/nui.nvim',
   'MeanderingProgrammer/render-markdown.nvim',

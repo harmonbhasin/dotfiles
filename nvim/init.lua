@@ -13,7 +13,9 @@ vim.opt.smartindent = true -- Make indenting smarter again
 vim.opt.autoindent = true -- Auto indent
 vim.opt.syntax = "on"     -- Enable syntax highlighting
 vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
+vim.opt.showmode = false   -- Don't show mode in command line
 vim.cmd 'colorscheme tokyonight-night' -- Add theme
+vim.opt.laststatus = 3 -- Avante setting
 
 -- Terminal
 vim.api.nvim_set_keymap('t', '<Esc><Esc>', [[<C-\><C-n>]], {noremap = true})
@@ -400,24 +402,4 @@ require("nvim-treesitter.configs").setup{
     additional_vim_regex_highlighting = false,
   },
 }
----------------------------------------------
-
--- Avante
-require("avante").setup({
-  provider = "gemini",
-  gemini = {
-    -- @see https://ai.google.dev/gemini-api/docs/models/gemini
-    model = "gemini-2.5-pro-exp-03-25",
-    temperature = 0,
-    max_tokens = 4096,
-  },
--- provider = "claude",
--- claude = {
---   endpoint = "https://api.anthropic.com",
---   model = "claude-3-5-sonnet-20241022",
---   temperature = 0,
---   max_tokens = 4096,
--- }
-})
-vim.opt.laststatus = 3
 ---------------------------------------------
