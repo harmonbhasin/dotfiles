@@ -8,13 +8,6 @@ return require("avante").setup({
   openai = {
     endpoint = "https://api.openai.com/v1",
     model = "gpt-4.1-mini", -- your desired model (or use gpt-4o, etc.)
-    models = {
-      "gpt-4.1-nano",
-      "gpt-4.1",
-      "gpt-4.1",
-      "o3",
-      "o4-mini",
-    },
     timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
     temperature = 0,
     max_completion_tokens = tokens(64), -- Increase this to include reasoning tokens (for reasoning models)
@@ -23,10 +16,6 @@ return require("avante").setup({
   gemini = {
     -- @see https://ai.google.dev/gemini-api/docs/models/gemini
     model = "gemini-2.5-pro-exp-03-25",
-    models = {
-      "gemini-2.5-flash-preview-04-17",
-      "gemini-2.0-flash",
-    },
     temperature = 0,
     max_tokens = tokens(64),
   },
