@@ -10,56 +10,56 @@ return require("avante").setup({
     model = "gpt-4.1-mini", -- your desired model (or use gpt-4o, etc.)
     timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
     temperature = 0,
-    max_completion_tokens = tokens(64), -- Increase this to include reasoning tokens (for reasoning models)
+    max_completion_tokens = tokens(32), -- Increase this to include reasoning tokens (for reasoning models)
     --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
   },
   gemini = {
     -- @see https://ai.google.dev/gemini-api/docs/models/gemini
     model = "gemini-2.5-pro-exp-03-25",
     temperature = 0,
-    max_tokens = tokens(64),
+    max_tokens = tokens(32),
   },
   claude = {
      endpoint = "https://api.anthropic.com",
      model = "claude-3-5-sonnet-20241022",
      temperature = 0,
-     max_tokens = tokens(64),
+     max_tokens = tokens(32),
    },
   vendors = {
     ["claude:3.7"] = {
       __inherited_from = "claude",
       model = "claude-3-7-sonnet-20250219",
-      max_tokens = tokens(64),
+      max_tokens = tokens(32),
     },
     ["openai:gpt-4.1-nano"] = {
       __inherited_from = "openai",
       model = "gpt-4.1-nano",
-      max_tokens = tokens(64),
+      max_tokens = tokens(32),
     },
     ["openai:gpt-4.1"] = {
       __inherited_from = "openai",
       model = "gpt-4.1",
-      max_tokens = tokens(64),
+      max_tokens = tokens(32),
     },
     ["openai:o3"] = {
       __inherited_from = "openai",
       model = "o3",
-      max_tokens = tokens(64),
+      max_tokens = tokens(32),
     },
     ["openai:o4-mini"] = {
       __inherited_from = "openai",
       model = "o4-mini",
-      max_tokens = tokens(64),
+      max_tokens = tokens(32),
     },
     ["gemini:2.0-flash"] = {
       __inherited_from = "gemini",
       model = "gemini-2.0-flash",
-      max_tokens = tokens(64),
+      max_tokens = tokens(32),
     },
     ["gemini:2.5-flash-preview"] = {
       __inherited_from = "gemini",
       model = "gemini-2.5-flash-preview-04-17",
-      max_tokens = tokens(64),
+      max_tokens = tokens(32),
     },
   },
   behaviour = {
