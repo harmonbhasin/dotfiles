@@ -16,6 +16,8 @@ vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
 vim.opt.showmode = false   -- Don't show mode in command line
 vim.cmd 'colorscheme tokyonight-night' -- Add theme
 vim.opt.laststatus = 3 -- Avante setting
+-- Make Fugitive use Git's configured pager (Delta)
+vim.g.fugitive_use_git_pager = 1
 
 -- Terminal
 vim.api.nvim_set_keymap('t', '<Esc><Esc>', [[<C-\><C-n>]], {noremap = true})
