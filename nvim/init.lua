@@ -14,7 +14,7 @@ vim.opt.autoindent = true -- Auto indent
 vim.opt.syntax = "on"     -- Enable syntax highlighting
 vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
 vim.opt.showmode = false   -- Don't show mode in command line
-vim.cmd 'colorscheme tokyonight-night' -- Add theme
+-- vim.cmd 'colorscheme tokyonight-night' -- Add theme
 vim.opt.laststatus = 3 -- Avante setting
 -- Make Fugitive use Git's configured pager (Delta)
 vim.g.fugitive_use_git_pager = 1

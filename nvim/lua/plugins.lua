@@ -27,7 +27,17 @@ local plugins = {
   'nvim-lua/lsp-status.nvim',
   'BurntSushi/ripgrep',
   'sharkdp/fd',
-  'folke/tokyonight.nvim',
+--  'folke/tokyonight.nvim',
+  {
+    "tiagovla/tokyodark.nvim",
+    opts = {
+        -- custom options here
+    },
+    config = function(_, opts)
+        require("tokyodark").setup(opts) -- calling setup is optional
+        vim.cmd [[colorscheme tokyodark]]
+    end,
+   }, 
    {
     "yetone/avante.nvim",
     event = "VeryLazy",
