@@ -27,7 +27,16 @@ local plugins = {
   'nvim-lua/lsp-status.nvim',
   'BurntSushi/ripgrep',
   'sharkdp/fd',
---  'folke/tokyonight.nvim',
+  {
+  "olimorris/codecompanion.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-treesitter/nvim-treesitter",
+  },
+  config = function()
+    require("config.codecompanion")
+  end
+  },
   {
     "tiagovla/tokyodark.nvim",
     opts = {
@@ -38,20 +47,6 @@ local plugins = {
         vim.cmd [[colorscheme tokyodark]]
     end,
    }, 
-   {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    version = false,
-    config = function()
-      require("config.avante")
-    end,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-  },
   'stevearc/dressing.nvim',
   'MunifTanjim/nui.nvim',
   'MeanderingProgrammer/render-markdown.nvim',
@@ -75,6 +70,24 @@ local plugins = {
   'folke/which-key.nvim',
   'folke/flash.nvim'
 }
+
+--  'folke/tokyonight.nvim',
+-- {
+--  "yetone/avante.nvim",
+--  event = "VeryLazy",
+--  version = false,
+--  config = function()
+--    require("config.avante")
+--  end,
+--  dependencies = {
+--    "nvim-treesitter/nvim-treesitter",
+--    "stevearc/dressing.nvim",
+--    "nvim-lua/plenary.nvim",
+--    "MunifTanjim/nui.nvim",
+--  },
+--},
+--
+--
 
 local opts = {}
 

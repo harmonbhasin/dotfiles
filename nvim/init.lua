@@ -19,6 +19,10 @@ vim.opt.laststatus = 3 -- Avante setting
 -- Make Fugitive use Git's configured pager (Delta)
 vim.g.fugitive_use_git_pager = 1
 
+-- CodeCompanion
+vim.keymap.set("n", "<leader>aa", "<cmd>CodeCompanionChat<cr>", { desc = "Open Code Companion Chat" })
+vim.keymap.set("n", "<leader>at", "<cmd>CodeCompanionActions<cr>", { desc = "Open Code Companion Actions" })
+
 -- Terminal
 vim.api.nvim_set_keymap('t', '<Esc><Esc>', [[<C-\><C-n>]], {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>t', ':terminal<CR>', {noremap = true, silent = true})
@@ -138,6 +142,16 @@ if path_exists(obsidian_path) then
       end
 
       return out
+    end,
+    -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
+    -- URL it will be ignored but you can customize this behavior here.
+    ---@param url string
+    follow_url_func = function(url)
+      -- Open the URL in the default web browser.
+      vim.fn.jobstart({"open", url})  -- Mac OS
+      -- vim.fn.jobstart({"xdg-open", url})  -- linux
+      -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+      -- vim.ui.open(url) -- need Neovim 0.10.0+
     end,
   })
   vim.opt.conceallevel = 1
