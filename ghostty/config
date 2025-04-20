@@ -1,0 +1,8 @@
+theme = CyberpunkScarletprotocol
+shell-integration = bash
+font-size = 11
+
+window-padding-balance = true
+window-save-state = always
+macos-titlebar-style = hidden
+window-colorspace = "display-p3"
