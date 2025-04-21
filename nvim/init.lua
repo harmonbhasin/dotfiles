@@ -4,6 +4,7 @@ require("plugins")
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.g.python_recommended_style = 0
 vim.wo.number = true
 vim.g.mapleader = " "
 vim.opt.tabstop = 2       -- Number of spaces that a <Tab> in the file counts for
@@ -15,13 +16,13 @@ vim.opt.syntax = "on"     -- Enable syntax highlighting
 vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
 vim.opt.showmode = false   -- Don't show mode in command line
 -- vim.cmd 'colorscheme tokyonight-night' -- Add theme
-vim.opt.laststatus = 3 -- Avante setting
+-- vim.opt.laststatus = 3 -- Avante setting
 -- Make Fugitive use Git's configured pager (Delta)
 vim.g.fugitive_use_git_pager = 1
 
 -- CodeCompanion
-vim.keymap.set("n", "<leader>aa", "<cmd>CodeCompanionChat<cr>", { desc = "Open Code Companion Chat" })
-vim.keymap.set("n", "<leader>at", "<cmd>CodeCompanionActions<cr>", { desc = "Open Code Companion Actions" })
+vim.keymap.set({"n", "v"}, "<leader>aa", "<cmd>CodeCompanionChat<cr>", { desc = "Open Code Companion Chat" })
+vim.keymap.set({"n", "v"}, "<leader>at", "<cmd>CodeCompanionActions<cr>", { desc = "Open Code Companion Actions" })
 
 -- Terminal
 vim.api.nvim_set_keymap('t', '<Esc><Esc>', [[<C-\><C-n>]], {noremap = true})
