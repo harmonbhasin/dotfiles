@@ -1,74 +1,121 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  'sindrets/diffview.nvim',
-  'nvim-tree/nvim-web-devicons',
-  'glepnir/dashboard-nvim',
-  'nvim-telescope/telescope.nvim',
-  'nvim-lua/plenary.nvim',
-  'famiu/feline.nvim',
-  'kyazdani42/nvim-tree.lua',
-  'nvim-treesitter/nvim-treesitter',
-  'nvim-lua/lsp-status.nvim',
-  'BurntSushi/ripgrep',
-  'sharkdp/fd',
-  {
-  "olimorris/codecompanion.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
-  },
-  config = function()
-    require("config.codecompanion")
-  end
-  },
-  {
-    "tiagovla/tokyodark.nvim",
-    opts = {
-        -- custom options here
-    },
-    config = function(_, opts)
-        require("tokyodark").setup(opts) -- calling setup is optional
-        vim.cmd [[colorscheme tokyodark]]
-    end,
-   }, 
-  'stevearc/dressing.nvim',
-  'MunifTanjim/nui.nvim',
-  'MeanderingProgrammer/render-markdown.nvim',
-  'hrsh7th/nvim-cmp',
-  'Exafunction/codeium.vim',
-  'neovim/nvim-lspconfig',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-path',
-  'L3MON4D3/LuaSnip',
-  'saadparwaiz1/cmp_luasnip',
-  'mfussenegger/nvim-dap',
-  'Vigemus/iron.nvim',
-  'epwalsh/obsidian.nvim',
-  'R-nvim/R.nvim',
-  'LukeGoodsell/nextflow-vim',
-  'quarto-dev/quarto-nvim',
-  'jmbuhr/otter.nvim',
-  'tpope/vim-fugitive',
-  'pwntester/octo.nvim',
-  'folke/which-key.nvim',
-  'folke/flash.nvim'
+	"sindrets/diffview.nvim",
+	"nvim-tree/nvim-web-devicons",
+	"glepnir/dashboard-nvim",
+	"nvim-telescope/telescope.nvim",
+	"nvim-lua/plenary.nvim",
+	-- status line
+	{
+		"famiu/feline.nvim",
+		config = function()
+			require("feline").setup()
+		end,
+	},
+	"kyazdani42/nvim-tree.lua",
+	"nvim-treesitter/nvim-treesitter",
+	"nvim-lua/lsp-status.nvim",
+	"BurntSushi/ripgrep",
+	"sharkdp/fd",
+	-- Manage LSP, DAP, Linters, Formatters
+	{
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup()
+		end,
+	},
+	-- Code formatting
+	{
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		opts = {
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_fallback = true,
+			},
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "ruff" },
+				javascript = { "prettier" },
+				markdown = { "prettier" },
+			},
+		},
+	},
+	-- Code assistant
+	{
+		"olimorris/codecompanion.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("config.codecompanion")
+		end,
+	},
+	-- Theme
+	{
+		"tiagovla/tokyodark.nvim",
+		opts = {
+			-- custom options here
+		},
+		config = function(_, opts)
+			require("tokyodark").setup(opts) -- calling setup is optional
+			vim.cmd([[colorscheme tokyodark]])
+		end,
+	},
+	"stevearc/dressing.nvim",
+	"MunifTanjim/nui.nvim",
+	-- Render markdown
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		config = function()
+			require("render-markdown").setup({
+				file_types = { "markdown", "quarto" },
+			})
+		end,
+	},
+	"hrsh7th/nvim-cmp",
+	"Exafunction/codeium.vim",
+	"neovim/nvim-lspconfig",
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
+	"L3MON4D3/LuaSnip",
+	"saadparwaiz1/cmp_luasnip",
+	"mfussenegger/nvim-dap",
+	"Vigemus/iron.nvim",
+	"epwalsh/obsidian.nvim",
+	"R-nvim/R.nvim",
+	"LukeGoodsell/nextflow-vim",
+	"quarto-dev/quarto-nvim",
+	-- For quarto
+	{
+		"jmbuhr/otter.nvim",
+		config = function()
+			require("otter").setup()
+		end,
+	},
+	"tpope/vim-fugitive",
+	"pwntester/octo.nvim",
+	"folke/which-key.nvim",
+	"folke/flash.nvim",
 }
 
 --  'folke/tokyonight.nvim',
@@ -91,4 +138,4 @@ local plugins = {
 
 local opts = {}
 
-require("lazy").setup(plugins,opts)
+require("lazy").setup(plugins, opts)
