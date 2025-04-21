@@ -13,7 +13,6 @@ vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.smartindent = true -- Make indenting smarter again
 vim.opt.autoindent = true -- Auto indent
 vim.opt.syntax = "on" -- Enable syntax highlighting
-vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
 vim.opt.showmode = false -- Don't show mode in command line
 -- vim.cmd 'colorscheme tokyonight-night' -- Add theme
 -- vim.opt.laststatus = 3 -- Avante setting

@@ -25,6 +25,7 @@ local plugins = {
 	{
 		"famiu/feline.nvim",
 		config = function()
+			vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
 			require("feline").setup()
 		end,
 	},
