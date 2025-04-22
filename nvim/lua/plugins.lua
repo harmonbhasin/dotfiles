@@ -16,10 +16,20 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+	{
+		"vhyrro/luarocks.nvim",
+		priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+		config = true,
+	},
 	"sindrets/diffview.nvim",
 	"nvim-tree/nvim-web-devicons",
 	"glepnir/dashboard-nvim",
-	"nvim-telescope/telescope.nvim",
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"sharkdp/fd",
+		},
+	},
 	"nvim-lua/plenary.nvim",
 	-- status line
 	{
@@ -33,7 +43,6 @@ local plugins = {
 	"nvim-treesitter/nvim-treesitter",
 	"nvim-lua/lsp-status.nvim",
 	"BurntSushi/ripgrep",
-	"sharkdp/fd",
 	-- Manage LSP, DAP, Linters, Formatters
 	{
 		"williamboman/mason.nvim",
@@ -57,6 +66,34 @@ local plugins = {
 				javascript = { "prettier" },
 				markdown = { "prettier" },
 			},
+		},
+	},
+	--https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		---@type MasonNvimDapSettings
+		opts = {
+			-- This line is essential to making automatic installation work
+			-- :exploding-brain
+			handlers = {},
+			automatic_installation = {
+				-- These will be configured by separate plugins.
+				exclude = {
+					"delve",
+					"python",
+				},
+			},
+			-- DAP servers: Mason will be invoked to install these if necessary.
+			ensure_installed = {
+				"bash",
+				"codelldb",
+				"php",
+				"python",
+			},
+		},
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"williamboman/mason.nvim",
 		},
 	},
 	-- Code assistant
@@ -100,7 +137,88 @@ local plugins = {
 	"hrsh7th/cmp-path",
 	"L3MON4D3/LuaSnip",
 	"saadparwaiz1/cmp_luasnip",
-	"mfussenegger/nvim-dap",
+	{
+		"mfussenegger/nvim-dap",
+		keys = {
+			{
+				"<leader>db",
+				function()
+					require("dap").toggle_breakpoint()
+				end,
+				desc = "Toggle Breakpoint",
+			},
+
+			{
+				"<leader>dc",
+				function()
+					require("dap").continue()
+				end,
+				desc = "Continue",
+			},
+
+			{
+				"<leader>dC",
+				function()
+					require("dap").run_to_cursor()
+				end,
+				desc = "Run to Cursor",
+			},
+
+			{
+				"<leader>dT",
+				function()
+					require("dap").terminate()
+				end,
+				desc = "Terminate",
+			},
+		},
+		dependencies = {
+			"mfussenegger/nvim-dap-python",
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			"nvim-neotest/nvim-nio",
+		},
+	},
+	{
+		"theHamsta/nvim-dap-virtual-text",
+		config = true,
+		dependencies = {
+			"mfussenegger/nvim-dap",
+		},
+	},
+	{
+		"rcarriga/nvim-dap-ui",
+		config = true,
+		keys = {
+			{
+				"<leader>du",
+				function()
+					require("dapui").toggle({})
+				end,
+				desc = "Dap UI",
+			},
+		},
+		dependencies = {
+			"jay-babu/mason-nvim-dap.nvim",
+			"leoluz/nvim-dap-go",
+			"mfussenegger/nvim-dap-python",
+			"nvim-neotest/nvim-nio",
+			"theHamsta/nvim-dap-virtual-text",
+		},
+	},
+	{
+		"mfussenegger/nvim-dap-python",
+		lazy = true,
+		config = function()
+			local python = vim.fn.expand("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+			require("dap-python").setup(python)
+		end,
+		-- Consider the mappings at
+		-- https://github.com/mfussenegger/nvim-dap-python?tab=readme-ov-file#mappings
+		dependencies = {
+			"mfussenegger/nvim-dap",
+		},
+	},
 	"Vigemus/iron.nvim",
 	"epwalsh/obsidian.nvim",
 	"R-nvim/R.nvim",
@@ -137,6 +255,4 @@ local plugins = {
 --
 --
 
-local opts = {}
-
-require("lazy").setup(plugins, opts)
+require("lazy").setup(plugins)

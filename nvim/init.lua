@@ -155,6 +155,29 @@ if path_exists(obsidian_path) then
 	vim.keymap.set("n", "<Leader>ofl", ":ObsidianFollowLink<CR>", { desc = "Obsidian Follow Link" })
 end
 
+-- Debug keybindings
+vim.keymap.set("n", "<leader>db", function()
+	require("dap").toggle_breakpoint()
+end, { desc = "Toggle Breakpoint" })
+vim.keymap.set("n", "<leader>dc", function()
+	require("dap").continue()
+end, { desc = "Continue Debugging" })
+vim.keymap.set("n", "<leader>du", function()
+	require("dapui").toggle()
+end, { desc = "Toggle Debug UI" })
+vim.keymap.set("n", "<leader>ds", function()
+	require("dap").step_over()
+end, { desc = "Step Over" })
+vim.keymap.set("n", "<leader>di", function()
+	require("dap").step_into()
+end, { desc = "Step Into" })
+vim.keymap.set("n", "<leader>do", function()
+	require("dap").step_out()
+end, { desc = "Step Out" })
+vim.keymap.set("n", "<leader>dt", function()
+	require("dap").terminate()
+end, { desc = "Terminate Debug" })
+
 --------------------------------------------------------------
 --- Codeium stuff
 vim.keymap.set("i", "<C-g>", function()
@@ -342,33 +365,6 @@ lspconfig.r_language_server.setup({
 vim.keymap.set("n", "<leader>d]", vim.diagnostic.open_float, { desc = "Show diagnostic under cursor" })
 ---------------------------------------------
 
--- DAP
-local dap = require("dap")
-dap.adapters.python = function(cb, config)
-	if config.request == "attach" then
-		---@diagnostic disable-next-line: undefined-field
-		local port = (config.connect or config).port
-		---@diagnostic disable-next-line: undefined-field
-		local host = (config.connect or config).host or "127.0.0.1"
-		cb({
-			type = "server",
-			port = assert(port, "`connect.port` is required for a python `attach` configuration"),
-			host = host,
-			options = {
-				source_filetype = "python",
-			},
-		})
-	else
-		cb({
-			type = "executable",
-			command = "path/to/virtualenvs/debugpy/bin/python",
-			args = { "-m", "debugpy.adapter" },
-			options = {
-				source_filetype = "python",
-			},
-		})
-	end
-end
 ----------------------------------------------
 
 -- TREE SITTER CONFIG
