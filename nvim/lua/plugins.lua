@@ -53,20 +53,30 @@ local plugins = {
 	-- Code formatting
 	{
 		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
-		opts = {
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "ruff" },
-				javascript = { "prettier" },
-				markdown = { "prettier" },
-			},
-		},
+		event = { "BufWritePre", "BufReadPre", "BufNewFile" },
+		config = function(_, opts)
+			local conform = require("conform")
+			conform.setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					python = { "ruff" },
+					javascript = { "prettier" },
+					markdown = { "prettier" },
+				},
+				format_on_save = {
+					timeout_ms = 500,
+					lsp_fallback = true,
+					async = false,
+				},
+			})
+			vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+				conform.format({
+					lsp_fallback = true,
+					async = false,
+					timeout_ms = 500,
+				})
+			end, { desc = "Format file or range (in visual mode)" })
+		end,
 	},
 	--https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
 	{
