@@ -132,13 +132,9 @@ local plugins = {
 		end,
 	},
 	{
-		"tiagovla/tokyodark.nvim", -- Theme
-		opts = {
-			-- custom options here
-		},
+		"rebelot/kanagawa.nvim",
 		config = function(_, opts)
-			require("tokyodark").setup(opts) -- calling setup is optional
-			vim.cmd([[colorscheme tokyodark]])
+			vim.cmd([[colorscheme kanagawa-dragon]])
 		end,
 	},
 	-- "stevearc/dressing.nvim", -- Customize telescope
