@@ -17,20 +17,34 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 	{
+		"stevearc/oil.nvim",
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {},
+		-- Optional dependencies
+		dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+		config = function()
+			require("oil").setup()
+		end,
+		lazy = false,
+	},
+	{
 		"vhyrro/luarocks.nvim",
 		priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
 		config = true,
 	},
-	"sindrets/diffview.nvim",
-	"nvim-tree/nvim-web-devicons",
-	"glepnir/dashboard-nvim",
+	-- "sindrets/diffview.nvim",
+	"nvim-tree/nvim-web-devicons", -- File icons
+	"glepnir/dashboard-nvim", -- Dashboard
 	{
-		"nvim-telescope/telescope.nvim",
+		"nvim-telescope/telescope.nvim", -- Fuzzy finder
 		dependencies = {
 			"sharkdp/fd",
 		},
 	},
-	"nvim-lua/plenary.nvim",
+	"nvim-lua/plenary.nvim", -- Common lua functions used by other plugins
 	-- status line
 	{
 		"famiu/feline.nvim",
@@ -39,9 +53,9 @@ local plugins = {
 			require("feline").setup()
 		end,
 	},
-	"kyazdani42/nvim-tree.lua",
-	"nvim-treesitter/nvim-treesitter",
-	"nvim-lua/lsp-status.nvim",
+	-- "kyazdani42/nvim-tree.lua",
+	"nvim-treesitter/nvim-treesitter", -- Syntax highlighting
+	"nvim-lua/lsp-status.nvim", -- Status bar
 	"BurntSushi/ripgrep",
 	-- Manage LSP, DAP, Linters, Formatters
 	{
@@ -62,6 +76,7 @@ local plugins = {
 					python = { "ruff" },
 					javascript = { "prettier" },
 					markdown = { "prettier" },
+					r = { "air" },
 				},
 				format_on_save = {
 					timeout_ms = 500,
@@ -106,9 +121,8 @@ local plugins = {
 			"williamboman/mason.nvim",
 		},
 	},
-	-- Code assistant
 	{
-		"olimorris/codecompanion.nvim",
+		"olimorris/codecompanion.nvim", -- Code assistant
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -117,9 +131,8 @@ local plugins = {
 			require("config.codecompanion")
 		end,
 	},
-	-- Theme
 	{
-		"tiagovla/tokyodark.nvim",
+		"tiagovla/tokyodark.nvim", -- Theme
 		opts = {
 			-- custom options here
 		},
@@ -128,8 +141,8 @@ local plugins = {
 			vim.cmd([[colorscheme tokyodark]])
 		end,
 	},
-	"stevearc/dressing.nvim",
-	"MunifTanjim/nui.nvim",
+	-- "stevearc/dressing.nvim", -- Customize telescope
+	-- "MunifTanjim/nui.nvim", -- Component library
 	-- Render markdown
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
@@ -138,15 +151,17 @@ local plugins = {
 				file_types = { "markdown" },
 			})
 		end,
+		lazy = true,
 	},
-	"hrsh7th/nvim-cmp",
-	"Exafunction/codeium.vim",
-	"neovim/nvim-lspconfig",
-	"hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-path",
+	"hrsh7th/nvim-cmp", -- Completion engine
+	"Exafunction/codeium.vim", -- Autocomplete with codeium
+	"neovim/nvim-lspconfig", -- LSP
+	"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
+	"hrsh7th/cmp-buffer", -- Buffer source for nvim-cmp
+	"hrsh7th/cmp-path", -- Path source for nvim-cmp
 	"L3MON4D3/LuaSnip",
 	"saadparwaiz1/cmp_luasnip",
+	-- Debugger
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
@@ -229,22 +244,34 @@ local plugins = {
 			"mfussenegger/nvim-dap",
 		},
 	},
-	"Vigemus/iron.nvim",
-	"epwalsh/obsidian.nvim",
-	"R-nvim/R.nvim",
-	"LukeGoodsell/nextflow-vim",
-	"quarto-dev/quarto-nvim",
-	-- For quarto
+	--
 	{
-		"jmbuhr/otter.nvim",
+		"Vigemus/iron.nvim", -- REPL
+		lazy = true,
+	},
+	{
+		"epwalsh/obsidian.nvim", -- Obsidian
+		lazy = true,
+	},
+	"R-nvim/R.nvim",
+	{
+		"LukeGoodsell/nextflow-vim", -- Nextlfow
+		lazy = true,
+	},
+	{
+		"quarto-dev/quarto-nvim", -- QUARTO
+		lazy = true,
+	},
+	{
+		"jmbuhr/otter.nvim", --QUARTO
 		config = function()
 			require("otter").setup()
 		end,
 	},
-	"tpope/vim-fugitive",
-	"pwntester/octo.nvim",
-	"folke/which-key.nvim",
-	"folke/flash.nvim",
+	"tpope/vim-fugitive", -- GIT
+	--"pwntester/octo.nvim",
+	--"folke/which-key.nvim",
+	"folke/flash.nvim", -- Move faster
 }
 
 --  'folke/tokyonight.nvim',

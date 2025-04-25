@@ -1,8 +1,8 @@
 require("plugins")
 
 -- disable netrw at the very start of your init.lua (Nvim tree)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 vim.g.python_recommended_style = 0
 vim.wo.number = true
@@ -27,26 +27,28 @@ vim.keymap.set({ "n", "v" }, "<leader>at", "<cmd>CodeCompanionActions<cr>", { de
 vim.api.nvim_set_keymap("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>t", ":terminal<CR>", { noremap = true, silent = true })
 
--- Tree navigator
-require("nvim-tree").setup({
-	git = {
-		ignore = false, -- <- this is the key part
-	},
-	sort = {
-		sorter = "case_sensitive",
-	},
-	view = {
-		width = 30,
-	},
-	renderer = {
-		group_empty = true,
-	},
-	filters = {
-		dotfiles = true,
-	},
-})
-vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeOpen<CR>", { noremap = true, silent = true })
+-- New tab
 vim.api.nvim_set_keymap("n", "<leader>tn", ":tabnew<CR>", { noremap = true, silent = true })
+
+-- Tree navigator
+-- require("nvim-tree").setup({
+-- 	git = {
+-- 		ignore = false, -- <- this is the key part
+-- 	},
+-- 	sort = {
+-- 		sorter = "case_sensitive",
+-- 	},
+-- 	view = {
+-- 		width = 30,
+-- 	},
+-- 	renderer = {
+-- 		group_empty = true,
+-- 	},
+-- 	filters = {
+-- 		dotfiles = true,
+-- 	},
+-- })
+-- vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeOpen<CR>", { noremap = true, silent = true })
 
 -- Quarto
 require("quarto").setup({
