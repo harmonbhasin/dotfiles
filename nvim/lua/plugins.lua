@@ -76,6 +76,7 @@ local plugins = {
 					python = { "ruff" },
 					javascript = { "prettier" },
 					markdown = { "prettier" },
+					svelte = { "prettier" },
 					r = { "air" },
 				},
 				format_on_save = {
@@ -137,8 +138,6 @@ local plugins = {
 			vim.cmd([[colorscheme kanagawa-dragon]])
 		end,
 	},
-	-- "stevearc/dressing.nvim", -- Customize telescope
-	-- "MunifTanjim/nui.nvim", -- Component library
 	-- Render markdown
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
@@ -265,27 +264,7 @@ local plugins = {
 		end,
 	},
 	"tpope/vim-fugitive", -- GIT
-	--"pwntester/octo.nvim",
-	--"folke/which-key.nvim",
 	"folke/flash.nvim", -- Move faster
 }
-
---  'folke/tokyonight.nvim',
--- {
---  "yetone/avante.nvim",
---  event = "VeryLazy",
---  version = false,
---  config = function()
---    require("config.avante")
---  end,
---  dependencies = {
---    "nvim-treesitter/nvim-treesitter",
---    "stevearc/dressing.nvim",
---    "nvim-lua/plenary.nvim",
---    "MunifTanjim/nui.nvim",
---  },
---},
---
---
 
 require("lazy").setup(plugins)

@@ -1,12 +1,9 @@
 require("plugins")
 
--- disable netrw at the very start of your init.lua (Nvim tree)
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 vim.g.python_recommended_style = 0
 vim.wo.number = true
 vim.g.mapleader = " "
+vim.opt.relativenumber = true
 vim.opt.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
 vim.opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
@@ -14,8 +11,7 @@ vim.opt.smartindent = true -- Make indenting smarter again
 vim.opt.autoindent = true -- Auto indent
 vim.opt.syntax = "on" -- Enable syntax highlighting
 vim.opt.showmode = false -- Don't show mode in command line
--- vim.cmd 'colorscheme tokyonight-night' -- Add theme
--- vim.opt.laststatus = 3 -- Avante setting
+
 -- Make Fugitive use Git's configured pager (Delta)
 vim.g.fugitive_use_git_pager = 1
 
@@ -29,26 +25,6 @@ vim.api.nvim_set_keymap("n", "<leader>t", ":terminal<CR>", { noremap = true, sil
 
 -- New tab
 vim.api.nvim_set_keymap("n", "<leader>tn", ":tabnew<CR>", { noremap = true, silent = true })
-
--- Tree navigator
--- require("nvim-tree").setup({
--- 	git = {
--- 		ignore = false, -- <- this is the key part
--- 	},
--- 	sort = {
--- 		sorter = "case_sensitive",
--- 	},
--- 	view = {
--- 		width = 30,
--- 	},
--- 	renderer = {
--- 		group_empty = true,
--- 	},
--- 	filters = {
--- 		dotfiles = true,
--- 	},
--- })
--- vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeOpen<CR>", { noremap = true, silent = true })
 
 -- Quarto
 require("quarto").setup({
@@ -199,8 +175,8 @@ end, { expr = true, silent = true })
 require("telescope").setup()
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+vim.keymap.set("n", "<leader>/", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>o", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 
 -- Iron REPL
@@ -234,22 +210,7 @@ iron.setup({
 			-- return "iron"
 		end,
 		-- How the repl window will be displayed
-		-- See below for more information
 		repl_open_cmd = "vertical botright 80 split",
-
-		-- repl_open_cmd can also be an array-style table so that multiple
-		-- repl_open_commands can be given.
-		-- When repl_open_cmd is given as a table, the first command given will
-		-- be the command that `IronRepl` initially toggles.
-		-- Moreover, when repl_open_cmd is a table, each key will automatically
-		-- be available as a keymap (see `keymaps` below) with the names
-		-- toggle_repl_with_cmd_1, ..., toggle_repl_with_cmd_k
-		-- For example,
-		--
-		-- repl_open_cmd = {
-		--   view.split.vertical.rightbelow("%40"), -- cmd_1: open a repl to the right
-		--   view.split.rightbelow("%25")  -- cmd_2: open a repl below
-		-- }
 	},
 	-- Iron doesn't set keymaps by default anymore.
 	-- You can set them here or manually add keymaps to the functions in iron.core
@@ -284,9 +245,6 @@ iron.setup({
 	},
 	ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
 })
-
-vim.keymap.set("n", "<leader>rf", "<cmd>IronFocus<cr>")
-vim.keymap.set("n", "<leader>rh", "<cmd>IronHide<cr>")
 ---------------------------------------------
 
 -- Dashboard
@@ -372,7 +330,18 @@ vim.keymap.set("n", "<leader>d]", vim.diagnostic.open_float, { desc = "Show diag
 -- TREE SITTER CONFIG
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the listed parsers MUST always be installed)
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "r" },
+	ensure_installed = {
+		"c",
+		"lua",
+		"vim",
+		"vimdoc",
+		"query",
+		"markdown",
+		"markdown_inline",
+		"r",
+		"typescript",
+		"javascript",
+	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
 	sync_install = false,
@@ -380,9 +349,6 @@ require("nvim-treesitter.configs").setup({
 	-- Automatically install missing parsers when entering buffer
 	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
 	auto_install = true,
-
-	-- List of parsers to ignore installing (or "all")
-	ignore_install = { "javascript" },
 
 	---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
 	-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
