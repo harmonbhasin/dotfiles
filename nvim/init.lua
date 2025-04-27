@@ -27,6 +27,8 @@ end, {
 	desc = "Toggle loclist",
 })
 
+-- Go between quickfixs
+
 -- CodeCompanion
 vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionChat<cr>", { desc = "Open Code Companion Chat" })
 vim.keymap.set({ "n", "v" }, "<leader>at", "<cmd>CodeCompanionActions<cr>", { desc = "Open Code Companion Actions" })
