@@ -15,6 +15,18 @@ vim.opt.showmode = false -- Don't show mode in command line
 -- Make Fugitive use Git's configured pager (Delta)
 vim.g.fugitive_use_git_pager = 1
 
+-- Quicker
+vim.keymap.set("n", "<leader>q", function()
+	require("quicker").toggle()
+end, {
+	desc = "Toggle quickfix",
+})
+vim.keymap.set("n", "<leader>l", function()
+	require("quicker").toggle({ loclist = true })
+end, {
+	desc = "Toggle loclist",
+})
+
 -- CodeCompanion
 vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionChat<cr>", { desc = "Open Code Companion Chat" })
 vim.keymap.set({ "n", "v" }, "<leader>at", "<cmd>CodeCompanionActions<cr>", { desc = "Open Code Companion Actions" })
@@ -50,16 +62,6 @@ require("quarto").setup({
 		never_run = { "yaml" }, -- filetypes which are never sent to a code runner
 	},
 })
-
-local runner = require("quarto.runner")
-vim.keymap.set("n", "<localleader>qc", runner.run_cell, { desc = "run cell", silent = true })
-vim.keymap.set("n", "<localleader>qa", runner.run_above, { desc = "run cell and above", silent = true })
-vim.keymap.set("n", "<localleader>qA", runner.run_all, { desc = "run all cells", silent = true })
-vim.keymap.set("n", "<localleader>ql", runner.run_line, { desc = "run line", silent = true })
-vim.keymap.set("v", "<localleader>q", runner.run_range, { desc = "run visual range", silent = true })
-vim.keymap.set("n", "<localleader>RA", function()
-	runner.run_all(true)
-end, { desc = "run all cells of all languages", silent = true })
 
 -- Get the home directory path and construct the full path to check
 local home = os.getenv("HOME")
@@ -322,7 +324,8 @@ lspconfig.r_language_server.setup({
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
-vim.keymap.set("n", "<leader>d]", vim.diagnostic.open_float, { desc = "Show diagnostic under cursor" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostic under cursor" })
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Diagnostics to location list" })
 ---------------------------------------------
 
 ----------------------------------------------

@@ -21,6 +21,8 @@ if status is-interactive
     # Mine
     alias vi "nvim"
     alias v "nvim"
+    alias python "python3"
+    alias pip "pip3"
     # Work
     alias change-ec2 "/Users/harmonbhasin/work/securebio/instance_manipulator.sh"
     alias check-ec2 "/Users/harmonbhasin/work/securebio/check_ec2.sh"
