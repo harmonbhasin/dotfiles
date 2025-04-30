@@ -138,31 +138,48 @@ local plugins = {
 	-- Code formatting
 	{
 		"stevearc/conform.nvim",
-		event = { "BufWritePre", "BufReadPre", "BufNewFile" },
-		config = function(_, opts)
-			local conform = require("conform")
-			conform.setup({
-				formatters_by_ft = {
-					lua = { "stylua" },
-					python = { "ruff" },
-					javascript = { "prettier" },
-					markdown = { "prettier" },
-					svelte = { "prettier" },
-					r = { "air" },
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				-- Customize or remove this keymap to your liking
+				"<leader>f",
+				function()
+					require("conform").format({ async = true })
+				end,
+				mode = "",
+				desc = "Format buffer",
+			},
+		},
+		-- This will provide type hinting with LuaLS
+		---@module "conform"
+		---@type conform.setupOpts
+		opts = {
+			-- Define your formatters
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "ruff" },
+				javascript = { "prettier" },
+				markdown = { "prettier" },
+				svelte = { "prettier" },
+				r = { "air" },
+			},
+			-- Set default options
+			default_format_opts = {
+				lsp_format = "fallback",
+			},
+			-- Set up format-on-save
+			format_on_save = { timeout_ms = 500 },
+			-- Customize formatters
+			formatters = {
+				shfmt = {
+					prepend_args = { "-i", "2" },
 				},
-				format_on_save = {
-					timeout_ms = 500,
-					lsp_fallback = true,
-					async = false,
-				},
-			})
-			vim.keymap.set({ "n", "v" }, "<leader>mp", function()
-				conform.format({
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 500,
-				})
-			end, { desc = "Format file or range (in visual mode)" })
+			},
+		},
+		init = function()
+			-- If you want the formatexpr, here is the place to set it
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
 	--https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
