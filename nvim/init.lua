@@ -12,6 +12,12 @@ vim.opt.autoindent = true -- Auto indent
 vim.opt.syntax = "on" -- Enable syntax highlighting
 vim.opt.showmode = false -- Don't show mode in command line
 
+vim.opt.showtabline = 0 --remove tabline
+
+-- Navigation between buffers
+vim.keymap.set("n", "<leader>h", ":bprevious<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>l", ":bnext<CR>", { desc = "Next buffer" })
+
 -- Make Fugitive use Git's configured pager (Delta)
 vim.g.fugitive_use_git_pager = 1
 
@@ -176,8 +182,22 @@ vim.keymap.set("i", "<c-x>", function()
 end, { expr = true, silent = true })
 ------------------------------------------------------------
 
-require("telescope").setup()
 local builtin = require("telescope.builtin")
+local actions = require("telescope.actions")
+
+require("telescope").setup({
+	defaults = {
+		mappings = {
+			i = {
+				["<c-d>"] = actions.delete_buffer,
+			},
+			n = {
+				["<c-d>"] = actions.delete_buffer,
+				["dd"] = actions.delete_buffer,
+			},
+		},
+	},
+})
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 vim.keymap.set("n", "<leader>/", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>o", builtin.buffers, {})
