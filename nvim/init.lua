@@ -27,7 +27,7 @@ vim.keymap.set("n", "<leader>q", function()
 end, {
 	desc = "Toggle quickfix",
 })
-vim.keymap.set("n", "<leader>l", function()
+vim.keymap.set("n", "<leader>w", function()
 	require("quicker").toggle({ loclist = true })
 end, {
 	desc = "Toggle loclist",
