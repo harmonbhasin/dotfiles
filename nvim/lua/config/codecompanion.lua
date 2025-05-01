@@ -10,8 +10,9 @@ require("codecompanion").setup({
 							"gpt-4.1-mini",
 							"gpt-4.1-nano",
 							"gpt-4.1",
+							"gpt-4.5-preview",
 							["o4-mini"] = { opt = { can_reason = true } },
-							["o3"] = { opt = { can_reason = true } },
+							["o1"] = { opt = { can_reason = true } },
 						},
 					},
 					max_completion_tokens = {
@@ -43,10 +44,10 @@ require("codecompanion").setup({
 	},
 	strategies = {
 		chat = {
-			adapter = "openai",
+			adapter = "gemini",
 		},
 		inline = {
-			adapter = "openai",
+			adapter = "gemini",
 			keymaps = {
 				accept_change = {
 					modes = { n = "ga" },
