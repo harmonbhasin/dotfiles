@@ -195,7 +195,10 @@ vim.keymap.set("n", "<leader>dt", function()
 end, { desc = "Terminate Debug" })
 
 --------------------------------------------------------------
---- Codeium stuff
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+	pattern = { "*.md", "*.txt", ".git-credentials", ".env", ".env.*" },
+	command = "CodeiumDisable",
+})
 vim.keymap.set("i", "<C-g>", function()
 	return vim.fn["codeium#Accept"]()
 end, { expr = true, silent = true })
