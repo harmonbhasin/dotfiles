@@ -31,6 +31,11 @@ local plugins = {
 		lazy = false,
 	},
 	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{
 		"mikavilpas/yazi.nvim",
 		event = "VeryLazy",
 		dependencies = {
