@@ -1,0 +1,15 @@
+# yazi.toml
+[manager]
+show_hidden = true
+show_symlink = true
+
+[opener]
+play = [
+	{ run = 'mpv "$@"', orphan = true},
+]
+edit = [
+	{ run = '$EDITOR "$@"', block = true},
+]
+open = [
+	{ run = 'xdg-open "$@"', desc = "Open" },
+]
