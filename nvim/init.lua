@@ -21,20 +21,20 @@ harpoon:setup()
 vim.keymap.set("n", "<leader>m", function()
 	harpoon:list():add()
 end)
-vim.keymap.set("n", "<C-e>", function()
+vim.keymap.set("n", "<leader>e", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 
-vim.keymap.set("n", "<C-h>", function()
+vim.keymap.set("n", "<leader>h", function()
 	harpoon:list():select(1)
 end)
-vim.keymap.set("n", "<C-j>", function()
+vim.keymap.set("n", "<leader>j", function()
 	harpoon:list():select(2)
 end)
-vim.keymap.set("n", "<C-k>", function()
+vim.keymap.set("n", "<leader>k", function()
 	harpoon:list():select(3)
 end)
-vim.keymap.set("n", "<C-l>", function()
+vim.keymap.set("n", "<leader>l", function()
 	harpoon:list():select(4)
 end)
 
@@ -45,10 +45,6 @@ end)
 vim.keymap.set("n", "<C-S-N>", function()
 	harpoon:list():next()
 end)
-
--- Navigation between buffers
-vim.keymap.set("n", "<leader>h", ":bprevious<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>l", ":bnext<CR>", { desc = "Next buffer" })
 
 -- Make Fugitive use Git's configured pager (Delta)
 vim.g.fugitive_use_git_pager = 1
@@ -169,10 +165,10 @@ if path_exists(obsidian_path) then
 		end,
 	})
 	vim.opt.conceallevel = 1
-	vim.keymap.set("n", "<Leader>og", ":ObsidianSearch<CR>", { desc = "Obsidian Search" })
-	vim.keymap.set("n", "<Leader>os", ":ObsidianQuickSwitch<CR>", { desc = "Obsidian Quick Switch" })
-	vim.keymap.set("n", "<Leader>od", ":ObsidianToday<CR>", { desc = "Obsidian Today" })
-	vim.keymap.set("n", "<Leader>ofl", ":ObsidianFollowLink<CR>", { desc = "Obsidian Follow Link" })
+	vim.keymap.set("n", "<Leader>n/", ":ObsidianSearch<CR>", { desc = "Obsidian Search" })
+	vim.keymap.set("n", "<Leader>nff", ":ObsidianQuickSwitch<CR>", { desc = "Obsidian Quick Switch" })
+	vim.keymap.set("n", "<Leader>nd", ":ObsidianToday<CR>", { desc = "Obsidian Today" })
+	vim.keymap.set("n", "<Leader>nfl", ":ObsidianFollowLink<CR>", { desc = "Obsidian Follow Link" })
 end
 
 -- Debug keybindings
