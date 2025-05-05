@@ -123,6 +123,9 @@ if path_exists(obsidian_path) then
 				path = "~/personal/obsidian/main",
 			},
 		},
+		-- Optional, if you keep notes in a specific subdirectory of your vault.
+		notes_subdir = "Zettlekasten",
+
 		completion = {
 			-- Set to false to disable completion.
 			nvim_cmp = true,
@@ -132,7 +135,13 @@ if path_exists(obsidian_path) then
 		daily_notes = {
 			folder = "Root/Daily note",
 		},
-		new_notes_location = "Zettlekasten",
+		new_notes_location = "current_dir",
+		-- Optional, customize how note IDs are generated given an optional title.
+		---@param title string|?
+		---@return string
+		note_id_func = function(title)
+			return title
+		end,
 		-- Optional, alternatively you can customize the frontmatter data.
 		---@return table
 		note_frontmatter_func = function(note)
@@ -163,12 +172,31 @@ if path_exists(obsidian_path) then
 			-- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
 			-- vim.ui.open(url) -- need Neovim 0.10.0+
 		end,
+		templates = {
+			folder = "Templates",
+			date_format = "%Y-%m-%d-%a",
+			time_format = "%H:%M",
+		},
 	})
 	vim.opt.conceallevel = 1
 	vim.keymap.set("n", "<Leader>n/", ":ObsidianSearch<CR>", { desc = "Obsidian Search" })
 	vim.keymap.set("n", "<Leader>nff", ":ObsidianQuickSwitch<CR>", { desc = "Obsidian Quick Switch" })
 	vim.keymap.set("n", "<Leader>nd", ":ObsidianToday<CR>", { desc = "Obsidian Today" })
 	vim.keymap.set("n", "<Leader>nfl", ":ObsidianFollowLink<CR>", { desc = "Obsidian Follow Link" })
+	vim.keymap.set("n", "<Leader>nt", ":ObsidianTOC<CR>", { desc = "Show note table of contents" })
+	vim.keymap.set("n", "<leader>nc", function()
+		-- Prompt the user for the note title
+		local title = vim.fn.input("Enter note title: ")
+
+		-- Check if the user entered a title (didn't press Cancel or leave empty)
+		if title and title ~= "" then
+			-- Execute the ObsidianNewFromTemplate command with the provided title
+			vim.cmd("ObsidianNewFromTemplate " .. title)
+		else
+			-- Optionally, provide feedback if no title was entered
+			print("No title entered, note creation cancelled.")
+		end
+	end, { desc = "Create new Obsidian note from template with title" })
 end
 
 -- Debug keybindings
