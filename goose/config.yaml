@@ -1,0 +1,34 @@
+GOOSE_CLI_THEME: light
+GOOSE_PROVIDER: openai
+OPENAI_BASE_PATH: v1/chat/completions
+GOOSE_MODEL: o4-mini
+OPENAI_HOST: https://api.openai.com
+extensions:
+  computercontroller:
+    bundled: true
+    display_name: Computer Controller
+    enabled: true
+    name: computercontroller
+    timeout: 300
+    type: builtin
+  developer:
+    bundled: null
+    display_name: Developer
+    enabled: true
+    name: developer
+    timeout: 300
+    type: builtin
+  github:
+    args:
+    - -y
+    - '@modelcontextprotocol/server-github'
+    bundled: null
+    cmd: npx
+    description: null
+    enabled: true
+    env_keys:
+    - GITHUB_PERSONAL_ACCESS_TOKEN
+    envs: {}
+    name: github
+    timeout: 300
+    type: stdio
