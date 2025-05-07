@@ -32,3 +32,4 @@ if status is-interactive
 
 
 end
+alias claude="/Users/harmonbhasin/.claude/local/claude"
