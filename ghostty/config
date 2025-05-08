@@ -1,6 +1,6 @@
 # CyberpunkScarletprotocol, catppuccin-mocha, cyberpunk
 theme = "kanagawa dragon"
-shell-integration = fish
+shell-integration = zsh
 font-size = 11
 
 window-padding-balance = true
@@ -11,3 +11,9 @@ app-notifications = no-clipboard-copy
 clipboard-paste-protection = false
 clipboard-paste-bracketed-safe = false
 
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+l=goto_split:right
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+v=new_split:right
+keybind = ctrl+s=new_split:down
