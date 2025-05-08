@@ -109,7 +109,7 @@ bindkey -v
 
 # Aliases
 alias vi="nvim"
-alias v="nvim"
+Alias v="nvim"
 alias python="python3"
 alias pip="pip3"
 alias change-ec2="/Users/harmonbhasin/work/securebio/instance_manipulator.sh"
