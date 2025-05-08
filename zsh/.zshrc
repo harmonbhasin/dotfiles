@@ -109,7 +109,7 @@ bindkey -v
 
 # Aliases
 alias vi="nvim"
-Alias v="nvim"
+alias v="nvim"
 alias python="python3"
 alias pip="pip3"
 alias change-ec2="/Users/harmonbhasin/work/securebio/instance_manipulator.sh"
@@ -118,6 +118,7 @@ alias start-ec2="/Users/harmonbhasin/work/securebio/start_ec2.sh"
 alias stop-ec2="/Users/harmonbhasin/work/securebio/stop_ec2.sh"
 alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias claude="/Users/harmonbhasin/.claude/local/claude"
+alias oo="cd /Users/harmonbhasin/personal/obsidian/main/"
 
 # NVM Configuration
 export NVM_DIR="$HOME/.nvm"
