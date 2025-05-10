@@ -11,8 +11,25 @@ vim.opt.smartindent = true -- Make indenting smarter again
 vim.opt.autoindent = true -- Auto indent
 vim.opt.syntax = "on" -- Enable syntax highlighting
 vim.opt.showmode = false -- Don't show mode in command line
+vim.opt.ignorecase = true -- Ignore case
 
 vim.opt.showtabline = 0 --remove tabline
+
+-- Surround
+require("mini.surround").setup({
+	mappings = {
+		add = "ya", -- Add surrounding in Normal and Visual modes
+		delete = "yd", -- Delete surrounding
+		find = "yf", -- Find surrounding (to the right)
+		find_left = "yF", -- Find surrounding (to the left)
+		highlight = "yh", -- Highlight surrounding
+		replace = "yr", -- Replace surrounding
+		update_n_lines = "yn", -- Update `n_lines`
+
+		suffix_last = "l", -- Suffix to search with "prev" method
+		suffix_next = "n", -- Suffix to search with "next" method
+	},
+})
 
 -- Harpoon
 local harpoon = require("harpoon")
@@ -38,13 +55,17 @@ vim.keymap.set("n", "<leader>l", function()
 	harpoon:list():select(4)
 end)
 
+-- Buffer list
+vim.keymap.set("n", "<C-S-P>", ":bprevious<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<C-S-N>", ":bnext<CR>", { desc = "Next buffer" })
+
 -- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set("n", "<C-S-P>", function()
-	harpoon:list():prev()
-end)
-vim.keymap.set("n", "<C-S-N>", function()
-	harpoon:list():next()
-end)
+--vim.keymap.set("n", "<C-S-P>", function()
+--	harpoon:list():prev()
+--end)
+--vim.keymap.set("n", "<C-S-N>", function()
+--	harpoon:list():next()
+--end)
 
 -- Make Fugitive use Git's configured pager (Delta)
 vim.g.fugitive_use_git_pager = 1

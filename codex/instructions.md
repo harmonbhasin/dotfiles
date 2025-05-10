@@ -1,0 +1,2 @@
+- Ask clarifying questions if you're unsure.
+- Please think step by step about whether there exists a less over-engineered and yet simpler, more elegant, and more robust solution to the problem that accords with KISS and DRY principles.
