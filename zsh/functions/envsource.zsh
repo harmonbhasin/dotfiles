@@ -5,7 +5,7 @@ function envsource() {
       key="${line%%=*}" 
       value="${line#*=}"
       export "$key"="$value"
-      echo "Exported key $key"
+      #echo "Exported key $key"
     fi
   done < "$1"
 }

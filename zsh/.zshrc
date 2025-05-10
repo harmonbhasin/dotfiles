@@ -70,6 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+#plugins=(git docker zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
 plugins=(git docker zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
 
 source $ZSH/oh-my-zsh.sh
@@ -106,6 +107,7 @@ source $ZSH/oh-my-zsh.sh
 # PRE- OMZ CONFIG
 # Vi mode (equivalent to fish_vi_key_bindings)
 bindkey -v
+bindkey '^ ' autosuggest-accept
 
 # Aliases
 alias vi="nvim"
@@ -142,3 +144,16 @@ fi
 if [ -f "$HOME/.local/bin/env.zsh" ]; then
   source "$HOME/.local/bin/env.zsh"
 fi
+
+# Source env
+envsource ~/.env
+
+# Yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
