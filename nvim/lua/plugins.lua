@@ -145,17 +145,17 @@ local plugins = {
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
-		keys = {
-			{
-				-- Customize or remove this keymap to your liking
-				"<leader>f",
-				function()
-					require("conform").format({ async = true })
-				end,
-				mode = "",
-				desc = "Format buffer",
-			},
-		},
+		--keys = {
+		--	{
+		--		-- Customize or remove this keymap to your liking
+		--		"<leader>f",
+		--		function()
+		--			require("conform").format({ async = true })
+		--		end,
+		--		mode = "",
+		--		desc = "Format buffer",
+		--	},
+		--},
 		-- This will provide type hinting with LuaLS
 		---@module "conform"
 		---@type conform.setupOpts
@@ -186,34 +186,6 @@ local plugins = {
 			-- If you want the formatexpr, here is the place to set it
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
-	},
-	--https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
-	{
-		"jay-babu/mason-nvim-dap.nvim",
-		---@type MasonNvimDapSettings
-		opts = {
-			-- This line is essential to making automatic installation work
-			-- :exploding-brain
-			handlers = {},
-			automatic_installation = {
-				-- These will be configured by separate plugins.
-				exclude = {
-					"delve",
-					"python",
-				},
-			},
-			-- DAP servers: Mason will be invoked to install these if necessary.
-			ensure_installed = {
-				"bash",
-				"codelldb",
-				"php",
-				"python",
-			},
-		},
-		dependencies = {
-			"mfussenegger/nvim-dap",
-			"williamboman/mason.nvim",
-		},
 	},
 	{
 		"olimorris/codecompanion.nvim", -- Code assistant
@@ -250,6 +222,35 @@ local plugins = {
 	"L3MON4D3/LuaSnip",
 	"saadparwaiz1/cmp_luasnip",
 	-- Debugger
+	--https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		---@type MasonNvimDapSettings
+		opts = {
+			-- This line is essential to making automatic installation work
+			-- :exploding-brain
+			handlers = {},
+			automatic_installation = {
+				-- These will be configured by separate plugins.
+				exclude = {
+					"delve",
+					"python",
+				},
+			},
+			-- DAP servers: Mason will be invoked to install these if necessary.
+			ensure_installed = {
+				"bash",
+				"codelldb",
+				"php",
+				"python",
+			},
+		},
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"williamboman/mason.nvim",
+		},
+	},
+
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
@@ -292,33 +293,26 @@ local plugins = {
 			"nvim-neotest/nvim-nio",
 		},
 	},
-	{
-		"theHamsta/nvim-dap-virtual-text",
-		config = true,
-		dependencies = {
-			"mfussenegger/nvim-dap",
-		},
-	},
-	{
-		"rcarriga/nvim-dap-ui",
-		config = true,
-		keys = {
-			{
-				"<leader>du",
-				function()
-					require("dapui").toggle({})
-				end,
-				desc = "Dap UI",
-			},
-		},
-		dependencies = {
-			"jay-babu/mason-nvim-dap.nvim",
-			"leoluz/nvim-dap-go",
-			"mfussenegger/nvim-dap-python",
-			"nvim-neotest/nvim-nio",
-			"theHamsta/nvim-dap-virtual-text",
-		},
-	},
+	--{
+	--	"rcarriga/nvim-dap-ui",
+	--	config = true,
+	--	keys = {
+	--		{
+	--			"<leader>du",
+	--			function()
+	--				require("dapui").toggle({})
+	--			end,
+	--			desc = "Dap UI",
+	--		},
+	--	},
+	--	dependencies = {
+	--		"jay-babu/mason-nvim-dap.nvim",
+	--		"leoluz/nvim-dap-go",
+	--		"mfussenegger/nvim-dap-python",
+	--		"nvim-neotest/nvim-nio",
+	--		"theHamsta/nvim-dap-virtual-text",
+	--	},
+	--},
 	{
 		"mfussenegger/nvim-dap-python",
 		lazy = true,
@@ -341,7 +335,10 @@ local plugins = {
 		"epwalsh/obsidian.nvim", -- Obsidian
 		lazy = true,
 	},
-	"R-nvim/R.nvim",
+	{
+		"R-nvim/R.nvim", -- R
+		lazy = true,
+	},
 	{
 		"LukeGoodsell/nextflow-vim", -- Nextlfow
 		lazy = true,
@@ -356,7 +353,11 @@ local plugins = {
 			require("otter").setup()
 		end,
 	},
-	"tpope/vim-fugitive", -- GIT
+	{
+		"tpope/vim-fugitive", -- GIT
+		lazy = true,
+	},
+
 	{ "echasnovski/mini.surround", version = false },
 	-- Move faster
 	{
