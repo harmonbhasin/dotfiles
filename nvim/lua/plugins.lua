@@ -355,7 +355,7 @@ local plugins = {
 	},
 	{
 		"tpope/vim-fugitive", -- GIT
-		lazy = true,
+		lazy = false,
 	},
 
 	{ "echasnovski/mini.surround", version = false },

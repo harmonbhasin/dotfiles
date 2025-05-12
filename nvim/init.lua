@@ -18,13 +18,13 @@ vim.opt.showtabline = 0 --remove tabline
 -- Surround
 require("mini.surround").setup({
 	mappings = {
-		add = "ya", -- Add surrounding in Normal and Visual modes
-		delete = "yd", -- Delete surrounding
-		find = "yf", -- Find surrounding (to the right)
-		find_left = "yF", -- Find surrounding (to the left)
-		highlight = "yh", -- Highlight surrounding
-		replace = "yr", -- Replace surrounding
-		update_n_lines = "yn", -- Update `n_lines`
+		add = "ga", -- Add surrounding in Normal and Visual modes
+		delete = "gd", -- Delete surrounding
+		find = "gf", -- Find surrounding (to the right)
+		find_left = "gF", -- Find surrounding (to the left)
+		highlight = "gh", -- Highlight surrounding
+		replace = "gr", -- Replace surrounding
+		update_n_lines = "gn", -- Update `n_lines`
 
 		suffix_last = "l", -- Suffix to search with "prev" method
 		suffix_next = "n", -- Suffix to search with "next" method
@@ -56,8 +56,8 @@ vim.keymap.set("n", "<leader>l", function()
 end)
 
 -- Buffer list
-vim.keymap.set("n", "<C-S-P>", ":bprevious<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<C-S-N>", ":bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<C-P>", ":bprevious<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<C-N>", ":bnext<CR>", { desc = "Next buffer" })
 
 -- Toggle previous & next buffers stored within Harpoon list
 --vim.keymap.set("n", "<C-S-P>", function()

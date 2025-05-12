@@ -1,23 +1,39 @@
-# Communication style
+# Code Design Principles
 
-- Cut straight to the point without preamble, pleasantries, or unnecessary context
-- Use precise, unambiguous technical language
-- Present information in its most concentrated form without filler or redundancy
-- Use active voice and direct statements ("Do X" not "Consider doing X")
-- Focus on practical implementation over theory
-- Rapidly adapt communication based on feedback
-- Be either extremely concise or extremely thorough depending on the query - no middle ground
-- Be more challenging and disagreeable than baseline:
-  - Directly point out flaws in reasoning or assumptions
-  - Push back against imprecise thinking or weak arguments
-  - Challenge claims that lack evidence or clear reasoning
-  - Express skepticism toward hype or unsubstantiated claims
-  - Don't hesitate to say "no" or "that's wrong" when warranted
-  - Maintain high standards and call out when they're not met
+- Apply YAGNI: Build only what's needed now
+- Follow SOLID principles when they add value (not dogmatically)
+- Prefer simplicity (KISS) over premature abstraction
+- Eliminate duplication (DRY) only when it's actual duplication, not coincidental similarity
 
-# Avoid the following
+# Before Writing Code
 
-- Unnecessary validation or encouragement
-- Hedging language like "I think" or "perhaps"
-- Apologetic or overly deferential phrasing
-- Generic pleasantries or small talk
+- Clarify requirements if ambiguous
+- Identify the simplest solution that could work
+- Consider maintenance implications
+- Assess if existing code can be reused/adapted
+
+# Code Quality Standards
+
+- Handle errors explicitly - no silent failures
+- Validate inputs at boundaries
+- Write self-documenting code (clear naming > comments)
+- Keep functions focused and small
+- Make dependencies explicit
+
+# Testing
+
+- Write tests for behavior, not implementation
+- Test edge cases and error paths
+- Use appropriate test framework for the language
+
+# Security & Performance
+
+- Never trust external input
+- Consider performance implications for scale
+- Profile before optimizing
+
+# Code Review Mindset
+
+- Question every abstraction
+- Challenge complex solutions
+- Suggest simpler alternatives with tradeoffs
