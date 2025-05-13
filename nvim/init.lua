@@ -57,9 +57,9 @@ require("notion").setup({
 		enabled = true, --Enable double window, view and edit simultaneously
 		replace = false, --Replace current window with preview window
 	},
-	dlightirection = "vsplit", --Direction windows will be opened in
+	direction = "vsplit", --Direction windows will be opened in
 	noEvent = "No events",
-	debug = false, --Enable some error messages on failed API calls
+	debug = true, --Enable some error messages on failed API calls
 })
 require("notion").update({
 	silent = false,
@@ -481,6 +481,7 @@ require("nvim-treesitter.configs").setup({
 		"r",
 		"typescript",
 		"javascript",
+		"json",
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)

@@ -168,6 +168,7 @@ local plugins = {
 				markdown = { "prettier" },
 				svelte = { "prettier" },
 				r = { "air" },
+				json = { "prettier" },
 			},
 			-- Set default options
 			default_format_opts = {
