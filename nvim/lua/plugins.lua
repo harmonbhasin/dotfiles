@@ -140,6 +140,13 @@ local plugins = {
 			require("mason").setup()
 		end,
 	},
+
+	{
+		"mason-org/mason-lspconfig.nvim",
+		config = function()
+			require("mason-lspconfig")
+		end,
+	},
 	-- Code formatting
 	{
 		"stevearc/conform.nvim",
