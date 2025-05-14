@@ -123,12 +123,21 @@ local plugins = {
 	"nvim-lua/plenary.nvim", -- Common lua functions used by other plugins
 	-- status line
 	{
-		"famiu/feline.nvim",
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
-			require("feline").setup()
+			require("lualine").setup({
+				options = { theme = "auto" },
+			})
 		end,
 	},
+	--{
+	--	"famiu/feline.nvim",
+	--	config = function()
+	--		vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
+	--		require("feline").setup()
+	--	end,
+	--},
 	-- "kyazdani42/nvim-tree.lua",
 	"nvim-treesitter/nvim-treesitter", -- Syntax highlighting
 	"nvim-lua/lsp-status.nvim", -- Status bar
@@ -205,12 +214,12 @@ local plugins = {
 			require("config.codecompanion")
 		end,
 	},
-	{
-		"rebelot/kanagawa.nvim",
-		config = function(_, opts)
-			vim.cmd([[colorscheme kanagawa-dragon]])
-		end,
-	},
+	--{
+	--	"rebelot/kanagawa.nvim",
+	--	config = function(_, opts)
+	--		vim.cmd([[colorscheme kanagawa-dragon]])
+	--	end,
+	--},
 	-- Render markdown
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
@@ -349,7 +358,6 @@ local plugins = {
 	},
 	{
 		"LukeGoodsell/nextflow-vim", -- Nextlfow
-		lazy = true,
 	},
 	{
 		"quarto-dev/quarto-nvim", -- QUARTO
@@ -405,6 +413,14 @@ local plugins = {
 		},
 		config = function()
 			require("notion").setup()
+		end,
+	},
+	-- lua/plugins/rose-pine.lua
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		config = function()
+			vim.cmd("colorscheme rose-pine")
 		end,
 	},
 }
