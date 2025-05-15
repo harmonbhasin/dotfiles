@@ -15,6 +15,12 @@ vim.opt.ignorecase = true -- Ignore case
 
 vim.opt.showtabline = 0 --remove tabline
 
+--
+require("diffview").setup()
+vim.api.nvim_set_keymap("n", "<leader>gdd", ":DiffviewOpen<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gdf", ":DiffviewFileHistory %<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gdq", ":DiffviewClose<CR>", { noremap = true, silent = true })
+
 -- Surround
 require("mini.surround").setup({
 	mappings = {

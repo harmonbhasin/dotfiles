@@ -423,6 +423,7 @@ local plugins = {
 			vim.cmd("colorscheme rose-pine")
 		end,
 	},
+	{ "sindrets/diffview.nvim" },
 }
 
 require("lazy").setup(plugins)

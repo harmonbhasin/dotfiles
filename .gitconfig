@@ -1,0 +1,24 @@
+# This is Git's per-user configuration file.
+[user]
+	email = harmonprograms@protonmail.com
+	name = harm0n
+
+[http]
+	postBuffer = 524288000
+
+[core]
+    pager = delta
+	editor = nvim
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    light = false
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = Dracula
+    
+[diff]
+    colorMoved = default
