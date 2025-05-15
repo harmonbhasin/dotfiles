@@ -125,20 +125,22 @@ The one exception to this is if the user references something you don't know abo
 		},
 	},
 	display = {
-		--	action_palette = {
-		--		view = "float",
-		--		-- floating window options
-		--		float = {
-		--			border = "rounded", -- single|double|rounded|shadow
-		--			width = 0.8, -- fraction (0 < x <= 1) or absolute cols
-		--			height = 0.3, -- fraction (0 < x <= 1) or absolute lines
-		--			winblend = 10, -- transparency
-		--			zindex = 50, -- make sure it floats on top
-		--		},
-		--		--	width = 95,
-		--		--	height = 10,
-		--		--	prompt = "Prompt ", -- Prompt used for interactive LLM calls
-		--		--	provider = "default", -- Can be "default", "telescope", or "mini_pick". If not specified, the plugin will autodetect installed providers.
+		chat = {
+			icons = {
+				pinned_buffer = " ",
+				watched_buffer = "👀 ",
+			},
+			-- Options to customize the UI of the chat buffer
+			window = {
+				layout = "vertical", -- float|vertical|horizontal|buffer
+				position = "left", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
+				border = "single",
+				width = 0.25,
+				relative = "editor",
+				full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
+			},
+		},
+
 		opts = {
 			show_default_actions = true, -- Show the default actions in the action palette?
 			show_default_prompt_library = true, -- Show the default prompt library in the action palette?

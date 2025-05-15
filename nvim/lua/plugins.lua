@@ -18,15 +18,17 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
 	{
 		"stevearc/oil.nvim",
-		---@module 'oil'
-		---@type oil.SetupOpts
 		opts = {},
-		-- Optional dependencies
 		dependencies = { { "echasnovski/mini.icons", opts = {} } },
-		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
 		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
 		config = function()
-			require("oil").setup()
+			require("oil").setup({
+				keymaps = {
+					["<esc>"] = "actions.close",
+					["q"] = "actions.close",
+					["<C-c>"] = "actions.close",
+				},
+			})
 		end,
 		lazy = false,
 	},
@@ -36,54 +38,9 @@ local plugins = {
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
-		"mikavilpas/yazi.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			-- check the installation instructions at
-			-- https://github.com/folke/snacks.nvim
-			"folke/snacks.nvim",
-		},
-		keys = {
-			-- 👇 in this section, choose your own keymappings!
-			{
-				"<leader>-",
-				mode = { "n", "v" },
-				"<cmd>Yazi<cr>",
-				desc = "Open yazi at the current file",
-			},
-			{
-				-- Open in the current working directory
-				"<leader>cw",
-				"<cmd>Yazi cwd<cr>",
-				desc = "Open the file manager in nvim's working directory",
-			},
-			{
-				"<c-up>",
-				"<cmd>Yazi toggle<cr>",
-				desc = "Resume the last yazi session",
-			},
-		},
-		---@type YaziConfig | {}
-		opts = {
-			-- if you want to open yazi instead of netrw, see below for more info
-			open_for_directories = false,
-			keymaps = {
-				show_help = "<f1>",
-			},
-		},
-		-- 👇 if you use `open_for_directories=true`, this is recommended
-		init = function()
-			-- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
-			-- vim.g.loaded_netrw = 1
-			vim.g.loaded_netrwPlugin = 1
-		end,
-	},
-	{
 		"stevearc/quicker.nvim",
 		event = "FileType qf",
 		lazy = false,
-		---@module "quicker"
-		---@type quicker.SetupOptions
 		opts = {},
 		config = function()
 			require("quicker").setup({
@@ -111,7 +68,6 @@ local plugins = {
 		priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
 		config = true,
 	},
-	-- "sindrets/diffview.nvim",
 	"nvim-tree/nvim-web-devicons", -- File icons
 	"glepnir/dashboard-nvim", -- Dashboard
 	{
@@ -131,14 +87,6 @@ local plugins = {
 			})
 		end,
 	},
-	--{
-	--	"famiu/feline.nvim",
-	--	config = function()
-	--		vim.opt.termguicolors = true -- Enable 24-bit RGB color in the terminal
-	--		require("feline").setup()
-	--	end,
-	--},
-	-- "kyazdani42/nvim-tree.lua",
 	"nvim-treesitter/nvim-treesitter", -- Syntax highlighting
 	"nvim-lua/lsp-status.nvim", -- Status bar
 	"BurntSushi/ripgrep",
@@ -161,20 +109,6 @@ local plugins = {
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
-		--keys = {
-		--	{
-		--		-- Customize or remove this keymap to your liking
-		--		"<leader>f",
-		--		function()
-		--			require("conform").format({ async = true })
-		--		end,
-		--		mode = "",
-		--		desc = "Format buffer",
-		--	},
-		--},
-		-- This will provide type hinting with LuaLS
-		---@module "conform"
-		---@type conform.setupOpts
 		opts = {
 			-- Define your formatters
 			formatters_by_ft = {
@@ -214,13 +148,6 @@ local plugins = {
 			require("config.codecompanion")
 		end,
 	},
-	--{
-	--	"rebelot/kanagawa.nvim",
-	--	config = function(_, opts)
-	--		vim.cmd([[colorscheme kanagawa-dragon]])
-	--	end,
-	--},
-	-- Render markdown
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		config = function()
@@ -310,26 +237,6 @@ local plugins = {
 			"nvim-neotest/nvim-nio",
 		},
 	},
-	--{
-	--	"rcarriga/nvim-dap-ui",
-	--	config = true,
-	--	keys = {
-	--		{
-	--			"<leader>du",
-	--			function()
-	--				require("dapui").toggle({})
-	--			end,
-	--			desc = "Dap UI",
-	--		},
-	--	},
-	--	dependencies = {
-	--		"jay-babu/mason-nvim-dap.nvim",
-	--		"leoluz/nvim-dap-go",
-	--		"mfussenegger/nvim-dap-python",
-	--		"nvim-neotest/nvim-nio",
-	--		"theHamsta/nvim-dap-virtual-text",
-	--	},
-	--},
 	{
 		"mfussenegger/nvim-dap-python",
 		lazy = true,
@@ -383,7 +290,7 @@ local plugins = {
 		opts = {},
   -- stylua: ignore
   keys = {
-    { "z", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    { "zk", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
     { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
     { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
     { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },

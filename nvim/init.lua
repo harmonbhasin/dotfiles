@@ -15,6 +15,19 @@ vim.opt.ignorecase = true -- Ignore case
 
 vim.opt.showtabline = 0 --remove tabline
 
+-- Set spell checker  for markdown files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt.spell = true
+		vim.opt.spelllang = en_us
+		vim.opt.spellcapcheck = "none"
+	end,
+})
+
+-- Oil
+vim.keymap.set("n", "<leader>-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+
 --
 require("diffview").setup()
 vim.api.nvim_set_keymap("n", "<leader>gdd", ":DiffviewOpen<CR>", { noremap = true, silent = true })
@@ -28,7 +41,7 @@ require("mini.surround").setup({
 		delete = "gsd", -- Delete surrounding
 		find = "gsf", -- Find surrounding (to the right)
 		find_left = "gsF", -- Find surrounding (to the left)
-		highlight = "gh", -- Highlight surrounding
+		highlight = "gsh", -- Highlight surrounding
 		replace = "gsr", -- Replace surrounding
 		update_n_lines = "gsn", -- Update `n_lines`
 
