@@ -65,7 +65,7 @@ The one exception to this is if the user references something you don't know abo
 				name = "openai",
 				schema = {
 					model = {
-						default = "o4-mini",
+						default = "gpt-4.1",
 						choices = {
 							"gpt-4.1-mini",
 							"gpt-4.1-nano",
@@ -108,7 +108,7 @@ The one exception to this is if the user references something you don't know abo
 			adapter = "openai",
 		},
 		inline = {
-			adapter = "gemini",
+			adapter = "openai",
 			keymaps = {
 				accept_change = {
 					modes = { n = "ga" },

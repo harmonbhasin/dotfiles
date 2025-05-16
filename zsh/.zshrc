@@ -121,6 +121,7 @@ alias stop-ec2="/Users/harmonbhasin/work/securebio/stop_ec2.sh"
 alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias claude="/Users/harmonbhasin/.claude/local/claude"
 alias oo="cd /Users/harmonbhasin/personal/obsidian/main/"
+alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
 
 # NVM Configuration
 export NVM_DIR="$HOME/.nvm"

@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Pre-commit hook to use Claude Code for linting and bug checking
+
+# Check if Claude CLI is installed
+if ! command -v claude &> /dev/null; then
+    echo "Claude CLI not found. Please install it first."
+    exit 1
+fi
+
+# Store staged files excluding deleted ones
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if [ -z "$STAGED_FILES" ]; then
+    echo "No files to analyze."
+    exit 0
+fi
+
+# Run claude on the changes
+echo "Running Claude Code analysis..."
+ANALYSIS=$(claude -p "You are a strict code linter and bug finder. Analyze the following git diff between staged changes and main branch.
+Focus on:
+1. Potential bugs or logic errors
+2. Security vulnerabilities
+3. Performance issues
+4. Typos and naming issues
+5. Code style inconsistencies
+
+For each issue found, report the filename and line number on one line, and a description of the issue on the second line.
+If no issues are found, respond with 'No issues found.'
+
+Here's the diff:
+$(git diff --cached)")
+
+# Check results
+if [[ "$ANALYSIS" == *"No issues found"* ]]; then
+    echo "✅ No issues detected"
+    exit 0
+else
+    echo "⚠️ Issues detected:"
+    echo "$ANALYSIS"
+    
+    # Ask if user wants to proceed with commit
+    read -p "Issues were found. Proceed with commit anyway? (y/N): " PROCEED
+    if [[ $PROCEED != "y" && $PROCEED != "Y" ]]; then
+        echo "Commit aborted."
+        exit 1
+    fi
+fi
+
+exit 0

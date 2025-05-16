@@ -17,7 +17,7 @@ vim.opt.showtabline = 0 --remove tabline
 
 -- Set spell checker  for markdown files
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "markdown",
+	pattern = { "markdown", "quarto" },
 	callback = function()
 		vim.opt.spell = true
 		vim.opt.spelllang = en_us
@@ -351,15 +351,23 @@ iron.setup({
 		scratch_repl = true,
 		-- Your repl definitions come here
 		repl_definition = {
-			sh = {
+			bash = {
 				-- Can be a table or a function that
 				-- returns a table (see below)
-				command = { "bash" },
+				command = { "sh" },
+			},
+			zsh = {
+				-- Can be a table or a function that
+				-- returns a table (see below)
+				command = { "zsh" },
 			},
 			python = {
 				command = { "python3" }, -- or { "ipython", "--no-autoindent" }
 				format = common.bracketed_paste_python,
 				block_deviders = { "# %%", "#%%" },
+			},
+			r = {
+				command = { "R" },
 			},
 		},
 		-- set the file type of the newly created repl to ft
