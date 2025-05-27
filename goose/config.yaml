@@ -1,5 +1,4 @@
-GOOSE_PROVIDER: ollama
-OPENAI_BASE_PATH: v1/chat/completions
+GOOSE_CLI_THEME: dark
 extensions:
   computercontroller:
     bundled: true
@@ -29,7 +28,8 @@ extensions:
     name: github
     timeout: 300
     type: stdio
-GOOSE_MODEL: gemma3
-OLLAMA_HOST: http://0.0.0.0:8080
-GOOSE_CLI_THEME: dark
+OPENAI_BASE_PATH: v1/chat/completions
 OPENAI_HOST: https://api.openai.com
+GOOSE_PROVIDER: openai
+OLLAMA_HOST: http://0.0.0.0:8080
+GOOSE_MODEL: o4-mini

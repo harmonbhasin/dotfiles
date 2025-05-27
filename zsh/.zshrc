@@ -112,8 +112,8 @@ bindkey '^ ' autosuggest-accept
 # Aliases
 alias vi="nvim"
 alias v="nvim"
-alias python="python3"
-alias pip="pip3"
+#alias python="python3"
+#alias pip="pip3"
 alias change-ec2="/Users/harmonbhasin/work/securebio/instance_manipulator.sh"
 alias check-ec2="/Users/harmonbhasin/work/securebio/check_ec2.sh"
 alias start-ec2="/Users/harmonbhasin/work/securebio/start_ec2.sh"
@@ -146,6 +146,22 @@ if [ -f "$HOME/.local/bin/env.zsh" ]; then
   source "$HOME/.local/bin/env.zsh"
 fi
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/harmonbhasin/programming/software/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/harmonbhasin/programming/software/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/harmonbhasin/programming/software/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/harmonbhasin/programming/software/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
 # Source env
 envsource ~/.env
 
@@ -158,3 +174,9 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export TVM_LIBRARY_PATH=/Users/harmonbhasin/programming/software/tvm/build
+export TVM_HOME=/Users/harmonbhasin/programming/software/tvm/build
+export PYTHONPATH=$TVM_HOME/python:$PYTHONPATH
+export PIP_REQUIRE_VIRTUALENV=false
+

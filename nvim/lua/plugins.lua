@@ -331,6 +331,13 @@ local plugins = {
 		end,
 	},
 	{ "sindrets/diffview.nvim" },
+	{
+		"catgoose/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {
+			tailwind = "normal",
+		},
+	},
 }
 
 require("lazy").setup(plugins)
