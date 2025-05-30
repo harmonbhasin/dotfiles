@@ -82,10 +82,10 @@ require("notion").setup({
 	noEvent = "No events",
 	debug = true, --Enable some error messages on failed API calls
 })
-require("notion").update({
-	silent = false,
-	window = nil,
-})
+--require("notion").update({
+--  silent = false,
+--  window = nil,
+--})
 
 -- Harpoon
 local harpoon = require("harpoon")
