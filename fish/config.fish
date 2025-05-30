@@ -31,5 +31,11 @@ if status is-interactive
     alias grab-ec2 "/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 
 
+    atuin init fish | source
 end
 alias claude="/Users/harmonbhasin/.claude/local/claude"
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/harmonbhasin/.lmstudio/bin
+# End of LM Studio CLI section
+

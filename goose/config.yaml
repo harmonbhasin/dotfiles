@@ -28,8 +28,8 @@ extensions:
     name: github
     timeout: 300
     type: stdio
-OPENAI_BASE_PATH: v1/chat/completions
-OPENAI_HOST: https://api.openai.com
-GOOSE_PROVIDER: openai
 OLLAMA_HOST: http://0.0.0.0:8080
-GOOSE_MODEL: o4-mini
+OPENAI_HOST: https://api.openai.com
+OPENAI_BASE_PATH: v1/chat/completions
+GOOSE_MODEL: gpt-4.1
+GOOSE_PROVIDER: openai

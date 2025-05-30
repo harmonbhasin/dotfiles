@@ -161,6 +161,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Disable conda's auto prompt modification (Starship handles it)
+export CONDA_CHANGEPS1=false
 
 # Source env
 envsource ~/.env
@@ -180,3 +182,28 @@ export TVM_HOME=/Users/harmonbhasin/programming/software/tvm/build
 export PYTHONPATH=$TVM_HOME/python:$PYTHONPATH
 export PIP_REQUIRE_VIRTUALENV=false
 
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/harmonbhasin/.lmstudio/bin"
+# End of LM Studio CLI section
+
+# # zsh helper to use goose if you make a typo or just want to yolo into the shell
+#command_not_found_handler() {
+#  local cmd="$*"
+#  echo "🪿:"
+#  goose run -t "can you try to run this command please: $cmd"
+#}
+
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/Users/harmonbhasin/.opam/opam-init/init.zsh' ]] || source '/Users/harmonbhasin/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration

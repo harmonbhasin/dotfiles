@@ -69,13 +69,13 @@ local plugins = {
 		config = true,
 	},
 	"nvim-tree/nvim-web-devicons", -- File icons
-	"glepnir/dashboard-nvim", -- Dashboard
-	{
-		"nvim-telescope/telescope.nvim", -- Fuzzy finder
-		dependencies = {
-			"sharkdp/fd",
-		},
-	},
+	--"glepnir/dashboard-nvim", -- Dashboard
+	--{
+	--	"nvim-telescope/telescope.nvim", -- Fuzzy finder
+	--	dependencies = {
+	--		"sharkdp/fd",
+	--	},
+	--},
 	"nvim-lua/plenary.nvim", -- Common lua functions used by other plugins
 	-- status line
 	{
@@ -115,7 +115,7 @@ local plugins = {
 				lua = { "stylua" },
 				python = { "ruff" },
 				javascript = { "prettier" },
-				markdown = { "prettier" },
+				--markdown = { "prettier" },
 				svelte = { "prettier" },
 				r = { "air" },
 				json = { "prettier" },
@@ -313,7 +313,7 @@ local plugins = {
 	},
 	{
 		"Al0den/notion.nvim",
-		lazy = false, --Should work when lazy loaded, not tested
+		lazy = true, --Should work when lazy loaded, not tested
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",
@@ -331,13 +331,13 @@ local plugins = {
 		end,
 	},
 	{ "sindrets/diffview.nvim" },
-	{
-		"catgoose/nvim-colorizer.lua",
-		event = "BufReadPre",
-		opts = {
-			tailwind = "normal",
-		},
-	},
+	--{
+	--	"catgoose/nvim-colorizer.lua",
+	--	event = "BufReadPre",
+	--	opts = {
+	--		tailwind = "normal",
+	--	},
+	--},
 }
 
 require("lazy").setup(plugins)

@@ -1,6 +1,8 @@
 require("plugins")
 
 vim.g.python_recommended_style = 0
+vim.g.markdown_recommended_style = 0
+
 vim.wo.number = true
 vim.g.mapleader = " "
 vim.opt.relativenumber = true
@@ -53,7 +55,7 @@ require("mini.surround").setup({
 -- Notion
 vim.keymap.set("n", "<leader>nm", function()
 	require("notion").openMenu()
-end)
+end, { desc = "Open Notion Menu" })
 
 require("notion").setup({
 	autoUpdate = true, --Allow the plugin to automatically update the data from the Notion API
@@ -200,7 +202,7 @@ if path_exists(obsidian_path) then
 			},
 		},
 		-- Optional, if you keep notes in a specific subdirectory of your vault.
-		notes_subdir = "Zettlekasten",
+		notes_subdir = "Knowledge",
 
 		completion = {
 			-- Set to false to disable completion.
@@ -417,26 +419,26 @@ iron.setup({
 ---------------------------------------------
 
 -- Dashboard
-require("dashboard").setup({
-	theme = "hyper",
-	config = {
-		week_header = {
-			enable = true,
-		},
-		packages = {
-			enable = true,
-		},
-		project = {
-			enable = true,
-			limit = 8,
-			icon = "  ",
-			action = "Telescope find_files path=",
-		},
-		mru = {
-			enable = true,
-		},
-	},
-})
+--require("dashboard").setup({
+--  theme = "hyper",
+--  config = {
+--    week_header = {
+--      enable = true,
+--    },
+--    packages = {
+--      enable = true,
+--    },
+--    project = {
+--      enable = true,
+--      limit = 8,
+--      icon = "  ",
+--      action = "Telescope find_files path=",
+--    },
+--    mru = {
+--      enable = true,
+--    },
+--  },
+--})
 ---------------------------------------------
 
 -- Command completion
