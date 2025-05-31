@@ -1,7 +1,9 @@
 # CyberpunkScarletprotocol, catppuccin-mocha, cyberpunk, kanagawa dragon, Fahrenheit
 theme = "rose-pine"
 shell-integration = zsh
-font-size = 11
+font-size = 9
+cursor-style = bar
+mouse-hide-while-typing = true
 
 window-padding-balance = true
 window-save-state = always
