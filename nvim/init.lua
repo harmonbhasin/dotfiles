@@ -324,8 +324,8 @@ local actions = require("telescope.actions")
 
 require("telescope").setup({
 	defaults = {
-		layout_strategy = "vertical",
-		layout_config = { height = 0.5 },
+		--layout_strategy = "vertical",
+		--layout_config = { height = 0.5 },
 
 		mappings = {
 			i = {
