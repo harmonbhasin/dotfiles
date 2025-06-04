@@ -218,5 +218,3 @@ export PATH="$PATH:/Users/harmonbhasin/.lmstudio/bin"
 # END opam configuration
 #
 eval "$(zoxide init zsh)"
-
-[ -f "/Users/harmonbhasin/.ghcup/env" ] && . "/Users/harmonbhasin/.ghcup/env" # ghcup-env
