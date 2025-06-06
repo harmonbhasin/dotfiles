@@ -1,5 +1,5 @@
-# CyberpunkScarletprotocol, catppuccin-mocha, cyberpunk, kanagawa dragon, Fahrenheit
-theme = "rose-pine"
+# CyberpunkScarletprotocol, catppuccin-mocha, cyberpunk, kanagawa dragon, Fahrenheit, rose-pine, carbonfox, oxocarbon
+theme = "oxocarbon"
 shell-integration = zsh
 font-size = 9
 cursor-style = bar

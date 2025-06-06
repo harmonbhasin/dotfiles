@@ -323,11 +323,18 @@ local plugins = {
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
-		config = function()
-			vim.cmd("colorscheme rose-pine")
-		end,
 	},
 	{ "sindrets/diffview.nvim" },
+	{
+		"nyoom-engineering/oxocarbon.nvim",
+		config = function()
+			vim.cmd("colorscheme oxocarbon")
+		end,
+	},
+	-- Add in any other configuration;
+	--   event = foo,
+	--   config = bar
+	--   end,
 	--{
 	--	"catgoose/nvim-colorizer.lua",
 	--	event = "BufReadPre",
