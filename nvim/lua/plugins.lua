@@ -342,6 +342,32 @@ local plugins = {
 	--		tailwind = "normal",
 	--	},
 	--},
+	{
+		"cameron-wags/rainbow_csv.nvim",
+		config = true,
+		ft = {
+			"csv",
+			"tsv",
+			"csv_semicolon",
+			"csv_whitespace",
+			"csv_pipe",
+			"rfc_csv",
+			"rfc_semicolon",
+		},
+		cmd = {
+			"RainbowDelim",
+			"RainbowDelimSimple",
+			"RainbowDelimQuoted",
+			"RainbowMultiDelim",
+		},
+	},
+	--{
+	--	"catgoose/nvim-colorizer.lua",
+	--	event = "BufReadPre",
+	--	opts = {
+	--		tailwind = "normal",
+	--	},
+	--},
 }
 
 require("lazy").setup(plugins)
