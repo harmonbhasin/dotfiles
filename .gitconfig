@@ -7,7 +7,7 @@
 	postBuffer = 524288000
 
 [core]
-    pager = delta
+  pager = delta
 	editor = nvim
 
 [interactive]
@@ -22,3 +22,5 @@
     
 [diff]
     colorMoved = default
+[init]
+	defaultBranch = main
