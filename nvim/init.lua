@@ -372,6 +372,9 @@ iron.setup({
       r = {
         command = { "R" },
       },
+      groovy = {
+        command = { "groovysh" },
+      },
     },
     -- set the file type of the newly created repl to ft
     -- bufnr is the buffer id of the REPL and ft is the filetype of the
