@@ -1,5 +1,19 @@
+OPENAI_BASE_PATH: v1/chat/completions
 GOOSE_CLI_THEME: dark
 extensions:
+  anki-mcp:
+    args:
+    - --yes
+    - anki-mcp-server
+    bundled: null
+    cmd: npx
+    description: MCP server that connects to Anki
+    enabled: true
+    env_keys: []
+    envs: {}
+    name: anki-mcp
+    timeout: 600
+    type: stdio
   computercontroller:
     bundled: true
     display_name: Computer Controller
@@ -30,6 +44,5 @@ extensions:
     type: stdio
 OLLAMA_HOST: http://0.0.0.0:8080
 OPENAI_HOST: https://api.openai.com
-OPENAI_BASE_PATH: v1/chat/completions
-GOOSE_MODEL: gpt-4.1
 GOOSE_PROVIDER: openai
+GOOSE_MODEL: o4-mini

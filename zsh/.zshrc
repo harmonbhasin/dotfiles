@@ -220,3 +220,5 @@ export PATH="$PATH:/Users/harmonbhasin/.lmstudio/bin"
 eval "$(zoxide init zsh)"
 
 [ -f "/Users/harmonbhasin/.ghcup/env" ] && . "/Users/harmonbhasin/.ghcup/env" # ghcup-env
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
