@@ -17,6 +17,16 @@ vim.opt.ignorecase = true -- Ignore case
 
 vim.opt.showtabline = 0 --remove tabline
 
+
+-- give highlighting for nf-test files
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*.nf.test",         -- This is the pattern for files ending in .nf.test
+  callback = function()
+    vim.bo.filetype = "nextflow" -- Set the filetype to 'nextflow'
+  end,
+})
+
+
 -- Set spell checker  for markdown files
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "markdown", "quarto" },
