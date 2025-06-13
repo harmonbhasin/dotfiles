@@ -148,7 +148,7 @@ require("codecompanion").setup({
 			-- Options to customize the UI of the chat buffer
 			window = {
 				layout = "vertical", -- float|vertical|horizontal|buffer
-				position = "left", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
+				position = "right", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
 				border = "single",
 				width = 0.25,
 				relative = "editor",
