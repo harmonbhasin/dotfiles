@@ -1,128 +1,55 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+# ABOUTME: Vanilla Zsh configuration with manually managed plugins
 
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Ghosty
+# ===== ENVIRONMENT SETUP =====
+# Ghostty integration
 if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
   source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
 fi
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ===== BASIC ZSH OPTIONS =====
+# Core zsh options that Oh My Zsh was handling
+setopt AUTO_CD                 # cd by typing directory name if it's not a command
+setopt AUTO_PUSHD              # Make cd push old directory to directory stack
+setopt PUSHD_IGNORE_DUPS       # Don't push multiple copies of same dir to stack
+setopt PUSHD_SILENT            # Don't print directory stack after pushd/popd
+setopt CORRECT                 # Command correction
+setopt EXTENDED_GLOB           # Extended globbing
+setopt GLOB_DOTS               # Include dotfiles in glob patterns
+setopt HIST_EXPIRE_DUPS_FIRST  # Delete duplicates first when HISTFILE size > HISTSIZE
+setopt HIST_IGNORE_DUPS        # Don't record duplicate commands
+setopt HIST_IGNORE_SPACE       # Don't record commands that start with space
+setopt HIST_VERIFY             # Show command with history expansion before running
+setopt INC_APPEND_HISTORY      # Save commands to history file immediately
+setopt SHARE_HISTORY           # Share history between all sessions
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# History configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Completion system
+autoload -U compinit
+compinit
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# ===== PLUGIN LOADING =====
+# Load zsh-autocomplete first (must be early, before compdef calls)
+source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# Load other plugins
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-#plugins=(git docker zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
-plugins=(git docker zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
-
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
 # Editor
 export EDITOR="nvim"
 
-
-# PRE- OMZ CONFIG
 # Vi mode (equivalent to fish_vi_key_bindings)
 bindkey -v
 bindkey '^ ' autosuggest-accept
 
-# Aliases
+# ===== ALIASES =====
+# Personal aliases
 alias vi="nvim"
 alias v="nvim"
-#alias python="python3"
-#alias pip="pip3"
 alias change-ec2="/Users/harmonbhasin/work/securebio/instance_manipulator.sh"
 alias check-ec2="/Users/harmonbhasin/work/securebio/check_ec2.sh"
 alias start-ec2="/Users/harmonbhasin/work/securebio/start_ec2.sh"
@@ -132,6 +59,7 @@ alias claude="/Users/harmonbhasin/.claude/local/claude"
 alias oo="cd /Users/harmonbhasin/personal/obsidian/main/"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
 
+# ===== EXTERNAL INTEGRATIONS =====
 # NVM Configuration
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" 
@@ -155,8 +83,7 @@ if [ -f "$HOME/.local/bin/env.zsh" ]; then
   source "$HOME/.local/bin/env.zsh"
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
+# Conda initialization
 __conda_setup="$('/Users/harmonbhasin/programming/software/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -168,7 +95,6 @@ else
     fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<
 
 # Disable conda's auto prompt modification (Starship handles it)
 export CONDA_CHANGEPS1=false
@@ -176,7 +102,7 @@ export CONDA_CHANGEPS1=false
 # Source env
 envsource ~/.env
 
-# Yazi
+# Yazi integration
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -185,40 +111,33 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+# Additional PATH exports
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export TVM_LIBRARY_PATH=/Users/harmonbhasin/programming/software/tvm/build
 export TVM_HOME=/Users/harmonbhasin/programming/software/tvm/build
 export PYTHONPATH=$TVM_HOME/python:$PYTHONPATH
 export PIP_REQUIRE_VIRTUALENV=false
 
-
+# Atuin
 . "$HOME/.atuin/bin/env"
-
 eval "$(atuin init zsh)"
 
-# Added by LM Studio CLI (lms)
+# LM Studio
 export PATH="$PATH:/Users/harmonbhasin/.lmstudio/bin"
-# End of LM Studio CLI section
 
-# # zsh helper to use goose if you make a typo or just want to yolo into the shell
-#command_not_found_handler() {
-#  local cmd="$*"
-#  echo "🪿:"
-#  goose run -t "can you try to run this command please: $cmd"
-#}
-
-
-
-# BEGIN opam configuration
-# This is useful if you're using opam as it adds:
-#   - the correct directories to the PATH
-#   - auto-completion for the opam binary
-# This section can be safely removed at any time if needed.
+# OCaml/Opam
 [[ ! -r '/Users/harmonbhasin/.opam/opam-init/init.zsh' ]] || source '/Users/harmonbhasin/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
-# END opam configuration
-#
+
+# Zoxide
 eval "$(zoxide init zsh)"
 
-[ -f "/Users/harmonbhasin/.ghcup/env" ] && . "/Users/harmonbhasin/.ghcup/env" # ghcup-env
+# GHCup
+[ -f "/Users/harmonbhasin/.ghcup/env" ] && . "/Users/harmonbhasin/.ghcup/env"
+
+# Terraform completion
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# Colors
+export CLICOLOR=1
