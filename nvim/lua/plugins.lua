@@ -168,7 +168,7 @@ local plugins = {
 				file_types = { "markdown" },
 			})
 		end,
-		lazy = true,
+		ft = { "markdown" },
 	},
 	"hrsh7th/nvim-cmp", -- Completion engine
 	"Exafunction/codeium.vim", -- Autocomplete with codeium
@@ -377,6 +377,7 @@ local plugins = {
 			"RainbowMultiDelim",
 		},
 	},
+
 	--{
 	--	"catgoose/nvim-colorizer.lua",
 	--	event = "BufReadPre",
