@@ -59,6 +59,8 @@ require("mini.surround").setup({
   },
 })
 
+
+require("markdown").setup()
 -- Notion
 --vim.keymap.set("n", "<leader>nm", function()
 --	require("notion").openMenu()
