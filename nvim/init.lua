@@ -24,6 +24,36 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+-- Function to check if path exists
+local function path_exists(path)
+  local file = io.open(path, "r")
+  if file then
+    file:close()
+    return true
+  else
+    return false
+  end
+end
+
+local nextflow_ls_path = "/home/ec2-user/language-server/build/libs"
+
+-- Obsidian
+if path_exists(nextflow_ls_path) then
+  vim.lsp.config('nextflow_ls', {
+    cmd = { 'java', '-jar', nextflow_ls_path .. '/language-server-all.jar' },
+    filetypes = { 'nextflow' },
+    settings = {
+      nextflow = {
+        files = {
+          exclude = { '.git', '.nf-test', 'work' },
+        },
+      },
+    },
+  })
+end
+
+vim.lsp.enable('nextflow_ls')
+
 -- Set spell checker  for markdown files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "quarto" },
@@ -190,16 +220,6 @@ require("quarto").setup({
 local home = os.getenv("HOME")
 local obsidian_path = home .. "/personal/obsidian/main"
 
--- Function to check if path exists
-local function path_exists(path)
-  local file = io.open(path, "r")
-  if file then
-    file:close()
-    return true
-  else
-    return false
-  end
-end
 
 -- Obsidian
 if path_exists(obsidian_path) then
