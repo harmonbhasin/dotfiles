@@ -4,5 +4,6 @@
       "Bash(ls:*)"
     ],
     "deny": []
-  }
+  },
+  "model": "sonnet"
 }
