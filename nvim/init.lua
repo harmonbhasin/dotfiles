@@ -6,62 +6,69 @@ vim.g.markdown_recommended_style = 0
 vim.wo.number = true
 vim.g.mapleader = " "
 vim.opt.relativenumber = true
-vim.opt.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
-vim.opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
-vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.tabstop = 2        -- Number of spaces that a <Tab> in the file counts for
+vim.opt.shiftwidth = 2     -- Number of spaces to use for each step of (auto)indent
+vim.opt.expandtab = true   -- Use spaces instead of tabs
 vim.opt.smartindent = true -- Make indenting smarter again
-vim.opt.autoindent = true -- Auto indent
-vim.opt.syntax = "on" -- Enable syntax highlighting
-vim.opt.showmode = false -- Don't show mode in command line
-vim.opt.ignorecase = true -- Ignore case
-vim.opt.showtabline = 0 --remove tabline
+vim.opt.autoindent = true  -- Auto indent
+vim.opt.syntax = "on"      -- Enable syntax highlighting
+vim.opt.showmode = false   -- Don't show mode in command line
+vim.opt.ignorecase = true  -- Ignore case
+vim.opt.showtabline = 0    --remove tabline
 
 -- give highlighting for nf-test files
 vim.api.nvim_create_autocmd("BufReadPost", {
-	pattern = "*.nf.test", -- This is the pattern for files ending in .nf.test
-	callback = function()
-		vim.bo.filetype = "nextflow" -- Set the filetype to 'nextflow'
-	end,
+  pattern = "*.nf.test",         -- This is the pattern for files ending in .nf.test
+  callback = function()
+    vim.bo.filetype = "nextflow" -- Set the filetype to 'nextflow'
+  end,
 })
 
 -- Function to check if path exists
 local function path_exists(path)
-	local file = io.open(path, "r")
-	if file then
-		file:close()
-		return true
-	else
-		return false
-	end
+  local file = io.open(path, "r")
+  if file then
+    file:close()
+    return true
+  else
+    return false
+  end
 end
 
 local nextflow_ls_path = "/home/ec2-user/language-server/build/libs"
 
--- Obsidian
+-- Nextflow LSP
 if path_exists(nextflow_ls_path) then
-	vim.lsp.config("nextflow_ls", {
-		cmd = { "java", "-jar", nextflow_ls_path .. "/language-server-all.jar" },
-		filetypes = { "nextflow" },
-		settings = {
-			nextflow = {
-				files = {
-					exclude = { ".git", ".nf-test", "work" },
-				},
-			},
-		},
-	})
+  -- This function runs when the LSP attaches to a buffer
+  local on_attach = function(client, bufnr)
+    -- This line tells Neovim the server cannot format, so it won't try
+    client.server_capabilities.documentFormattingProvider = false
+  end
+
+  vim.lsp.config("nextflow_ls", {
+    cmd = { "java", "-jar", nextflow_ls_path .. "/language-server-all.jar" },
+    filetypes = { "nextflow" },
+    on_attach = on_attach,
+    settings = {
+      nextflow = {
+        files = {
+          exclude = { ".git", ".nf-test", "work" },
+        },
+      },
+    },
+  })
 end
 
 vim.lsp.enable("nextflow_ls")
 
 -- Set spell checker  for markdown files
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "markdown", "quarto" },
-	callback = function()
-		vim.opt.spell = true
-		vim.opt.spelllang = en_us
-		vim.opt.spellcapcheck = "none"
-	end,
+  pattern = { "markdown", "quarto" },
+  callback = function()
+    vim.opt.spell = true
+    vim.opt.spelllang = en_us
+    vim.opt.spellcapcheck = "none"
+  end,
 })
 
 -- Oil
@@ -75,18 +82,18 @@ vim.api.nvim_set_keymap("n", "<leader>gdq", ":DiffviewClose<CR>", { noremap = tr
 
 -- Surround
 require("mini.surround").setup({
-	mappings = {
-		add = "gsa", -- Add surrounding in Normal and Visual modes
-		delete = "gsd", -- Delete surrounding
-		find = "gsf", -- Find surrounding (to the right)
-		find_left = "gsF", -- Find surrounding (to the left)
-		highlight = "gsh", -- Highlight surrounding
-		replace = "gsr", -- Replace surrounding
-		update_n_lines = "gsn", -- Update `n_lines`
+  mappings = {
+    add = "gsa",            -- Add surrounding in Normal and Visual modes
+    delete = "gsd",         -- Delete surrounding
+    find = "gsf",           -- Find surrounding (to the right)
+    find_left = "gsF",      -- Find surrounding (to the left)
+    highlight = "gsh",      -- Highlight surrounding
+    replace = "gsr",        -- Replace surrounding
+    update_n_lines = "gsn", -- Update `n_lines`
 
-		suffix_last = "l", -- Suffix to search with "prev" method
-		suffix_next = "n", -- Suffix to search with "next" method
-	},
+    suffix_last = "l",      -- Suffix to search with "prev" method
+    suffix_next = "n",      -- Suffix to search with "next" method
+  },
 })
 
 -- require("markdown").setup()
@@ -96,23 +103,23 @@ local harpoon = require("harpoon")
 
 harpoon:setup()
 vim.keymap.set("n", "<leader>m", function()
-	harpoon:list():add()
+  harpoon:list():add()
 end)
 vim.keymap.set("n", "<leader>e", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list())
+  harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 
 vim.keymap.set("n", "<leader>h", function()
-	harpoon:list():select(1)
+  harpoon:list():select(1)
 end)
 vim.keymap.set("n", "<leader>j", function()
-	harpoon:list():select(2)
+  harpoon:list():select(2)
 end)
 vim.keymap.set("n", "<leader>k", function()
-	harpoon:list():select(3)
+  harpoon:list():select(3)
 end)
 vim.keymap.set("n", "<leader>l", function()
-	harpoon:list():select(4)
+  harpoon:list():select(4)
 end)
 
 -- Buffer list
@@ -132,14 +139,14 @@ vim.g.fugitive_use_git_pager = 1
 
 -- Quicker
 vim.keymap.set("n", "<leader>q", function()
-	require("quicker").toggle()
+  require("quicker").toggle()
 end, {
-	desc = "Toggle quickfix",
+  desc = "Toggle quickfix",
 })
 vim.keymap.set("n", "<leader>w", function()
-	require("quicker").toggle({ loclist = true })
+  require("quicker").toggle({ loclist = true })
 end, {
-	desc = "Toggle loclist",
+  desc = "Toggle loclist",
 })
 
 -- Go between quickfixs
@@ -158,27 +165,27 @@ vim.api.nvim_set_keymap("n", "<leader>tn", ":tabnew<CR>", { noremap = true, sile
 
 -- Quarto
 require("quarto").setup({
-	debug = false,
-	closePreviewOnExit = true,
-	lspFeatures = {
-		enabled = true,
-		chunks = "curly",
-		languages = { "r", "python", "julia", "bash", "html" },
-		diagnostics = {
-			enabled = true,
-			triggers = { "BufWritePost" },
-		},
-		completion = {
-			enabled = true,
-		},
-	},
-	codeRunner = {
-		enabled = true,
-		default_method = "iron", -- "molten", "slime", "iron" or <function>
-		ft_runners = {}, -- filetype to runner, ie. `{ python = "molten" }`.
-		-- Takes precedence over `default_method`
-		never_run = { "yaml" }, -- filetypes which are never sent to a code runner
-	},
+  debug = false,
+  closePreviewOnExit = true,
+  lspFeatures = {
+    enabled = true,
+    chunks = "curly",
+    languages = { "r", "python", "julia", "bash", "html" },
+    diagnostics = {
+      enabled = true,
+      triggers = { "BufWritePost" },
+    },
+    completion = {
+      enabled = true,
+    },
+  },
+  codeRunner = {
+    enabled = true,
+    default_method = "iron", -- "molten", "slime", "iron" or <function>
+    ft_runners = {},         -- filetype to runner, ie. `{ python = "molten" }`.
+    -- Takes precedence over `default_method`
+    never_run = { "yaml" },  -- filetypes which are never sent to a code runner
+  },
 })
 
 -- Get the home directory path and construct the full path to check
@@ -187,129 +194,129 @@ local obsidian_path = home .. "/personal/obsidian/main"
 
 -- Obsidian
 if path_exists(obsidian_path) then
-	require("obsidian").setup({
-		workspaces = {
-			{
-				name = "personal",
-				path = "~/personal/obsidian/main",
-			},
-		},
-		-- Optional, if you keep notes in a specific subdirectory of your vault.
-		notes_subdir = "Knowledge",
+  require("obsidian").setup({
+    workspaces = {
+      {
+        name = "personal",
+        path = "~/personal/obsidian/main",
+      },
+    },
+    -- Optional, if you keep notes in a specific subdirectory of your vault.
+    notes_subdir = "Knowledge",
 
-		completion = {
-			-- Set to false to disable completion.
-			nvim_cmp = true,
-			-- Trigger completion at 2 chars.
-			min_chars = 2,
-		},
-		daily_notes = {
-			folder = "Root/Daily note",
-		},
-		new_notes_location = "current_dir",
-		-- Optional, customize how note IDs are generated given an optional title.
-		---@param title string|?
-		---@return string
-		note_id_func = function(title)
-			return title
-		end,
-		-- Optional, alternatively you can customize the frontmatter data.
-		---@return table
-		note_frontmatter_func = function(note)
-			-- Add the title of the note as an alias.
-			if note.title then
-				note:add_alias(note.title)
-			end
+    completion = {
+      -- Set to false to disable completion.
+      nvim_cmp = true,
+      -- Trigger completion at 2 chars.
+      min_chars = 2,
+    },
+    daily_notes = {
+      folder = "Root/Daily note",
+    },
+    new_notes_location = "current_dir",
+    -- Optional, customize how note IDs are generated given an optional title.
+    ---@param title string|?
+    ---@return string
+    note_id_func = function(title)
+      return title
+    end,
+    -- Optional, alternatively you can customize the frontmatter data.
+    ---@return table
+    note_frontmatter_func = function(note)
+      -- Add the title of the note as an alias.
+      if note.title then
+        note:add_alias(note.title)
+      end
 
-			local out = { aliases = note.aliases, tags = note.tags }
+      local out = { aliases = note.aliases, tags = note.tags }
 
-			-- `note.metadata` contains any manually added fields in the frontmatter.
-			-- So here we just make sure those fields are kept in the frontmatter.
-			if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-				for k, v in pairs(note.metadata) do
-					out[k] = v
-				end
-			end
+      -- `note.metadata` contains any manually added fields in the frontmatter.
+      -- So here we just make sure those fields are kept in the frontmatter.
+      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+        for k, v in pairs(note.metadata) do
+          out[k] = v
+        end
+      end
 
-			return out
-		end,
-		-- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
-		-- URL it will be ignored but you can customize this behavior here.
-		---@param url string
-		follow_url_func = function(url)
-			-- Open the URL in the default web browser.
-			vim.fn.jobstart({ "open", url }) -- Mac OS
-			-- vim.fn.jobstart({"xdg-open", url})  -- linux
-			-- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
-			-- vim.ui.open(url) -- need Neovim 0.10.0+
-		end,
-		templates = {
-			folder = "Templates",
-			date_format = "%Y-%m-%d-%a",
-			time_format = "%H:%M",
-		},
-	})
-	vim.opt.conceallevel = 1
-	vim.keymap.set("n", "<Leader>n/", ":ObsidianSearch<CR>", { desc = "Obsidian Search" })
-	vim.keymap.set("n", "<Leader>nff", ":ObsidianQuickSwitch<CR>", { desc = "Obsidian Quick Switch" })
-	vim.keymap.set("n", "<Leader>nd", ":ObsidianToday<CR>", { desc = "Obsidian Today" })
-	vim.keymap.set("n", "<Leader>ny", ":ObsidianYesterday<CR>", { desc = "Obsidian Yesterday" })
-	vim.keymap.set("n", "<Leader>nfl", ":ObsidianFollowLink<CR>", { desc = "Obsidian Follow Link" })
-	vim.keymap.set("n", "<Leader>nt", ":ObsidianTOC<CR>", { desc = "Show note table of contents" })
-	vim.keymap.set("n", "<leader>nc", function()
-		-- Prompt the user for the note title
-		local title = vim.fn.input("Enter note title: ")
+      return out
+    end,
+    -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
+    -- URL it will be ignored but you can customize this behavior here.
+    ---@param url string
+    follow_url_func = function(url)
+      -- Open the URL in the default web browser.
+      vim.fn.jobstart({ "open", url }) -- Mac OS
+      -- vim.fn.jobstart({"xdg-open", url})  -- linux
+      -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+      -- vim.ui.open(url) -- need Neovim 0.10.0+
+    end,
+    templates = {
+      folder = "Templates",
+      date_format = "%Y-%m-%d-%a",
+      time_format = "%H:%M",
+    },
+  })
+  vim.opt.conceallevel = 1
+  vim.keymap.set("n", "<Leader>n/", ":ObsidianSearch<CR>", { desc = "Obsidian Search" })
+  vim.keymap.set("n", "<Leader>nff", ":ObsidianQuickSwitch<CR>", { desc = "Obsidian Quick Switch" })
+  vim.keymap.set("n", "<Leader>nd", ":ObsidianToday<CR>", { desc = "Obsidian Today" })
+  vim.keymap.set("n", "<Leader>ny", ":ObsidianYesterday<CR>", { desc = "Obsidian Yesterday" })
+  vim.keymap.set("n", "<Leader>nfl", ":ObsidianFollowLink<CR>", { desc = "Obsidian Follow Link" })
+  vim.keymap.set("n", "<Leader>nt", ":ObsidianTOC<CR>", { desc = "Show note table of contents" })
+  vim.keymap.set("n", "<leader>nc", function()
+    -- Prompt the user for the note title
+    local title = vim.fn.input("Enter note title: ")
 
-		-- Check if the user entered a title (didn't press Cancel or leave empty)
-		if title and title ~= "" then
-			-- Execute the ObsidianNewFromTemplate command with the provided title
-			vim.cmd("ObsidianNewFromTemplate " .. title)
-		else
-			-- Optionally, provide feedback if no title was entered
-			print("No title entered, note creation cancelled.")
-		end
-	end, { desc = "Create new Obsidian note from template with title" })
+    -- Check if the user entered a title (didn't press Cancel or leave empty)
+    if title and title ~= "" then
+      -- Execute the ObsidianNewFromTemplate command with the provided title
+      vim.cmd("ObsidianNewFromTemplate " .. title)
+    else
+      -- Optionally, provide feedback if no title was entered
+      print("No title entered, note creation cancelled.")
+    end
+  end, { desc = "Create new Obsidian note from template with title" })
 end
 
 -- Debug keybindings
 vim.keymap.set("n", "<leader>db", function()
-	require("dap").toggle_breakpoint()
+  require("dap").toggle_breakpoint()
 end, { desc = "Toggle Breakpoint" })
 vim.keymap.set("n", "<leader>dc", function()
-	require("dap").continue()
+  require("dap").continue()
 end, { desc = "Continue Debugging" })
 vim.keymap.set("n", "<leader>du", function()
-	require("dapui").toggle()
+  require("dapui").toggle()
 end, { desc = "Toggle Debug UI" })
 vim.keymap.set("n", "<leader>ds", function()
-	require("dap").step_over()
+  require("dap").step_over()
 end, { desc = "Step Over" })
 vim.keymap.set("n", "<leader>di", function()
-	require("dap").step_into()
+  require("dap").step_into()
 end, { desc = "Step Into" })
 vim.keymap.set("n", "<leader>do", function()
-	require("dap").step_out()
+  require("dap").step_out()
 end, { desc = "Step Out" })
 vim.keymap.set("n", "<leader>dt", function()
-	require("dap").terminate()
+  require("dap").terminate()
 end, { desc = "Terminate Debug" })
 
 --------------------------------------------------------------
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-	pattern = { "*.md", "*.txt", ".git-credentials", ".env", ".env.*" },
-	command = "CodeiumDisable",
+  pattern = { "*.md", "*.txt", ".git-credentials", ".env", ".env.*" },
+  command = "CodeiumDisable",
 })
 vim.keymap.set("i", "<C-g>", function()
-	return vim.fn["codeium#Accept"]()
+  return vim.fn["codeium#Accept"]()
 end, { expr = true, silent = true })
 vim.keymap.set("i", "<c-;>", function()
-	return vim.fn["codeium#CycleCompletions"](1)
+  return vim.fn["codeium#CycleCompletions"](1)
 end, { expr = true, silent = true })
 vim.keymap.set("i", "<c-,>", function()
-	return vim.fn["codeium#CycleCompletions"](-1)
+  return vim.fn["codeium#CycleCompletions"](-1)
 end, { expr = true, silent = true })
 vim.keymap.set("i", "<c-x>", function()
-	return vim.fn["codeium#Clear"]()
+  return vim.fn["codeium#Clear"]()
 end, { expr = true, silent = true })
 ------------------------------------------------------------
 
@@ -328,25 +335,25 @@ table.insert(vimgrep_arguments, "--glob")
 table.insert(vimgrep_arguments, "!**/.git/*")
 
 require("telescope").setup({
-	defaults = {
-		vimgrep_arguments = vimgrep_arguments,
-		--layout_strategy = "vertical",
-		--layout_config = { height = 0.5 },
-		mappings = {
-			i = {
-				["<c-d>"] = actions.delete_buffer,
-			},
-			n = {
-				["dd"] = actions.delete_buffer,
-			},
-		},
-	},
-	pickers = {
-		find_files = {
-			-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-			find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-		},
-	},
+  defaults = {
+    vimgrep_arguments = vimgrep_arguments,
+    --layout_strategy = "vertical",
+    --layout_config = { height = 0.5 },
+    mappings = {
+      i = {
+        ["<c-d>"] = actions.delete_buffer,
+      },
+      n = {
+        ["dd"] = actions.delete_buffer,
+      },
+    },
+  },
+  pickers = {
+    find_files = {
+      -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+    },
+  },
 })
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 --vim.keymap.set("n", "<leader>/", builtin.live_grep, {})
@@ -360,117 +367,117 @@ local view = require("iron.view")
 local common = require("iron.fts.common")
 
 iron.setup({
-	config = {
-		-- Whether a repl should be discarded or not
-		scratch_repl = true,
-		-- Your repl definitions come here
-		repl_definition = {
-			bash = {
-				-- Can be a table or a function that
-				-- returns a table (see below)
-				command = { "sh" },
-			},
-			zsh = {
-				-- Can be a table or a function that
-				-- returns a table (see below)
-				command = { "zsh" },
-			},
-			python = {
-				command = { "python3" }, -- or { "ipython", "--no-autoindent" }
-				format = common.bracketed_paste_python,
-				block_deviders = { "# %%", "#%%" },
-			},
-			r = {
-				command = { "R" },
-			},
-			groovy = {
-				command = { "groovysh" },
-			},
-		},
-		-- set the file type of the newly created repl to ft
-		-- bufnr is the buffer id of the REPL and ft is the filetype of the
-		-- language being used for the REPL.
-		repl_filetype = function(bufnr, ft)
-			return ft
-			-- or return a string name such as the following
-			-- return "iron"
-		end,
-		-- How the repl window will be displayed
-		repl_open_cmd = "vertical botright 80 split",
-	},
-	-- Iron doesn't set keymaps by default anymore.
-	-- You can set them here or manually add keymaps to the functions in iron.core
-	keymaps = {
-		toggle_repl = "<leader>rr", -- toggles the repl open and closed.
-		-- If repl_open_command is a table as above, then the following keymaps are
-		-- available
-		-- toggle_repl_with_cmd_1 = "<leader>rv",
-		-- toggle_repl_with_cmd_2 = "<leader>rh",
-		restart_repl = "<leader>rR", -- calls `IronRestart` to restart the repl
-		send_motion = "<leader>sc",
-		visual_send = "<leader>sc",
-		send_file = "<leader>sf",
-		send_line = "<leader>sl",
-		send_paragraph = "<leader>sp",
-		send_until_cursor = "<leader>su",
-		send_mark = "<leader>sm",
-		send_code_block = "<leader>sb",
-		send_code_block_and_move = "<leader>sn",
-		mark_motion = "<leader>mc",
-		mark_visual = "<leader>mc",
-		remove_mark = "<leader>md",
-		cr = "<leader>s<cr>",
-		interrupt = "<leader>s<leader>",
-		exit = "<leader>sq",
-		clear = "<leader>cl",
-	},
-	-- If the highlight is on, you can change how it looks
-	-- For the available options, check nvim_set_hl
-	highlight = {
-		italic = true,
-	},
-	ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
+  config = {
+    -- Whether a repl should be discarded or not
+    scratch_repl = true,
+    -- Your repl definitions come here
+    repl_definition = {
+      bash = {
+        -- Can be a table or a function that
+        -- returns a table (see below)
+        command = { "sh" },
+      },
+      zsh = {
+        -- Can be a table or a function that
+        -- returns a table (see below)
+        command = { "zsh" },
+      },
+      python = {
+        command = { "python3" }, -- or { "ipython", "--no-autoindent" }
+        format = common.bracketed_paste_python,
+        block_deviders = { "# %%", "#%%" },
+      },
+      r = {
+        command = { "R" },
+      },
+      groovy = {
+        command = { "groovysh" },
+      },
+    },
+    -- set the file type of the newly created repl to ft
+    -- bufnr is the buffer id of the REPL and ft is the filetype of the
+    -- language being used for the REPL.
+    repl_filetype = function(bufnr, ft)
+      return ft
+      -- or return a string name such as the following
+      -- return "iron"
+    end,
+    -- How the repl window will be displayed
+    repl_open_cmd = "vertical botright 80 split",
+  },
+  -- Iron doesn't set keymaps by default anymore.
+  -- You can set them here or manually add keymaps to the functions in iron.core
+  keymaps = {
+    toggle_repl = "<leader>rr", -- toggles the repl open and closed.
+    -- If repl_open_command is a table as above, then the following keymaps are
+    -- available
+    -- toggle_repl_with_cmd_1 = "<leader>rv",
+    -- toggle_repl_with_cmd_2 = "<leader>rh",
+    restart_repl = "<leader>rR", -- calls `IronRestart` to restart the repl
+    send_motion = "<leader>sc",
+    visual_send = "<leader>sc",
+    send_file = "<leader>sf",
+    send_line = "<leader>sl",
+    send_paragraph = "<leader>sp",
+    send_until_cursor = "<leader>su",
+    send_mark = "<leader>sm",
+    send_code_block = "<leader>sb",
+    send_code_block_and_move = "<leader>sn",
+    mark_motion = "<leader>mc",
+    mark_visual = "<leader>mc",
+    remove_mark = "<leader>md",
+    cr = "<leader>s<cr>",
+    interrupt = "<leader>s<leader>",
+    exit = "<leader>sq",
+    clear = "<leader>cl",
+  },
+  -- If the highlight is on, you can change how it looks
+  -- For the available options, check nvim_set_hl
+  highlight = {
+    italic = true,
+  },
+  ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
 })
 
 vim.keymap.set("n", "<leader>rn", function()
-	local lines = { "```{r}", "", "```" }
-	local row = vim.api.nvim_win_get_cursor(0)[1]
-	vim.api.nvim_buf_set_lines(0, row, row, false, lines)
-	vim.api.nvim_win_set_cursor(0, { row + 2, 0 })
-	vim.cmd("startinsert")
+  local lines = { "```{r}", "", "```" }
+  local row = vim.api.nvim_win_get_cursor(0)[1]
+  vim.api.nvim_buf_set_lines(0, row, row, false, lines)
+  vim.api.nvim_win_set_cursor(0, { row + 2, 0 })
+  vim.cmd("startinsert")
 end, { desc = "Insert R code block" })
 
 -- Command completion
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-		-- Prevents autocomplete from showing up normal text suggestions, this way everything else works
-		--    { name = 'buffer' },
-		{ name = "path" },
-	}),
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  }),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+    -- Prevents autocomplete from showing up normal text suggestions, this way everything else works
+    --    { name = 'buffer' },
+    { name = "path" },
+  }),
 })
 ---------------------------------------------
 ---
@@ -483,19 +490,19 @@ mason_lspconfig.setup()
 -- LSP Configuration
 local lspconfig = require("lspconfig")
 lspconfig.pyright.setup({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
 lspconfig.ruff.setup({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
 lspconfig.ts_ls.setup({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
 lspconfig.r_language_server.setup({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+  capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostic under cursor" })
@@ -506,42 +513,42 @@ vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Diagnosti
 
 -- TREE SITTER CONFIG
 require("nvim-treesitter.configs").setup({
-	-- A list of parser names, or "all" (the listed parsers MUST always be installed)
-	ensure_installed = {
-		"c",
-		"lua",
-		"vim",
-		"vimdoc",
-		"query",
-		"markdown",
-		"markdown_inline",
-		"r",
-		"typescript",
-		"javascript",
-		"json",
-	},
-	markdown = {
-		enable = true,
-		-- configuration here or nothing for defaults
-	},
+  -- A list of parser names, or "all" (the listed parsers MUST always be installed)
+  ensure_installed = {
+    "c",
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+    "markdown",
+    "markdown_inline",
+    "r",
+    "typescript",
+    "javascript",
+    "json",
+  },
+  markdown = {
+    enable = true,
+    -- configuration here or nothing for defaults
+  },
 
-	-- Install parsers synchronously (only applied to `ensure_installed`)
-	sync_install = false,
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
 
-	-- Automatically install missing parsers when entering buffer
-	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-	auto_install = true,
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
 
-	---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-	-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
 
-	highlight = {
-		enable = true,
-		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-		-- Using this option may slow down your editor, and you may see some duplicate highlights.
-		-- Instead of true it can also be a list of languages
-		additional_vim_regex_highlighting = { "markdown" },
-	},
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = { "markdown" },
+  },
 })
 ---------------------------------------------

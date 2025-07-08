@@ -91,6 +91,29 @@ Notable Neovim keybindings:
 - `<leader>db`: Toggle debug breakpoint
 - `<leader>rr`: Toggle REPL
 
+## Git Configuration
+
+### Skip-worktree Files
+
+The following files are marked with git's skip-worktree flag to prevent local changes from being tracked:
+- `.gitconfig`: Personal git configuration
+- `nvim/lazy-lock.json`: Neovim plugin lock file
+
+To view all skip-worktree files:
+```bash
+git ls-files -v | grep '^S'
+```
+
+To add a file to skip-worktree:
+```bash
+git update-index --skip-worktree <file>
+```
+
+To remove skip-worktree status:
+```bash
+git update-index --no-skip-worktree <file>
+```
+
 ## Important Notes
 
 1. The configuration assumes certain tools are installed on the system
