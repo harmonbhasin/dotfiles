@@ -141,3 +141,6 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 # Colors
 export CLICOLOR=1
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
