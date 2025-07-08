@@ -23,9 +23,7 @@
     colorMoved = default
 [init]
 	defaultBranch = main
-[credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+# Use includeIf with hasconfig to detect EC2
+# On EC2, set: git config --global ec2.instance true
+[includeIf "hasconfig:ec2.instance:true"]
+	path = ~/.gitconfig-github
