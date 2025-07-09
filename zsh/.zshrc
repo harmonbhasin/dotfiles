@@ -58,6 +58,14 @@ alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias claude="/Users/harmonbhasin/.claude/local/claude"
 alias oo="cd /Users/harmonbhasin/personal/obsidian/main/"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
+alias gs="git status"
+alias gl="git log --oneline"
+alias gb="git branch"
+alias gpl="git pull"
+alias ga="git add ."
+alias gc="git commit -m"
+alias gpom="git push origin main"
+alias gd="git diff"
 
 # ===== EXTERNAL INTEGRATIONS =====
 # NVM Configuration
