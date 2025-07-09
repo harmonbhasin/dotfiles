@@ -152,3 +152,6 @@ export CLICOLOR=1
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+
+# Ripgrep configuration
+export RIPGREP_CONFIG_PATH="$HOME/dotfiles/.ripgreprc"
