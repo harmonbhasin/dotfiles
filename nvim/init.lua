@@ -16,6 +16,8 @@ vim.opt.showmode = false   -- Don't show mode in command line
 vim.opt.ignorecase = true  -- Ignore case
 vim.opt.showtabline = 0    --remove tabline
 
+vim.cmd("colorscheme carbonfox")
+
 -- give highlighting for nf-test files
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*.nf.test",         -- This is the pattern for files ending in .nf.test
