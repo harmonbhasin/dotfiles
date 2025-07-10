@@ -18,12 +18,23 @@ vim.opt.showtabline = 0    --remove tabline
 
 vim.cmd("colorscheme carbonfox")
 
+require("autoclose").setup()
+
+
+---- Nextflow
 -- give highlighting for nf-test files
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*.nf.test",         -- This is the pattern for files ending in .nf.test
   callback = function()
     vim.bo.filetype = "nextflow" -- Set the filetype to 'nextflow'
   end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "nextflow",
+  callback = function()
+    vim.bo.commentstring = "// %s"
+  end
 })
 
 -- Function to check if path exists
@@ -62,6 +73,7 @@ if path_exists(nextflow_ls_path) then
 end
 
 vim.lsp.enable("nextflow_ls")
+----
 
 -- Set spell checker  for markdown files
 vim.api.nvim_create_autocmd("FileType", {
@@ -97,8 +109,6 @@ require("mini.surround").setup({
     suffix_next = "n",      -- Suffix to search with "next" method
   },
 })
-
--- require("markdown").setup()
 
 -- Harpoon
 local harpoon = require("harpoon")
