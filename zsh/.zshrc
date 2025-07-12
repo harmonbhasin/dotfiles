@@ -154,4 +154,4 @@ export CLICOLOR=1
 source <(fzf --zsh)
 
 # Ripgrep configuration
-export RIPGREP_CONFIG_PATH="$HOME/dotfiles/.ripgreprc"
+#export RIPGREP_CONFIG_PATH="$HOME/dotfiles/.ripgreprc"
