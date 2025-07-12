@@ -62,10 +62,11 @@ alias gs="git status"
 alias gl="git log --oneline"
 alias gb="git branch"
 alias gpl="git pull"
-alias ga="git add ."
+alias ga="git add"
 alias gc="git commit -m"
 alias gpom="git push origin main"
 alias gd="git diff"
+alias c="claude"
 
 # ===== EXTERNAL INTEGRATIONS =====
 # NVM Configuration
