@@ -155,19 +155,28 @@ vim.keymap.set("n", "<leader>rn", function()
 	vim.cmd("startinsert")
 end, { desc = "Insert R code block" })
 
+-- bash code block insertion
+vim.keymap.set("n", "<leader>bn", function()
+	local lines = { "```bash", "", "```" }
+	local row = vim.api.nvim_win_get_cursor(0)[1]
+	vim.api.nvim_buf_set_lines(0, row, row, false, lines)
+	vim.api.nvim_win_set_cursor(0, { row + 2, 0 })
+	vim.cmd("startinsert")
+end, { desc = "Insert bash code block" })
+
 -- Date navigation for YYYY-MM-DD markdown files
 local function navigate_date_files(direction)
 	-- Get all markdown files in current buffer's directory that match YYYY-MM-DD pattern
 	local date_pattern = "%d%d%d%d%-%d%d%-%d%d"
 	local files = {}
-	
+
 	-- Always use the directory of the current buffer
 	local current_dir = vim.fn.expand("%:p:h")
-	
+
 	-- Use vim.fn.glob to get files instead of shell command
 	local glob_pattern = current_dir .. "/*.md"
 	local found_files = vim.fn.glob(glob_pattern, false, true)
-	
+
 	-- Filter for date pattern and sort
 	for _, file_path in ipairs(found_files) do
 		local file_name = vim.fn.fnamemodify(file_path, ":t:r") -- get filename without extension
@@ -175,15 +184,15 @@ local function navigate_date_files(direction)
 			table.insert(files, file_path)
 		end
 	end
-	
+
 	-- Sort the files
 	table.sort(files)
-	
+
 	if #files == 0 then
 		print("No date-formatted markdown files found")
 		return
 	end
-	
+
 	-- Find current file index
 	local current_file = vim.fn.expand("%:p")
 	local current_index = nil
@@ -193,7 +202,7 @@ local function navigate_date_files(direction)
 			break
 		end
 	end
-	
+
 	if not current_index then
 		-- If current file is not a date file, go to first or last based on direction
 		if direction == "next" then
@@ -202,7 +211,7 @@ local function navigate_date_files(direction)
 			current_index = #files + 1
 		end
 	end
-	
+
 	-- Calculate target index
 	local target_index
 	if direction == "next" then
@@ -218,17 +227,20 @@ local function navigate_date_files(direction)
 			return
 		end
 	end
-	
+
 	-- Open target file
 	local target_file = files[target_index]
 	vim.cmd("edit " .. target_file)
 	print("Navigated to: " .. vim.fn.fnamemodify(target_file, ":t"))
 end
 
-vim.keymap.set("n", "<leader>dn", function() navigate_date_files("next") end, { desc = "Next date file" })
-vim.keymap.set("n", "<leader>dp", function() navigate_date_files("previous") end, { desc = "Previous date file" })
+vim.keymap.set("n", "<leader>dn", function()
+	navigate_date_files("next")
+end, { desc = "Next date file" })
+vim.keymap.set("n", "<leader>dp", function()
+	navigate_date_files("previous")
+end, { desc = "Previous date file" })
 
 -- LSP diagnostics
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostic under cursor" })
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Diagnostics to location list" })
-
