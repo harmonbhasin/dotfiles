@@ -8,7 +8,7 @@ export HISTSIZE=-1         # Unlimited commands in memory per session
 export HISTFILESIZE=-1     # Unlimited commands in the history file
 shopt -s histappend        # Append to history file, don't overwrite
 # Synchronize history across multiple sessions (e.g., tmux, multiple tabs)
-PROMPT_COMMAND='history -a; history -c; history -r;'
+PROMPT_COMMAND='history -a; history -c; history -r'
 
 # Set the cursor to steady bar (|) cursor
 PROMPT_COMMAND+=';echo -ne "\e[6 q"'
@@ -94,9 +94,10 @@ alias gwl="git worktree list"
 alias gs="git status"
 alias gl="git log --oneline"
 alias gb="git branch"
-alias gpl="git pull"
-alias ga="git add ."
+alias gpl="git pull origin"
+alias ga="git add"
 alias gc="git commit -m"
+alias gpu="git push origin"
 alias gpom="git push origin main"
 alias gd="git diff"
 
@@ -110,5 +111,5 @@ eval "$(fzf --bash)"
 alias sd="cd \$(find . -type d | fzf)" #already exists bruh alt + c; not exactly, as this looks for file, then brings you to that dir
 alias fz='readlink -f "$(fzf)"'
 
-# zoxide
-eval "$(zoxide init bash)"
+# zoxide; needs to be at bottom of file if i'm remembering correctly
+#eval "$(zoxide init bash)"
