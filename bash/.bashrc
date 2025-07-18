@@ -92,6 +92,7 @@ alias gwa=gwa
 alias gwr=gwr
 alias gwl="git worktree list"
 alias gs="git status"
+alias gr="git restore --staged"
 alias gl="git log --oneline"
 alias gb="git branch"
 alias gpl="git pull origin"
