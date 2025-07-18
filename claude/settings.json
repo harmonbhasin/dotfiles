@@ -1,9 +1,14 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(ls:*)"
-    ],
+    "allow": ["Bash(ls:*)", "Bash(git diff:*)"],
     "deny": []
   },
-  "model": "sonnet"
+  "enableAllProjectMcpServers": true,
+  "includeCoAuthoredBy": false,
+  "model": "opus",
+  "env": {
+    "DISABLE_BUG_COMMANDS": "1",
+    "DISABLE_COST_WARNINGS": "1",
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1"
+  }
 }
