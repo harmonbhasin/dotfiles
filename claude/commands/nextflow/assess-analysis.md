@@ -1,0 +1,1 @@
+Please analyze this diagnosis for correctness about this issue. First, identify if the problem is accurately explained, and what is truly happening. Second, analyze the solution, see if it is correct, but also if it can be simplified. Report back with your review of the diagnosis in `review_diagnosis.md`. Make sure to review the files that the diagnosis discusses. : $ARGUMENTS.
