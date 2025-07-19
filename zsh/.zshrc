@@ -58,15 +58,25 @@ alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias claude="/Users/harmonbhasin/.claude/local/claude"
 alias oo="cd /Users/harmonbhasin/personal/obsidian/main/"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
+
+# Tmux aliases
+alias t=tmux
+alias ta="tmux attach"
+
+# Git aliases
+#alias gwa=gwa
+#alias gwr=gwr
+alias gwl="git worktree list"
 alias gs="git status"
+alias gr="git restore --staged"
 alias gl="git log --oneline"
 alias gb="git branch"
-alias gpl="git pull"
+alias gpl="git pull origin"
 alias ga="git add"
 alias gc="git commit -m"
+alias gpu="git push origin"
 alias gpom="git push origin main"
 alias gd="git diff"
-alias c="claude"
 
 # ===== EXTERNAL INTEGRATIONS =====
 # NVM Configuration
@@ -127,6 +137,7 @@ export TVM_LIBRARY_PATH=/Users/harmonbhasin/programming/software/tvm/build
 export TVM_HOME=/Users/harmonbhasin/programming/software/tvm/build
 export PYTHONPATH=$TVM_HOME/python:$PYTHONPATH
 export PIP_REQUIRE_VIRTUALENV=false
+export TERM=xterm-ghostty
 
 # Atuin
 . "$HOME/.atuin/bin/env"
