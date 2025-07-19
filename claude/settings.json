@@ -6,7 +6,7 @@
   },
   "includeCoAuthoredBy": false,
   "permissions": {
-    "allow": ["Bash(ls:*)", "Bash(git diff:*)"],
+    "allow": ["Bash(ls:*)", "Bash(git diff:*)", "Bash(rg:*)", "Bash(fd:*)"],
     "deny": []
   },
   "model": "opus",
@@ -30,10 +30,13 @@
           {
             "type": "command",
             "command": "notify-send 'Claude Code' 'Awaiting your input'"
+          },
+          {
+            "type": "command",
+            "command": "terminal-notifier -title 'Claude Code' -message 'Awaiting your input'"
           }
         ]
       }
     ]
   }
 }
-
