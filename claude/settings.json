@@ -1,14 +1,39 @@
 {
-  "permissions": {
-    "allow": ["Bash(ls:*)", "Bash(git diff:*)"],
-    "deny": []
-  },
-  "enableAllProjectMcpServers": true,
-  "includeCoAuthoredBy": false,
-  "model": "opus",
   "env": {
     "DISABLE_BUG_COMMANDS": "1",
     "DISABLE_COST_WARNINGS": "1",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1"
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": ["Bash(ls:*)", "Bash(git diff:*)"],
+    "deny": []
+  },
+  "model": "opus",
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '\"\\(.tool_input.command) - \\(.tool_input.description // \"No description\")\"' >> ~/.claude/bash-command-log.txt"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send 'Claude Code' 'Awaiting your input'"
+          }
+        ]
+      }
+    ]
   }
 }
+
