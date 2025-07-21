@@ -78,6 +78,11 @@ alias gpu="git push origin"
 alias gpom="git push origin main"
 alias gd="git diff"
 
+# RunPod aliases
+alias runpodcp="runpodctl create pod --gpuType 'NVIDIA RTX A4500' --imageName 'runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04' --ports '22/tcp' --ports '8888/http' --volumeSize 50 --containerDiskSize 30 --volumePath '/workspace' --secureCloud"
+alias runpodgp="runpodctl get pod | awk 'NR==2 {print \$1}' | pbcopy && runpodctl get pod"
+alias runpodrp="runpodctl remove pod"
+
 # ===== EXTERNAL INTEGRATIONS =====
 # NVM Configuration
 export NVM_DIR="$HOME/.nvm"
