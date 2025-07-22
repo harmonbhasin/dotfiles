@@ -15,6 +15,9 @@ Implement test(s) for #$ARGUMENTS following our coding standards:
   - Make sure your resource label exists in `configs/containers.config`
 - Set `set -eou pipefail` in processes such that errors propagate
 - Every test should point to a config that is located in `tests/config/`
+- Put non-channel inputs (like string values, numbers, or configuration maps) into params, but keep channel inputs (like tuples with sample IDs and file paths) inline in the process block.
+- Do not write obvious comments, comments should only be written for non-obvious code
+- Avoid hardcoded assertions in tests - derive expected values from the input data or test parameters instead.
 
 ### 1. Use nf-test Built-in Helpers
 - Use `path().csv(sep: "\t", decompress: true)` for structured TSV/CSV data

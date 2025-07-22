@@ -101,6 +101,7 @@ alias gc="git commit -m"
 alias gpu="git push origin"
 alias gpom="git push origin main"
 alias gd="git diff"
+alias gds="git diff --staged"
 
 # Editor aliases
 alias vi=nvim
