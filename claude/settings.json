@@ -6,7 +6,13 @@
   },
   "includeCoAuthoredBy": false,
   "permissions": {
-    "allow": ["Bash(ls:*)", "Bash(git diff:*)", "Bash(rg:*)", "Bash(fd:*)"],
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(git diff:*)",
+      "Bash(rg:*)",
+      "Bash(fd:*)",
+      "Bash(gh view:*)"
+    ],
     "deny": []
   },
   "model": "opus",

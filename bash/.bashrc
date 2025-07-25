@@ -63,7 +63,7 @@ gwr () {
             realpath -m "$path" 2>/dev/null || echo "$path"
         )$"; then
         echo "Removing worktree $path"
-        git worktree remove "$path"
+        git worktree remove "$path" --force
     else
         echo "No worktree registered at $path"
     fi
@@ -92,15 +92,19 @@ alias gwa=gwa
 alias gwr=gwr
 alias gwl="git worktree list"
 alias gs="git status"
-alias gr="git restore --staged"
+alias gr="git restore"
+alias grs="git restore --staged"
 alias gl="git log --oneline"
 alias gb="git branch"
 alias gpl="git pull origin"
 alias ga="git add"
+alias gclf="git clean -f"
 alias gc="git commit -m"
+alias gca="git commit --amend"
 alias gpu="git push origin"
 alias gpom="git push origin main"
 alias gd="git diff"
+alias gds="git diff --staged"
 
 # Editor aliases
 alias vi=nvim
