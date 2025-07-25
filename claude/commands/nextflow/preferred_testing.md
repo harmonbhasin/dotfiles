@@ -1,6 +1,6 @@
 # Your task
 
-Implement test(s) for #$ARGUMENTS following our coding standards:
+Implement test(s) for $ARGUMENTS following our coding standards:
 
 ## Core Principle
 **Test transformations, not exact strings.** Focus on validating that data flows correctly through the pipeline and that operations produce the expected logical results.
