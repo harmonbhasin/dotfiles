@@ -78,6 +78,28 @@ gwr () {
     git worktree prune --verbose
 }
 
+ccv() {
+  # 1. Environment variables to set just for the `claude` invocation
+  local -a env_vars=(
+    ENABLE_BACKGROUND_TASKS=true
+    FORCE_AUTO_BACKGROUND_TASKS=true
+    CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=true
+    CLAUDE_CODE_ENABLE_UNIFIED_READ_TOOL=true
+  )
+
+  # 2. Collect extra CLI flags for `claude`
+  local -a claude_args=()
+
+  case "$1" in
+    -y)   claude_args+=(--dangerously-skip-permissions); shift ;;
+    -r)   claude_args+=(--resume);                       shift ;;
+    -ry|-yr)
+          claude_args+=(--resume --dangerously-skip-permissions); shift ;;
+  esac
+
+  # 3. Run `claude` with env vars and any remaining args
+  env "${env_vars[@]}" claude "${claude_args[@]}" "$@"
+}
 
 # General aliases
 alias lsa='ls -la'
@@ -115,6 +137,9 @@ alias vim=nvim
 eval "$(fzf --bash)"
 alias sd="cd \$(find . -type d | fzf)" #already exists bruh alt + c; not exactly, as this looks for file, then brings you to that dir
 alias fz='readlink -f "$(fzf)"'
+
+# claude alias
+alias ccv=ccv
 
 # zoxide; needs to be at bottom of file if i'm remembering correctly
 #eval "$(zoxide init bash)"
