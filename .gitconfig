@@ -23,7 +23,8 @@
     colorMoved = default
 [init]
 	defaultBranch = main
-# Use includeIf with hasconfig to detect EC2
-# On EC2, set: git config --global ec2.instance true
-[includeIf "hasconfig:ec2.instance:true"]
-	path = ~/.gitconfig-github
+
+# https://git-scm.com/docs/git-config#_includes
+# For ec2 instances
+[includeif "gitdir:/home/ec2-user/"]
+	path = /home/ec2-user/dotfiles/.gitconfig-remote
