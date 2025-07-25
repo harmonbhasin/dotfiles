@@ -316,14 +316,14 @@ local mason_lspconfig = require("mason-lspconfig")
 mason.setup()
 mason_lspconfig.setup({
 	ensure_installed = {
-		"pyright",
+		"basedpyright",
 		"ruff",
 	},
 })
 
 -- LSP Configuration
 local lspconfig = require("lspconfig")
-lspconfig.pyright.setup({
+lspconfig.basedpyright.setup({
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
