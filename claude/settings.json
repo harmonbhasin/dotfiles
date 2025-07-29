@@ -35,10 +35,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "notify-send 'Claude Code' 'Awaiting your input'"
-          },
-          {
-            "type": "command",
             "command": "terminal-notifier -title 'Claude Code' -message 'Awaiting your input'"
           }
         ]
