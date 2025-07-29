@@ -1,17 +1,15 @@
 # .bashrc
-# Things to set
 
+# Vim keybindings
 set -o vi
 
 # History settings
 export HISTSIZE=-1         # Unlimited commands in memory per session
 export HISTFILESIZE=-1     # Unlimited commands in the history file
 shopt -s histappend        # Append to history file, don't overwrite
-# Synchronize history across multiple sessions (e.g., tmux, multiple tabs)
-PROMPT_COMMAND='history -a; history -c; history -r'
-
-# Set the cursor to steady bar (|) cursor
-PROMPT_COMMAND+=';echo -ne "\e[6 q"'
+export HISTTIMEFORMAT="%d/%m/%y %T " # Timestamp format
+# Synchronize history across multiple sessions (e.g., tmux, multiple tabs); Set the cursor to steady bar (|) cursor
+export PROMPT_COMMAND='history -a; history -c; history -r;echo -ne "\e[6 q"'
 
 # Get colors in terminal
 export CLICOLOR=1
@@ -78,6 +76,7 @@ gwr () {
     git worktree prune --verbose
 }
 
+# Claude yolo
 ccv() {
   # 1. Environment variables to set just for the `claude` invocation
   local -a env_vars=(
@@ -100,6 +99,21 @@ ccv() {
   # 3. Run `claude` with env vars and any remaining args
   env "${env_vars[@]}" claude "${claude_args[@]}" "$@"
 }
+
+# User prompt stuff
+# Function to get git branch and status
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# Define colors
+GREEN="\[\033[0;32m\]"
+BLUE="\[\033[0;34m\]"
+YELLOW="\[\033[0;33m\]"
+NC="\[\033[0m\]" # No Color
+
+# The PS1 prompt variable
+PS1="${GREEN}\u@\h${NC}:${BLUE}\w${YELLOW}\$(parse_git_branch)${NC}\n❯ "
 
 # General aliases
 alias lsa='ls -la'
