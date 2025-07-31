@@ -1,8 +1,11 @@
 {
   "env": {
-    "DISABLE_BUG_COMMANDS": "1",
+    "DISABLE_BUG_COMMAND": "1",
     "DISABLE_COST_WARNINGS": "1",
-    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1"
+    "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1",
+    "ENABLE_BACKGROUND_TASKS": "1",
+    "FORCE_AUTO_BACKGROUND_TASKS": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
   "includeCoAuthoredBy": false,
   "permissions": {
@@ -45,3 +48,4 @@
     "lastShownTime": 1753975417180
   }
 }
+
