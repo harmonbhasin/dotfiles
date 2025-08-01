@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
     "DISABLE_BUG_COMMAND": "1",
     "DISABLE_COST_WARNINGS": "1",
@@ -12,6 +13,7 @@
     "allow": [
       "Bash(ls:*)",
       "Bash(git diff:*)",
+      "Bash(git status:*)",
       "Bash(rg:*)",
       "Bash(fd:*)",
       "Bash(gh view:*)"
@@ -45,7 +47,6 @@
     ]
   },
   "feedbackSurveyState": {
-    "lastShownTime": 1753975417180
+    "lastShownTime": 1754009338037
   }
 }
-

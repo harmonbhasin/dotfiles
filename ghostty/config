@@ -1,5 +1,7 @@
 # CyberpunkScarletprotocol, catppuccin-mocha, cyberpunk, kanagawa dragon, Fahrenheit, rose-pine, carbonfox, oxocarbon
 theme = "carbonfox"
+macos-icon = "retro"
+macos-icon-frame = "chrome"
 shell-integration = zsh
 font-size = 9
 cursor-style = bar
@@ -20,3 +22,4 @@ keybind = cmd+j=goto_split:bottom
 keybind = cmd+k=goto_split:top
 keybind = shift+cmd+v=new_split:right
 keybind = shift+cmd+s=new_split:down
+#keybind = global:ctrl+grave_accent=toggle_quick_terminal
