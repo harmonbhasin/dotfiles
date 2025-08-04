@@ -40,13 +40,13 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message 'Awaiting your input'"
+            "command": "terminal-notifier -title 'Claude Code' -message \"Awaiting your input - $(tmux display-message -p '#{session_name}:#{window_index}.#{pane_index}')\""
           }
         ]
       }
     ]
   },
   "feedbackSurveyState": {
-    "lastShownTime": 1754009338037
+    "lastShownTime": 1754309299636
   }
 }
