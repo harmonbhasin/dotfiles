@@ -128,7 +128,7 @@ if path_exists(obsidian_path) then
 end
 
 -- Codeium keymaps
-vim.keymap.set("i", "<C-g>", function()
+vim.keymap.set("i", "<M-Space>", function()
   return vim.fn["codeium#Accept"]()
 end, { expr = true, silent = true })
 vim.keymap.set("i", "<c-;>", function()
