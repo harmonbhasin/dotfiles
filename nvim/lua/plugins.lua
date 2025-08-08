@@ -97,7 +97,7 @@ local plugins = {
     end,
   },
   "nvim-treesitter/nvim-treesitter", -- Syntax highlighting
-  "nvim-lua/lsp-status.nvim",       -- Status bar
+  "nvim-lua/lsp-status.nvim",        -- Status bar
   "BurntSushi/ripgrep",
   -- Manage LSP, DAP, Linters, Formatters
   {
@@ -119,7 +119,7 @@ local plugins = {
       -- Define your formatters
       formatters_by_ft = {
         lua = { "stylua" },
-        --				python = { "ruff" },
+        python = os.getenv("HOME") == "/home/ec2-user" and {} or { "ruff" },
         javascript = { "prettier" },
         --markdown = { "prettier" },
         svelte = { "prettier" },
@@ -163,12 +163,12 @@ local plugins = {
   --	end,
   --	ft = { "markdown" },
   --},
-  "hrsh7th/nvim-cmp",       -- Completion engine
+  "hrsh7th/nvim-cmp",        -- Completion engine
   "Exafunction/codeium.vim", -- Autocomplete with codeium
-  "neovim/nvim-lspconfig",  -- LSP
-  "hrsh7th/cmp-nvim-lsp",   -- LSP source for nvim-cmp
-  "hrsh7th/cmp-buffer",     -- Buffer source for nvim-cmp
-  "hrsh7th/cmp-path",       -- Path source for nvim-cmp
+  "neovim/nvim-lspconfig",   -- LSP
+  "hrsh7th/cmp-nvim-lsp",    -- LSP source for nvim-cmp
+  "hrsh7th/cmp-buffer",      -- Buffer source for nvim-cmp
+  "hrsh7th/cmp-path",        -- Path source for nvim-cmp
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
   {
