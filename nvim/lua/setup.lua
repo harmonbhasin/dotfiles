@@ -314,11 +314,13 @@ local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 
 mason.setup()
+local ensure_installed = { "basedpyright" }
+if os.getenv("HOME") ~= "/home/ec2-user" then
+	table.insert(ensure_installed, "ruff")
+end
+
 mason_lspconfig.setup({
-	ensure_installed = {
-		"basedpyright",
-		"ruff",
-	},
+	ensure_installed = ensure_installed,
 })
 
 -- LSP Configuration
