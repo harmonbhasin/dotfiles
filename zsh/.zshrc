@@ -50,6 +50,7 @@ bindkey '^ ' autosuggest-accept
 # Personal aliases
 alias vi="nvim"
 alias v="nvim"
+alias vl="nvim --listen /tmp/nvim"
 alias change-ec2="/Users/harmonbhasin/work/securebio/instance_manipulator.sh"
 alias check-ec2="/Users/harmonbhasin/work/securebio/check_ec2.sh"
 alias start-ec2="/Users/harmonbhasin/work/securebio/start_ec2.sh"
@@ -67,16 +68,25 @@ alias ta="tmux attach"
 #alias gwa=gwa
 #alias gwr=gwr
 alias gwl="git worktree list"
+alias gh="git stash"
+alias ghl="git stash list"
+alias gha="git stash apply"
 alias gs="git status"
-alias gr="git restore --staged"
+alias gr="git restore"
+alias grs="git restore --staged"
+alias grbc="git rebase --continue"
 alias gl="git log --oneline"
 alias gb="git branch"
 alias gpl="git pull origin"
 alias ga="git add"
+alias gap="git add --patch"
+alias gclf="git clean -f"
 alias gc="git commit -m"
+alias gca="git commit --amend --no-edit"
 alias gpu="git push origin"
 alias gpom="git push origin main"
 alias gd="git diff"
+alias gds="git diff --staged"
 
 # RunPod aliases
 alias runpodtouch="runpodctl create pod --gpuType 'NVIDIA RTX A4500' --imageName 'runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04' --ports '22/tcp' --ports '8888/http' --volumeSize 50 --containerDiskSize 30 --volumePath '/workspace' --secureCloud"
@@ -95,7 +105,7 @@ for file in $HOME/dotfiles/zsh/functions/*.zsh; do
 done
 
 # Execute greeting on startup (equivalent to fish_greeting)
-[ -f "$HOME/dotfiles/zsh/functions/greeting.zsh" ] && greeting
+#[ -f "$HOME/dotfiles/zsh/functions/greeting.zsh" ] && greeting
 
 # Starship prompt if installed
 if command -v starship &>/dev/null; then
