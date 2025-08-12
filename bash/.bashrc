@@ -151,6 +151,8 @@ alias gds="git diff --staged"
 alias vi=nvim
 alias v=nvim
 alias vim=nvim
+alias vl="nvim --listen /tmp/nvim"
+
 
 # fzf aliases
 eval "$(fzf --bash)"
