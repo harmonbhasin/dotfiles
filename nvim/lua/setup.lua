@@ -193,7 +193,28 @@ require("telescope").setup({
 	pickers = {
 		find_files = {
 			-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-			find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+			find_command = {
+				"rg",
+				"--files",
+				"--hidden",
+				"--no-ignore",
+				"--glob",
+				"!**/.git/*",
+				"--glob",
+				"!**/.mypy/*",
+				"--glob",
+				"!**/.venv/*",
+				"--glob",
+				"!**/.pytest_cache/*",
+				"--glob",
+				"!**/__pycache__/*",
+				"--glob",
+				"!**/*.egg-info/*",
+				"--glob",
+				"!**/.ruff_cache/*",
+				"--glob",
+				"!**/.mypy_cache/*",
+			},
 		},
 	},
 })
@@ -369,4 +390,3 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 	},
 })
-
