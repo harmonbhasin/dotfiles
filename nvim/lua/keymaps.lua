@@ -147,6 +147,9 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 vim.keymap.set("n", "<leader>/", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 vim.keymap.set("n", "<leader>o", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+vim.keymap.set("n", "<leader>fc", function()
+  builtin.lsp_document_symbols({ symbols = { "class", "function", "method" } })
+end, { desc = "Find classes and functions in document" })
 
 -- R code block insertion
 vim.keymap.set("n", "<leader>rn", function()

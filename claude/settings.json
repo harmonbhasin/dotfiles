@@ -16,7 +16,8 @@
       "Bash(git status:*)",
       "Bash(rg:*)",
       "Bash(fd:*)",
-      "Bash(gh view:*)"
+      "Bash(gh view:*)",
+      "Bash(ls:~/.litai/)"
     ],
     "deny": []
   },
@@ -45,6 +46,12 @@
         ]
       }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); printf 'Model: %s' \"$(echo \"$input\" | jq -r '.model.display_name // .model.id // \"Unknown\"')\""
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1754413237616
   }
 }
-
