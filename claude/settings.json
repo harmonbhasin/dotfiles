@@ -41,7 +41,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message \"Awaiting your input - $(tmux display-message -p '#{session_name}:#{window_index}.#{pane_index}')\""
+            "command": "terminal-notifier -title 'Claude Code' -message \"Awaiting your input - $(tmux display-message -p '#{session_name}:#{window_name}.#{pane_index}')\""
           }
         ]
       }
