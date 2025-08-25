@@ -2,7 +2,7 @@
 -- ABOUTME: Contains all plugin .setup() calls and plugin-specific configurations
 
 -- Set colorscheme after plugins are loaded
-vim.cmd("colorscheme carbonfox")
+vim.cmd("colorscheme ashen")
 
 require("autoclose").setup()
 

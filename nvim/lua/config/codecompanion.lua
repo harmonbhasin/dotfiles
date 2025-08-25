@@ -1,8 +1,8 @@
 require("codecompanion").setup({
-  opts = {
-    -- https://zed.dev/leaked-prompts
-    system_prompt = function(opts)
-      return [[
+	opts = {
+		-- https://zed.dev/leaked-prompts
+		system_prompt = function(opts)
+			return [[
       You are a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
 
     # Communication
@@ -57,109 +57,45 @@ require("codecompanion").setup({
     When selecting which version of an API or package to use, choose one that is compatible with the user's dependency management file(s). If no such file exists or if the package is not present, use the latest version that is in your training data.
     If an external API requires an API Key, be sure to point this out to the user. Adhere to best security practices (e.g. DO NOT hardcode an API key in a place where it can be exposed)
     ]]
-    end,
-  },
-  adapters = {
-    openai = function()
-      return require("codecompanion.adapters").extend("openai", {
-        name = "openai",
-        schema = {
-          model = {
-            default = "o3",
-            choices = {
-              "gpt-4.1-mini",
-              "gpt-4.1-nano",
-              "gpt-4.1",
-              "gpt-4.5-preview",
-              ["o4-mini"] = { opt = { can_reason = true } },
-              ["o1"] = { opt = { can_reason = true } },
-              ["o3"] = { opt = { can_reason = true } },
-            },
-          },
-          max_completion_tokens = {
-            default = 200000,
-            optional = true,
-          },
-        },
-      })
-    end,
-    my_openai = function()
-      return require("codecompanion.adapters").extend("openai_compatible", {
-        env = {
-          url = "http://127.0.0.1:8080", -- optional: default value is ollama url http://127.0.0.1:11434
-          chat_url = "/v1/chat/completions", -- optional: default value, override if different
-          models_endpoint = "/v1/models", -- optional: attaches to the end of the URL to form the endpoint to retrieve models
-        },
-        schema = {
-          model = {
-            default = "gemma-3", -- define llm model to be used
-          },
-        },
-      })
-    end,
+		end,
+	},
+	strategies = {
+		-- Change the default chat adapter
+		chat = {
+			adapter = "openai",
+		},
+	},
+	adapters = {
+		openai = function()
+			return require("codecompanion.adapters").extend("openai", {
+				schema = {
+					model = {
+						default = "gpt-5-nano",
+					},
+				},
+			})
+		end,
+	},
+	display = {
+		chat = {
+			icons = {
+				pinned_buffer = " ",
+				watched_buffer = "👀 ",
+			},
+			-- Options to customize the UI of the chat buffer
+			window = {
+				layout = "vertical", -- float|vertical|horizontal|buffer
+				position = "right", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
+				border = "single",
+				width = 0.25,
+				relative = "editor",
+				full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
+			},
+		},
 
-    gemini = function()
-      return require("codecompanion.adapters").extend("gemini", {
-        name = "gemini",
-        schema = {
-          model = {
-            default = "gemini-2.5-pro-exp-03-25",
-            choices = {
-              ["gemini-2.5-flash-preview-04-17"] = { opt = { can_reason = true } },
-              "gemini-2.5-pro-exp-03-25",
-              "gemini-2.0-flash",
-              "gemini-2.5-pro-preview-05-06",
-            },
-          },
-          max_completion_tokens = {
-            default = 500000,
-            optional = true,
-          },
-        },
-      })
-    end,
-  },
-  strategies = {
-    chat = {
-      adapter = "openai",
-    },
-    inline = {
-      adapter = "openai",
-      keymaps = {
-        accept_change = {
-          modes = { n = "ga" },
-          description = "Accept the suggested change",
-        },
-        reject_change = {
-          modes = { n = "gr" },
-          description = "Reject the suggested change",
-        },
-      },
-    },
-    cmd = {
-      adapter = "openai",
-    },
-  },
-  display = {
-    chat = {
-      icons = {
-        pinned_buffer = " ",
-        watched_buffer = "👀 ",
-      },
-      -- Options to customize the UI of the chat buffer
-      window = {
-        layout = "vertical", -- float|vertical|horizontal|buffer
-        position = "right", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
-        border = "single",
-        width = 0.25,
-        relative = "editor",
-        full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
-      },
-    },
-
-    opts = {
-      show_default_actions = true,     -- Show the default actions in the action palette?
-      show_default_prompt_library = true, -- Show the default prompt library in the action palette?
-    },
-  },
+		opts = {
+			show_default_actions = true, -- Show the default actions in the action palette?
+			show_default_prompt_library = true, -- Show the default prompt library in the action palette?
+		},
+	},
 })
