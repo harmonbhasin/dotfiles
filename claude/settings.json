@@ -49,9 +49,11 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "input=$(cat); printf 'Model: %s' \"$(echo \"$input\" | jq -r '.model.display_name // .model.id // \"Unknown\"')\""
+    "command": "bun x ccusage statusline", // Use "npx -y ccusage statusline" if you prefer npm
+    "padding": 0 // Optional: set to 0 to let status line go to edge
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754413237616
   }
 }
+
