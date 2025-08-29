@@ -68,6 +68,7 @@ alias ta="tmux attach"
 # Git aliases
 #alias gwa=gwa
 #alias gwr=gwr
+alias gw="git worktree"
 alias gwl="git worktree list"
 alias gst="git stash"
 alias gstl="git stash list"
