@@ -228,6 +228,12 @@ iron.setup({
 	config = {
 		-- Whether a repl should be discarded or not
 		scratch_repl = true,
+		-- Preferred REPL for filetypes
+		preferred = {
+			r = "r",
+			rmd = "r",
+			qmd = "r",
+		},
 		-- Your repl definitions come here
 		repl_definition = {
 			bash = {
@@ -246,6 +252,12 @@ iron.setup({
 				block_deviders = { "# %%", "#%%" },
 			},
 			r = {
+				command = { "R" },
+			},
+			rmd = {
+				command = { "R" },
+			},
+			quarto = {
 				command = { "R" },
 			},
 			groovy = {
