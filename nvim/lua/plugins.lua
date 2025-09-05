@@ -282,6 +282,9 @@ local plugins = {
 			-- your settings here
 		},
 	},
+  {
+    'norcalli/nvim-colorizer.lua'
+  }
 }
 
 require("lazy").setup(plugins)

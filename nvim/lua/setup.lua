@@ -6,6 +6,7 @@ vim.cmd("colorscheme ashen")
 
 require("autoclose").setup()
 
+require("colorizer").setup()
 -- Oil
 require("diffview").setup()
 

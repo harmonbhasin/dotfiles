@@ -18,64 +18,6 @@ export EDITOR=nvim
 # Set default terminal color
 export TERM=xterm-256color
 
-# Add a worktree for a new or existing branch
-gwa () {
-    local branch=$1
-    local path=${2:-../$branch}
-
-    if [[ -z $branch ]]; then
-        echo "Usage: gwa <branch> [path]"
-        return 1
-    fi
-
-    # If that path is already registered as a worktree, do nothing
-    if git worktree list --porcelain | grep -q "^worktree $(
-            realpath -m "$path" 2>/dev/null || echo "$path"
-        )$"; then
-        echo "Worktree already exists at $path"
-        return 0
-    fi
-
-    # If the branch already exists, check it out; otherwise create it
-    if git show-ref --verify --quiet "refs/heads/$branch"; then
-        echo "Adding worktree for existing branch '$branch' → $path"
-        git worktree add "$path" "$branch"
-    else
-        echo "Branch '$branch' does not exist – creating it in $path"
-        git worktree add -b "$branch" "$path"
-    fi
-}
-
-# Remove a worktree (and optionally delete the branch if it no longer has checkouts)
-gwr () {
-    local branch=$1
-    local path=${2:-../$branch}
-
-    if [[ -z $branch ]]; then
-        echo "Usage: gwr <branch> [path]"
-        return 1
-    fi
-
-    # Remove the worktree directory if it is registered
-    if git worktree list --porcelain | grep -q "^worktree $(
-            realpath -m "$path" 2>/dev/null || echo "$path"
-        )$"; then
-        echo "Removing worktree $path"
-        git worktree remove "$path" --force
-    else
-        echo "No worktree registered at $path"
-    fi
-
-    # Try to delete the local branch (ignore if unmerged)
-    if git show-ref --verify --quiet "refs/heads/$branch"; then
-        git branch -D "$branch" 2>/dev/null || \
-        echo "Branch '$branch' not fully merged; remove manually with 'git branch -D $branch' if desired."
-    fi
-
-    # Clean up any stale worktree refs
-    git worktree prune --verbose
-}
-
 # Claude yolo
 ccv() {
   # 1. Environment variables to set just for the `claude` invocation
@@ -124,8 +66,8 @@ alias t=tmux
 alias ta="tmux attach"
 
 # Git aliases
-alias gwa=gwa
-alias gwr=gwr
+alias gwa="git worktree add"
+alias gwr="git worktree remove"
 alias gwl="git worktree list"
 alias gw="git worktree"
 alias gst="git stash"
