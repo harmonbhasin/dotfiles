@@ -214,6 +214,8 @@ require("telescope").setup({
 				"!**/.ruff_cache/*",
 				"--glob",
 				"!**/.mypy_cache/*",
+				"--glob",
+				"!**/node_modules/*",
 			},
 		},
 	},
