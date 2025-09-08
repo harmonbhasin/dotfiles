@@ -63,18 +63,8 @@ require("codecompanion").setup({
 		-- Change the default chat adapter
 		chat = {
 			adapter = "openai",
+			model = "gpt-5-nano",
 		},
-	},
-	adapters = {
-		openai = function()
-			return require("codecompanion.adapters").extend("openai", {
-				schema = {
-					model = {
-						default = "gpt-5-nano",
-					},
-				},
-			})
-		end,
 	},
 	display = {
 		chat = {
