@@ -154,15 +154,6 @@ local plugins = {
 			require("config.codecompanion")
 		end,
 	},
-	--{
-	--	"MeanderingProgrammer/render-markdown.nvim",
-	--	config = function()
-	--		require("render-markdown").setup({
-	--			file_types = { "markdown" },
-	--		})
-	--	end,
-	--	ft = { "markdown" },
-	--},
 	"hrsh7th/nvim-cmp", -- Completion engine
 	"Exafunction/codeium.vim", -- Autocomplete with codeium
 	"neovim/nvim-lspconfig", -- LSP
@@ -270,18 +261,17 @@ local plugins = {
 			virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
 		},
 	},
-	{
-		"ficcdaf/ashen.nvim",
-		-- optional but recommended,
-		-- pin to the latest stable release:
-		tag = "*",
-		lazy = false,
-		priority = 1000,
-		-- configuration is optional!
-		opts = {
-			-- your settings here
-		},
-	},
+  {
+      'sainnhe/everforest',
+      lazy = false,
+      priority = 1000,
+      config = function()
+        -- Optionally configure and load the colorscheme
+        -- directly inside the plugin declaration.
+        vim.g.everforest_enable_italic = true
+        vim.cmd.colorscheme('everforest')
+      end
+    },
   {
     'norcalli/nvim-colorizer.lua'
   }

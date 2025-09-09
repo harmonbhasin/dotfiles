@@ -1,8 +1,11 @@
--- ABOUTME: Plugin setup and configuration calls
--- ABOUTME: Contains all plugin .setup() calls and plugin-specific configurations
 
--- Set colorscheme after plugins are loaded
-vim.cmd("colorscheme ashen")
+-- Set colors
+vim.g.everforest_background = 'hard'
+--vim.g.everforest_better_performance = 1
+vim.opt.background = 'dark'
+vim.opt.termguicolors = true
+
+vim.cmd('colorscheme everforest')
 
 require("autoclose").setup()
 
