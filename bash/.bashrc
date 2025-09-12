@@ -3,6 +3,9 @@
 # Vim keybindings
 set -o vi
 
+# Less settings
+export LESS="-JMQRSi"
+
 # History settings
 export HISTSIZE=-1         # Unlimited commands in memory per session
 export HISTFILESIZE=-1     # Unlimited commands in the history file
@@ -17,6 +20,25 @@ export CLICOLOR=1
 export EDITOR=nvim
 # Set default terminal color
 export TERM=xterm-256color
+
+# spelling
+shopt -s nocaseglob # ignore case when matching
+shopt -s cdspell # fix common spelling mistakes
+
+# autocd
+shopt -s autocd
+
+# go to root of project in git dir; https://blog.meain.io/2023/navigating-around-in-shell/
+r () {
+cd "$(git rev-parse --show-toplevel 2>/dev/null)"
+}
+
+# tmp dir; https://blog.meain.io/2023/navigating-around-in-shell/
+tmp () {
+[ "$1" = "view" ] && cd /tmp/workspaces && cd $(ls -t | fzf --preview 'ls -A {}') && return 0
+r="/tmp/workspaces/$(xxd -l3 -ps /dev/urandom)"
+mkdir -p -p "$r" && pushd "$r"
+}
 
 # Claude yolo
 ccv() {
