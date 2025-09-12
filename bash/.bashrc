@@ -105,5 +105,10 @@ alias fz='readlink -f "$(fzf)"'
 # claude alias
 alias ccv=ccv
 
+# work alias
+s3fetch() {
+    sed 's|/fusion/s3/|s3://|' "$1" | xargs -P 1 -I {} aws s3 cp {} ./
+}
+
 # zoxide; needs to be at bottom of file if i'm remembering correctly
 #eval "$(zoxide init bash)"
