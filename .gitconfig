@@ -28,3 +28,5 @@
 # For ec2 instances
 [includeif "gitdir:/home/ec2-user/"]
 	path = /home/ec2-user/dotfiles/.gitconfig-remote
+[includeif "gitdir:/tmp/"]
+	path = /home/ec2-user/dotfiles/.gitconfig-remote

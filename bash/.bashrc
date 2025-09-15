@@ -132,5 +132,9 @@ s3fetch() {
     sed 's|/fusion/s3/|s3://|' "$1" | xargs -P 1 -I {} aws s3 cp {} ./
 }
 
+# Autocomplete
+# Git 
+source /usr/share/bash-completion/completions/git
+
 # zoxide; needs to be at bottom of file if i'm remembering correctly
 #eval "$(zoxide init bash)"
