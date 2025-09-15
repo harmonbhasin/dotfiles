@@ -1,11 +1,10 @@
-
 -- Set colors
-vim.g.everforest_background = 'hard'
+vim.g.everforest_background = "hard"
 --vim.g.everforest_better_performance = 1
-vim.opt.background = 'dark'
+vim.opt.background = "dark"
 vim.opt.termguicolors = true
 
-vim.cmd('colorscheme everforest')
+vim.cmd("colorscheme everforest")
 
 require("autoclose").setup()
 
@@ -220,6 +219,8 @@ require("telescope").setup({
 				"!**/.mypy_cache/*",
 				"--glob",
 				"!**/node_modules/*",
+				"--glob",
+				"!**/*.class",
 			},
 		},
 	},
