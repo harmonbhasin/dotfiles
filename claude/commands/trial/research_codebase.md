@@ -29,9 +29,17 @@ Then wait for the user's research query.
 3. **Spawn parallel sub-agent tasks for comprehensive research:**
    - Create multiple Task agents to research different aspects concurrently
 
+   **For codebase research:**
+   - Find WHERE files and components live
+   - Understand HOW specific code works
+
+   **For web research (only if user explicitly asks):**
+   - Use an agent for external documentation and resources
+   - IF you use web-research agents, instruct them to return LINKS with their findings, and please INCLUDE those links in your final report
+
    The key is to use these agents intelligently:
-   - Start with locator agents to find what exists
-   - Then use analyzer agents on the most promising findings
+   - Start with finding what exists
+   - Then use an agents on the most promising findings
    - Run multiple agents in parallel when they're searching for different things
    - Each agent knows its job - just tell it what you're looking for
    - Don't write detailed prompts about HOW to search - the agents already know
@@ -40,10 +48,8 @@ Then wait for the user's research query.
    - IMPORTANT: Wait for ALL sub-agent tasks to complete before proceeding
    - Compile all sub-agent results (both codebase and thoughts findings)
    - Prioritize live codebase findings as primary source of truth
-   - Use thoughts/ findings as supplementary historical context
    - Connect findings across different components
    - Include specific file paths and line numbers for reference
-   - Verify all thoughts/ paths are correct (e.g., thoughts/allison/ not thoughts/shared/ for personal files)
    - Highlight patterns, connections, and architectural decisions
    - Answer the user's specific questions with concrete evidence
 
@@ -94,12 +100,6 @@ Then wait for the user's research query.
      ## Architecture Insights
      [Patterns, conventions, and design decisions discovered]
 
-     ## Historical Context (from thoughts/)
-     [Relevant insights from thoughts/ directory with references]
-     - `thoughts/shared/something.md` - Historical decision about X
-     - `thoughts/local/notes.md` - Past exploration of Y
-     Note: Paths exclude "searchable/" even if found there
-
      ## Related Research
      [Links to other research documents in thoughts/shared/research/]
 
@@ -115,9 +115,9 @@ Then wait for the user's research query.
    - Continue updating the document and syncing
 
 ## Important notes:
+- NEVER try to write an implementation, just mention what you think is necessary
 - Always use parallel Task agents to maximize efficiency and minimize context usage
 - Always run fresh codebase research - never rely solely on existing research documents
-- The thoughts/ directory provides historical context to supplement live findings
 - Focus on finding concrete file paths and line numbers for developer reference
 - Research documents should be self-contained with all necessary context
 - Each sub-agent prompt should be specific and focused on read-only operations
@@ -126,7 +126,6 @@ Then wait for the user's research query.
 - Link to GitHub when possible for permanent references
 - Keep the main agent focused on synthesis, not deep file reading
 - Encourage sub-agents to find examples and usage patterns, not just definitions
-- Explore all of thoughts/ directory, not just research subdirectory
 - **File reading**: Always read mentioned files FULLY (no limit/offset) before spawning sub-tasks
 - **Critical ordering**: Follow the numbered steps exactly
   - ALWAYS read mentioned files first before spawning sub-tasks (step 1)
