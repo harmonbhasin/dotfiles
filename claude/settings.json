@@ -14,29 +14,21 @@
       "Bash(ls:*)",
       "Bash(git diff:*)",
       "Bash(git status:*)",
+      "Bash(git show:*)",
       "Bash(rg:*)",
       "Bash(fd:*)",
       "Bash(gh view:*)",
       "Bash(gh pr view:*)",
       "Bash(gh api:*)",
-      "Bash(ls:~/.litai/)"
+      "Bash(pytest:*)",
+      "Bash(tmux capture-pane:*)",
+      "Read(~/dotfiles/**)"
     ],
     "deny": []
   },
   "model": "opus",
   "enableAllProjectMcpServers": true,
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "jq -r '\"\\(.tool_input.command) - \\(.tool_input.description // \"No description\")\"' >> ~/.claude/bash-command-log.txt"
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "matcher": "",
