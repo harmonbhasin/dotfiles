@@ -63,11 +63,6 @@ local plugins = {
 			})
 		end,
 	},
-	{
-		"vhyrro/luarocks.nvim",
-		priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-		config = true,
-	},
 	"nvim-tree/nvim-web-devicons", -- File icons
 	{
 		"nvim-telescope/telescope.nvim",
@@ -98,7 +93,6 @@ local plugins = {
 	},
 	"nvim-treesitter/nvim-treesitter", -- Syntax highlighting
 	"nvim-lua/lsp-status.nvim", -- Status bar
-	"BurntSushi/ripgrep",
 	-- Manage LSP, DAP, Linters, Formatters
 	{
 		"mason-org/mason.nvim",
@@ -146,6 +140,7 @@ local plugins = {
 	},
 	{
 		"olimorris/codecompanion.nvim", -- Code assistant
+		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -183,6 +178,7 @@ local plugins = {
 	},
 	{
 		"jmbuhr/otter.nvim", --QUARTO
+		lazy = true,
 		config = function()
 			require("otter").setup()
 		end,
@@ -261,20 +257,20 @@ local plugins = {
 			virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
 		},
 	},
-  {
-      'sainnhe/everforest',
-      lazy = false,
-      priority = 1000,
-      config = function()
-        -- Optionally configure and load the colorscheme
-        -- directly inside the plugin declaration.
-        vim.g.everforest_enable_italic = true
-        vim.cmd.colorscheme('everforest')
-      end
-    },
-  {
-    'norcalli/nvim-colorizer.lua'
-  }
+	{
+		"sainnhe/everforest",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			-- Optionally configure and load the colorscheme
+			-- directly inside the plugin declaration.
+			vim.g.everforest_enable_italic = true
+			vim.cmd.colorscheme("everforest")
+		end,
+	},
+	{
+		"norcalli/nvim-colorizer.lua",
+	},
 }
 
 require("lazy").setup(plugins)
