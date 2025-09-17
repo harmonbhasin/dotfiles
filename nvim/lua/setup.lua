@@ -1,3 +1,6 @@
+--- Plugin initialization and configuration
+--- Sets up colorscheme, initializes various plugins, and applies their settings
+
 -- Set colors
 vim.g.everforest_background = "hard"
 --vim.g.everforest_better_performance = 1
