@@ -9,6 +9,10 @@ vim.opt.termguicolors = true
 
 vim.cmd("colorscheme everforest")
 
+-- java
+require("java").setup()
+require("lspconfig").jdtls.setup({})
+
 require("autoclose").setup()
 
 require("colorizer").setup()

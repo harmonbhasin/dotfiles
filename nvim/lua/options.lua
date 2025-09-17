@@ -14,7 +14,6 @@ vim.opt.smartindent = true -- Make indenting smarter again
 vim.opt.autoindent = true -- Auto indent
 vim.opt.syntax = "on" -- Enable syntax highlighting
 vim.opt.showmode = false -- Don't show mode in command line
-vim.opt.ignorecase = true -- Ignore case
 vim.opt.showtabline = 0 --remove tabline
 
 -- Make Fugitive use Git's configured pager (Delta)
