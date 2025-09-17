@@ -137,6 +137,9 @@ alias fz='readlink -f "$(fzf)"'
 # claude alias
 alias ccv=ccv
 
+# exit alias
+alias x="exit"
+
 # work alias
 s3fetch() {
     sed 's|/fusion/s3/|s3://|' "$1" | xargs -P 1 -I {} aws s3 cp {} ./
