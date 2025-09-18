@@ -58,7 +58,7 @@ alias stop-ec2="/Users/harmonbhasin/work/securebio/stop_ec2.sh"
 alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias list-ec2="/Users/harmonbhasin/work/securebio/list_harmon_instances.sh"
 alias claude="/Users/harmonbhasin/.claude/local/claude"
-alias oo="cd /Users/harmonbhasin/personal/obsidian/main/"
+alias d="cd /Users/harmonbhasin/personal/obsidian/main/ && nvim -c ':ObsidianToday'"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
 
 # Tmux aliases
@@ -66,8 +66,8 @@ alias t=tmux
 alias ta="tmux attach"
 
 # Git aliases
-#alias gwa=gwa
-#alias gwr=gwr
+alias gwa="git worktree add"
+alias gwr="git worktree remove"
 alias gw="git worktree"
 alias gwl="git worktree list"
 alias gst="git stash"
@@ -89,6 +89,9 @@ alias gpu="git push origin"
 alias gpom="git push origin main"
 alias gd="git diff"
 alias gds="git diff --staged"
+
+alias l="ls -la"
+alias x="exit"
 
 # RunPod aliases
 alias runpodtouch="runpodctl create pod --gpuType 'NVIDIA RTX A4500' --imageName 'runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04' --ports '22/tcp' --ports '8888/http' --volumeSize 50 --containerDiskSize 30 --volumePath '/workspace' --secureCloud"
