@@ -80,29 +80,38 @@ NC="\[\033[0m\]" # No Color
 PS1="${GREEN}\u@\h${NC}:${BLUE}\w${YELLOW}\$(parse_git_branch)${NC}\n❯ "
 
 # General aliases
-alias lsa='ls -la'
+alias l='ls -la'
 alias clear="clear -x"
 
 # Tmux aliases
 alias t=tmux
 alias ta="tmux attach"
 
-# Git aliases
+# Git autocomplete
+source /usr/share/bash-completion/completions/git
+
+# Git aliases + completions
 alias gwa="git worktree add"
 alias gwr="git worktree remove"
 alias gwl="git worktree list"
 alias gw="git worktree"
+__git_complete gw _git_worktree
 alias gst="git stash"
+__git_complete gst _git_stash
 alias gstl="git stash list"
-alias gha="git stash apply"
+alias gsa="git stash apply"
 alias gs="git status"
+__git_complete gs _git_status
 alias gr="git restore"
+__git_complete gr _git_restore
 alias grs="git restore --staged"
 alias grbc="git rebase --continue"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gb="git branch"
+__git_complete gb _git_branch
 alias gpl="git pull origin"
 alias ga="git add"
+__git_complete ga _git_add
 alias gap="git add --patch"
 alias gclf="git clean -f"
 alias gc="git commit -m"
@@ -110,6 +119,7 @@ alias gca="git commit --amend --no-edit"
 alias gpu="git push origin"
 alias gpom="git push origin main"
 alias gd="git diff"
+__git_complete gd _git_diff
 alias gds="git diff --staged"
 
 # Editor aliases
@@ -127,14 +137,14 @@ alias fz='readlink -f "$(fzf)"'
 # claude alias
 alias ccv=ccv
 
+# exit alias
+alias x="exit"
+
 # work alias
 s3fetch() {
     sed 's|/fusion/s3/|s3://|' "$1" | xargs -P 1 -I {} aws s3 cp {} ./
 }
 
-# Autocomplete
-# Git 
-source /usr/share/bash-completion/completions/git
 
 # zoxide; needs to be at bottom of file if i'm remembering correctly
 #eval "$(zoxide init bash)"
