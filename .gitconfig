@@ -30,3 +30,5 @@
 	path = /home/ec2-user/dotfiles/.gitconfig-remote
 [includeif "gitdir:/tmp/"]
 	path = /home/ec2-user/dotfiles/.gitconfig-remote
+[pull]
+	rebase = true

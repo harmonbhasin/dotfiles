@@ -140,6 +140,10 @@ alias ccv=ccv
 # exit alias
 alias x="exit"
 
+# Make tab completion cycle through options (like Zsh) - shows all matches immediately and cycles through them with Tab
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+
 # work alias
 s3fetch() {
     sed 's|/fusion/s3/|s3://|' "$1" | xargs -P 1 -I {} aws s3 cp {} ./
