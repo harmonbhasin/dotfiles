@@ -21,6 +21,7 @@
       "Bash(gh view:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr status:*)",
+      "Bash(gh issue:*)",
       "Bash(gh api:*)",
       "Bash(pytest:*)",
       "Bash(tmux capture-pane:*)",
