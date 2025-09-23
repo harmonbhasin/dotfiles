@@ -80,7 +80,7 @@ NC="\[\033[0m\]" # No Color
 PS1="${GREEN}\u@\h${NC}:${BLUE}\w${YELLOW}\$(parse_git_branch)${NC}\n❯ "
 
 # General aliases
-alias l='ls -la'
+alias l='ls -lah'
 alias clear="clear -x"
 
 # Tmux aliases
