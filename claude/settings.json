@@ -24,6 +24,8 @@
       "Bash(gh issue:*)",
       "Bash(gh api:*)",
       "Bash(pytest:*)",
+      "Bash(ruff:*)",
+      "Bash(mypy:*)",
       "Bash(tmux capture-pane:*)",
       "Read(~/dotfiles/**)"
     ],

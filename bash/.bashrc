@@ -128,7 +128,6 @@ alias v=nvim
 alias vim=nvim
 alias vl="nvim --listen /tmp/nvim"
 
-
 # fzf aliases
 eval "$(fzf --bash)"
 alias sd="cd \$(find . -type d | fzf)" #already exists bruh alt + c; not exactly, as this looks for file, then brings you to that dir
@@ -139,6 +138,9 @@ alias ccv=ccv
 
 # exit alias
 alias x="exit"
+
+# last opened file
+alias la='nvim "$(ls -tu --time=atime | head -n1)"'
 
 # Make tab completion cycle through options (like Zsh) - shows all matches immediately and cycles through them with Tab
 bind 'set show-all-if-ambiguous on'

@@ -9,6 +9,9 @@ vim.opt.termguicolors = true
 
 vim.cmd("colorscheme everforest")
 
+-- Override WinSeparator highlight after colorscheme loads
+vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#ffffff', bold = true })
+
 -- java
 require("java").setup()
 require("lspconfig").jdtls.setup({})

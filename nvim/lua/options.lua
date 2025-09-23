@@ -21,3 +21,5 @@ vim.g.fugitive_use_git_pager = 1
 
 -- Set conceallevel for obsidian (conditionally set in setup.lua)
 vim.opt.conceallevel = 1
+
+
