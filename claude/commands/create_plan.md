@@ -44,8 +44,8 @@ Then wait for the user's input.
 2. **Spawn initial research tasks to gather context**:
    Before asking the user any questions, use specialized agents to research in parallel:
 
-   - Use an agent to find all files related to the ticket/task
-   - Use an agent to understand how the current implementation works
+   - Use the codebase-locator agent to find all files related to the ticket/task
+   - Use the codebase-analyzer agent to understand how the current implementation works
 
    These agents will:
    - Find relevant source files, configs, and tests

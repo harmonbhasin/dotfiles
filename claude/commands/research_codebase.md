@@ -30,12 +30,12 @@ Then wait for the user's research query.
    - Create multiple Task agents to research different aspects concurrently
 
    **For codebase research:**
-   - Find WHERE files and components live
-   - Understand HOW specific code works
+   - Use the codebase-locator agent to find WHERE files and components live
+   - Use the codebase-analyzer agent to understand HOW specific code works
 
    **For web research (only if user explicitly asks):**
-   - Use an agent for external documentation and resources
-   - IF you use web-research agents, instruct them to return LINKS with their findings, and please INCLUDE those links in your final report
+   - Use the web-search-research agent for external documentation and resources
+   - If you use web-research agents, instruct them to return LINKS with their findings, and please INCLUDE those links in your final report
 
    The key is to use these agents intelligently:
    - Start with finding what exists
