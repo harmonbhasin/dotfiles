@@ -58,6 +58,7 @@ alias stop-ec2="/Users/harmonbhasin/work/securebio/stop_ec2.sh"
 alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias list-ec2="/Users/harmonbhasin/work/securebio/list_harmon_instances.sh"
 alias claude="/Users/harmonbhasin/.claude/local/claude"
+alias c="/Users/harmonbhasin/.claude/local/claude"
 alias d="cd /Users/harmonbhasin/personal/obsidian/main/ && nvim -c ':ObsidianToday'"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
 
@@ -184,6 +185,9 @@ export CLICOLOR=1
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+
+# Set up jj key bindings
+source <(COMPLETE=zsh jj)
 
 # Ripgrep configuration
 #export RIPGREP_CONFIG_PATH="$HOME/dotfiles/.ripgreprc"
