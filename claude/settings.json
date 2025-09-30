@@ -31,7 +31,6 @@
     ],
     "deny": []
   },
-  "model": "opus",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "Notification": [
@@ -53,5 +52,6 @@
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754413237616
-  }
+  },
+  "alwaysThinkingEnabled": true
 }
