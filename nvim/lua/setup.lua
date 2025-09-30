@@ -13,7 +13,7 @@ vim.cmd("colorscheme everforest")
 vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#ffffff', bold = true })
 
 -- java
-require("java").setup()
+--require("java").setup()
 require("lspconfig").jdtls.setup({})
 
 require("autoclose").setup()
