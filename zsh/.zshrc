@@ -59,7 +59,7 @@ alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias list-ec2="/Users/harmonbhasin/work/securebio/list_harmon_instances.sh"
 alias claude="/Users/harmonbhasin/.claude/local/claude"
 alias c="/Users/harmonbhasin/.claude/local/claude"
-alias d="cd /Users/harmonbhasin/personal/obsidian/main/ && nvim -c ':ObsidianToday'"
+alias d="nvim -c ':ObsidianToday'"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
 
 # Tmux aliases
