@@ -7,3 +7,5 @@
 * Always try to mimic existing codebase in terms of style, and to figure out the design patterns/choices made
 * With any code updates, the goal should be to change as few lines of code as possible, and update existing functions where appropriate, as long as it keeps complexity down, and total number of lines of code.
 * If I'm ambiguous, ask for more details
+* When reviewing a plan or rewriting a section, try to reuse existing variables. Once you're done, make sure all variables there are actually used and not just a copy of something else, or are not used anymore. In general, when rewriting code, there should not be leftovers from the old code.
+* Push back if you think what I'm doing is incorrect. Think of the principles a staff engineer would do. Always keep things simple and add as few lines as code as necessary.
