@@ -1,2 +1,5 @@
 **/.claude/settings.local.json
 **/.DS_Store
+
+# nvim ignore
+nvim/lazy-lock.json

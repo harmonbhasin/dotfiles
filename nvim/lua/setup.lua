@@ -14,7 +14,8 @@ vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#ffffff', bold = true })
 
 -- java
 --require("java").setup()
-require("lspconfig").jdtls.setup({})
+vim.lsp.config('jdtls', {})
+vim.lsp.enable('jdtls')
 
 require("autoclose").setup()
 
@@ -374,15 +375,17 @@ mason_lspconfig.setup({
 })
 
 -- LSP Configuration
-local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-lspconfig.ts_ls.setup({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+vim.lsp.config('ts_ls', {
+	capabilities = capabilities,
 })
+vim.lsp.enable('ts_ls')
 
-lspconfig.r_language_server.setup({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+vim.lsp.config('r_language_server', {
+	capabilities = capabilities,
 })
+vim.lsp.enable('r_language_server')
 
 -- TREE SITTER CONFIG
 require("nvim-treesitter.configs").setup({
