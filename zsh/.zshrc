@@ -50,7 +50,8 @@ bindkey '^ ' autosuggest-accept
 # Personal aliases
 alias vi="nvim"
 alias v="nvim"
-alias vl="nvim --listen /tmp/nvim"
+alias vs="nvim --listen /tmp/nvim"
+alias vc="nvim $(git diff --name-only HEAD)"
 alias change-ec2="/Users/harmonbhasin/work/securebio/instance_manipulator.sh"
 alias check-ec2="/Users/harmonbhasin/work/securebio/check_ec2.sh"
 alias start-ec2="/Users/harmonbhasin/work/securebio/start_ec2.sh"
@@ -150,6 +151,22 @@ function y() {
 		builtin cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"
+}
+
+# Obsidian sync - open, wait for sync, then close
+osync() {
+	local sync_time=${1:-5}  # Default 10 seconds, can pass custom time as argument
+
+	echo "Opening Obsidian..."
+	open -a Obsidian
+
+	echo "Waiting ${sync_time} seconds for sync..."
+	sleep "$sync_time"
+
+	echo "Closing Obsidian..."
+	osascript -e 'quit app "Obsidian"'
+
+	echo "Sync complete!"
 }
 
 # Additional PATH exports
