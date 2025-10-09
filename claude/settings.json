@@ -52,6 +52,14 @@
     "command": "bun x ccusage statusline",
     "padding": 0
   },
+  "extraKnownMarketplaces": {
+    "claude-code-templates": {
+      "source": {
+        "source": "github",
+        "repo": "https://github.com/davila7/claude-code-templates.git"
+      }
+    }
+  },
   "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754413237616
