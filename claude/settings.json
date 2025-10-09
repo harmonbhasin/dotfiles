@@ -52,11 +52,12 @@
     "command": "bun x ccusage statusline",
     "padding": 0
   },
+  "enabledPlugins": {
+    "performance-optimizer@claude-code-templates": true,
+    "ai-ml-toolkit@claude-code-templates": true
+  },
   "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754413237616
-  },
-  "enabledPlugins": {
-    "performance-optimizer@claude-code-templates": true
   }
 }
