@@ -80,6 +80,12 @@ end
 -- Get the home directory path and construct the full path to check
 local home = os.getenv("HOME")
 local obsidian_path = home .. "/personal/obsidian/main"
+local zotero_bib_path = home .. "/personal/obsidian/zotero.bib"
+
+-- Citations (only if zotero.bib exists)
+if path_exists(zotero_bib_path) then
+	require("citations").setup()
+end
 
 -- Obsidian
 if path_exists(obsidian_path) then

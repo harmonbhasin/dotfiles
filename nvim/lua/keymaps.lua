@@ -94,6 +94,7 @@ vim.api.nvim_set_keymap("n", "<leader>tn", ":tabnew<CR>", { noremap = true, sile
 -- Obsidian keymaps (only if obsidian is available)
 local home = os.getenv("HOME")
 local obsidian_path = home .. "/personal/obsidian/main"
+local zotero_bib_path = home .. "/personal/obsidian/zotero.bib"
 local function path_exists(path)
 	local file = io.open(path, "r")
 	if file then
@@ -124,6 +125,13 @@ if path_exists(obsidian_path) then
 			print("No title entered, note creation cancelled.")
 		end
 	end, { desc = "Create new Obsidian note from template with title" })
+end
+
+-- Citation picker (only if zotero.bib exists)
+if path_exists(zotero_bib_path) then
+	vim.keymap.set("n", "<Leader>np", function()
+		require("citations").pick_citation()
+	end, { desc = "Create literature note from citation" })
 end
 
 -- Codeium keymaps
