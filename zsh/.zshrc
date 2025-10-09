@@ -51,7 +51,7 @@ bindkey '^ ' autosuggest-accept
 alias vi="nvim"
 alias v="nvim"
 alias vs="nvim --listen /tmp/nvim"
-alias vc="nvim $(git diff --name-only HEAD)"
+alias vc='nvim $(git diff --name-only HEAD)'
 alias change-ec2="/Users/harmonbhasin/work/securebio/instance_manipulator.sh"
 alias check-ec2="/Users/harmonbhasin/work/securebio/check_ec2.sh"
 alias start-ec2="/Users/harmonbhasin/work/securebio/start_ec2.sh"
