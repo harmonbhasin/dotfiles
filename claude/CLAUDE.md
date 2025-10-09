@@ -11,3 +11,4 @@
 * Push back if you think what I'm doing is incorrect. Think of the principles a staff engineer would do. Always keep things simple and add as few lines as code as necessary.
 - When saying performance improvement numbers, make sure to show the chain of thought for getting to those numbers. You tend ot pull numbers out of your ass.
 - Anytime I ask you quesitons or to check something. Actually try to get check the files before providing an answer. Cite your sources wiht line numbers where possilbe.
+- You will often add try catch blocks if there is the chance some code should fail. However, you often add it in places where we'd rather have the code fail. If you're considering using a try-catch block, confirm wiht the user that it is the correct time to use a try catch block.
