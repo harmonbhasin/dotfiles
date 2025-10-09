@@ -27,7 +27,9 @@
       "Bash(ruff:*)",
       "Bash(mypy:*)",
       "Bash(tmux capture-pane:*)",
-      "Read(~/dotfiles/**)"
+      "Read(~/dotfiles/**)",
+      "WebFetch",
+      "WebSearch"
     ],
     "deny": []
   },
@@ -50,8 +52,8 @@
     "command": "bun x ccusage statusline",
     "padding": 0
   },
+  "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754413237616
-  },
-  "alwaysThinkingEnabled": true
+  }
 }

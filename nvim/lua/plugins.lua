@@ -260,17 +260,7 @@ local plugins = {
 			virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
 		},
 	},
-	{
-		"sainnhe/everforest",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			-- Optionally configure and load the colorscheme
-			-- directly inside the plugin declaration.
-			vim.g.everforest_enable_italic = true
-			vim.cmd.colorscheme("everforest")
-		end,
-	},
+	-- Colorscheme is loaded from colors/ir_black.vim
 	{
 		"norcalli/nvim-colorizer.lua",
 	},

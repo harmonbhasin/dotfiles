@@ -2,12 +2,10 @@
 --- Sets up colorscheme, initializes various plugins, and applies their settings
 
 -- Set colors
-vim.g.everforest_background = "hard"
---vim.g.everforest_better_performance = 1
 vim.opt.background = "dark"
 vim.opt.termguicolors = true
 
-vim.cmd("colorscheme everforest")
+vim.cmd("colorscheme ir_black")
 
 -- Override WinSeparator highlight after colorscheme loads
 vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#ffffff', bold = true })
