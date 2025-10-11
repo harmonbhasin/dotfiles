@@ -208,3 +208,5 @@ source <(COMPLETE=zsh jj)
 
 # Ripgrep configuration
 #export RIPGREP_CONFIG_PATH="$HOME/dotfiles/.ripgreprc"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
