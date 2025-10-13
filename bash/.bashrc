@@ -1,8 +1,5 @@
 # .bashrc
 
-# Vim keybindings
-set -o vi
-
 # Less settings
 export LESS="-JMQRSi"
 
