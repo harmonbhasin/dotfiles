@@ -29,12 +29,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Disable Codeium for certain file types
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-	pattern = { "*.md", "*.txt", ".git-credentials", ".env", ".env.*" },
-	command = "CodeiumDisable",
-})
-
 -- Oil
 vim.keymap.set("n", "<leader>-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
@@ -133,20 +127,6 @@ if path_exists(zotero_bib_path) then
 		require("citations").pick_citation()
 	end, { desc = "Create literature note from citation" })
 end
-
--- Codeium keymaps
-vim.keymap.set("i", "<M-Space>", function()
-	return vim.fn["codeium#Accept"]()
-end, { expr = true, silent = true })
-vim.keymap.set("i", "<c-;>", function()
-	return vim.fn["codeium#CycleCompletions"](1)
-end, { expr = true, silent = true })
-vim.keymap.set("i", "<c-,>", function()
-	return vim.fn["codeium#CycleCompletions"](-1)
-end, { expr = true, silent = true })
-vim.keymap.set("i", "<c-x>", function()
-	return vim.fn["codeium#Clear"]()
-end, { expr = true, silent = true })
 
 -- Telescope
 local builtin = require("telescope.builtin")

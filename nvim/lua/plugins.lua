@@ -153,7 +153,6 @@ local plugins = {
 		end,
 	},
 	"hrsh7th/nvim-cmp", -- Completion engine
-	"Exafunction/codeium.vim", -- Autocomplete with codeium
 	"neovim/nvim-lspconfig", -- LSP
 	"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 	"hrsh7th/cmp-buffer", -- Buffer source for nvim-cmp
@@ -264,10 +263,10 @@ local plugins = {
 	{
 		"norcalli/nvim-colorizer.lua",
 	},
---{
---	"nvim-java/nvim-java",
---	lazy = true,
---},
+	--{
+	--	"nvim-java/nvim-java",
+	--	lazy = true,
+	--},
 }
 
 require("lazy").setup(plugins)
