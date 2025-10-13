@@ -34,24 +34,6 @@
     "deny": []
   },
   "enableAllProjectMcpServers": true,
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message \"Awaiting your input - $(tmux display-message -p '#{session_name}:#{window_name}.#{pane_index}')\""
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bun x ccusage statusline",
-    "padding": 0
-  },
   "enabledPlugins": {
     "performance-optimizer@claude-code-templates": true,
     "ai-ml-toolkit@claude-code-templates": true
