@@ -1,0 +1,14 @@
+# Vi mode keybindings
+$if mode=vi
+  set keymap vi-command
+  "ciw": "bcw"
+  "cIW": "BcW"
+$endif
+
+# Tab completion settings
+set show-all-if-ambiguous on
+set colored-stats on             # Colorize completion listings by file type
+set visible-stats on             # Show file type indicators in listings
+set colored-completion-prefix on # Colorize the common prefix
+set mark-symlinked-directories on # Add trailing slash to symlinked dirs
+TAB: menu-complete

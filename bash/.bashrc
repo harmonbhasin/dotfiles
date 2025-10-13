@@ -90,6 +90,9 @@ alias ta="tmux attach"
 # Git autocomplete
 source /usr/share/bash-completion/completions/git
 
+# Load inputrc
+bind -f ~/dotfiles/bash/.inputrc
+
 # Git aliases + completions
 alias gwa="git worktree add"
 alias gwr="git worktree remove"
@@ -127,6 +130,7 @@ alias vi=nvim
 alias v=nvim
 alias vim=nvim
 alias vl="nvim --listen /tmp/nvim"
+alias vc='nvim $(git diff --name-only HEAD)'
 
 # fzf aliases
 eval "$(fzf --bash)"
@@ -141,10 +145,6 @@ alias x="exit"
 
 # last opened file
 alias la='nvim "$(ls -tu --time=atime | head -n1)"'
-
-# Make tab completion cycle through options (like Zsh) - shows all matches immediately and cycles through them with Tab
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
 
 # work alias
 s3fetch() {
