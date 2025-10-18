@@ -131,54 +131,12 @@ alias vc='nvim $(git diff --name-only HEAD)'
 
 # fzf aliases
 eval "$(fzf --bash)"
-alias sd="cd \$(find . -type d | fzf)" #already exists bruh alt + c; not exactly, as this looks for file, then brings you to that dir
-alias fz='readlink -f "$(fzf)"'
 
 # exit alias
 alias x="exit"
 
 # last opened file
 alias la='nvim "$(ls -tu --time=atime | head -n1)"'
-
-# work alias
-s3fetch() {
-    sed 's|/fusion/s3/|s3://|' "$1" | xargs -P 1 -I {} aws s3 cp {} ./
-}
-
-# PR comments function - get comments for a PR by number
-pr() {
-    # Check if PR number was provided
-    if [ -z "$1" ]; then
-        echo "Usage: pr <PR_NUMBER>"
-        return 1
-    fi
-
-    # Get the GitHub remote URL
-    local remote_url=$(git remote get-url origin 2>/dev/null)
-    if [ -z "$remote_url" ]; then
-        echo "Error: Not in a git repository or no 'origin' remote found"
-        return 1
-    fi
-
-    # Extract owner and repo from the remote URL
-    # Handle both SSH and HTTPS URLs
-    if [[ "$remote_url" =~ git@github.com:([^/]+)/(.+)\.git ]]; then
-        # SSH format
-        local owner="${BASH_REMATCH[1]}"
-        local repo="${BASH_REMATCH[2]}"
-    elif [[ "$remote_url" =~ https://github.com/([^/]+)/(.+)(\.git)?$ ]]; then
-        # HTTPS format
-        local owner="${BASH_REMATCH[1]}"
-        local repo="${BASH_REMATCH[2]%.git}"  # Remove .git if present
-    else
-        echo "Error: Could not parse GitHub repository from remote URL"
-        return 1
-    fi
-
-    # Get the PR comments using gh api
-    gh api "repos/$owner/$repo/pulls/$1/comments"
-}
-
 
 # zoxide; needs to be at bottom of file if i'm remembering correctly
 #eval "$(zoxide init bash)"
