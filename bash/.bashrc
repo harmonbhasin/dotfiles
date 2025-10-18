@@ -1,16 +1,27 @@
 # .bashrc
 
+#################
+# Basic config
+#################
+
+## Prompt
+# Define colors
+GREEN="\[\033[0;32m\]"
+BLUE="\[\033[0;34m\]"
+YELLOW="\[\033[0;33m\]"
+NC="\[\033[0m\]" # No Color
+# The PS1 prompt variable
+PS1="${GREEN}\u@\h${NC}:${BLUE}\w${YELLOW}\$(parse_git_branch)${NC}\n❯ "
+
+## Exporting
 # Less settings
 export LESS="-JMQRSi"
-
 # History settings
 export HISTSIZE=-1         # Unlimited commands in memory per session
 export HISTFILESIZE=-1     # Unlimited commands in the history file
-shopt -s histappend        # Append to history file, don't overwrite
 export HISTTIMEFORMAT="%d/%m/%y %T " # Timestamp format
 # Synchronize history across multiple sessions (e.g., tmux, multiple tabs); Set the cursor to steady bar (|) cursor
 export PROMPT_COMMAND='history -a; history -c; history -r;echo -ne "\e[6 q"'
-
 # Get colors in terminal
 export CLICOLOR=1
 # Set default editor
@@ -18,12 +29,30 @@ export EDITOR=nvim
 # Set default terminal color
 export TERM=xterm-256color
 
+## shopt
 # spelling
 shopt -s nocaseglob # ignore case when matching
 shopt -s cdspell # fix common spelling mistakes
-
 # autocd
 shopt -s autocd
+# Append to history file, don't overwrite; for tmux
+shopt -s histappend        
+
+## Source
+# Git autocomplete
+source /usr/share/bash-completion/completions/git
+
+## Bind
+# Load inputrc
+bind -f ~/dotfiles/bash/.inputrc
+
+## Eval
+# fzf aliases
+eval "$(fzf --bash)"
+
+#################
+# Custom commands
+#################
 
 # go to root of project in git dir; https://blog.meain.io/2023/navigating-around-in-shell/
 r () {
@@ -61,34 +90,25 @@ ccv() {
   env "${env_vars[@]}" claude "${claude_args[@]}" "$@"
 }
 
-# User prompt stuff
 # Function to get git branch and status
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-# Define colors
-GREEN="\[\033[0;32m\]"
-BLUE="\[\033[0;34m\]"
-YELLOW="\[\033[0;33m\]"
-NC="\[\033[0m\]" # No Color
-
-# The PS1 prompt variable
-PS1="${GREEN}\u@\h${NC}:${BLUE}\w${YELLOW}\$(parse_git_branch)${NC}\n❯ "
+#################
+# Aliases
+#################
 
 # General aliases
 alias l='ls -lah'
 alias clear="clear -x"
+alias x="exit"
+# last opened file
+alias la='nvim "$(ls -tu --time=atime | head -n1)"'
 
 # Tmux aliases
 alias t=tmux
 alias ta="tmux attach"
-
-# Git autocomplete
-source /usr/share/bash-completion/completions/git
-
-# Load inputrc
-bind -f ~/dotfiles/bash/.inputrc
 
 # Git aliases + completions
 alias gwa="git worktree add"
@@ -129,14 +149,6 @@ alias vim=nvim
 alias vl="nvim --listen /tmp/nvim"
 alias vc='nvim $(git diff --name-only HEAD)'
 
-# fzf aliases
-eval "$(fzf --bash)"
-
-# exit alias
-alias x="exit"
-
-# last opened file
-alias la='nvim "$(ls -tu --time=atime | head -n1)"'
 
 # zoxide; needs to be at bottom of file if i'm remembering correctly
 #eval "$(zoxide init bash)"
