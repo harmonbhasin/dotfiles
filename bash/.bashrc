@@ -134,9 +134,6 @@ eval "$(fzf --bash)"
 alias sd="cd \$(find . -type d | fzf)" #already exists bruh alt + c; not exactly, as this looks for file, then brings you to that dir
 alias fz='readlink -f "$(fzf)"'
 
-# claude alias
-alias ccv=ccv
-
 # exit alias
 alias x="exit"
 
