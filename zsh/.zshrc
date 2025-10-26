@@ -153,9 +153,14 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# go to root of project in git dir; https://blog.meain.io/2023/navigating-around-in-shell/
+r () {
+cd "$(git rev-parse --show-toplevel 2>/dev/null)"
+}
+
 # Obsidian sync - open, wait for sync, then close
 osync() {
-	local sync_time=${1:-5}  # Default 10 seconds, can pass custom time as argument
+	local sync_time=${1:-10}  # Default 10 seconds, can pass custom time as argument
 
 	echo "Opening Obsidian..."
 	open -a Obsidian
