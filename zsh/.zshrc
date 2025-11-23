@@ -5,6 +5,14 @@
 if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
   source "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
 fi
+# Homebrew prefix (aligns with .zprofile)
+if [ -z "$HOMEBREW_PREFIX" ]; then
+  if [ "$(uname -m)" = "x86_64" ]; then
+    HOMEBREW_PREFIX="/usr/local"
+  else
+    HOMEBREW_PREFIX="/opt/homebrew"
+  fi
+fi
 
 # ===== BASIC ZSH OPTIONS =====
 # Core zsh options that Oh My Zsh was handling
@@ -33,11 +41,11 @@ compinit
 
 # ===== PLUGIN LOADING =====
 # Load zsh-autocomplete first (must be early, before compdef calls)
-source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 # Load other plugins
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+#source "$HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
 # Editor
 export EDITOR="nvim"
@@ -175,12 +183,15 @@ osync() {
 }
 
 # Additional PATH exports
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 export TVM_LIBRARY_PATH=/Users/harmonbhasin/programming/software/tvm/build
 export TVM_HOME=/Users/harmonbhasin/programming/software/tvm/build
 export PYTHONPATH=$TVM_HOME/python:$PYTHONPATH
 export PIP_REQUIRE_VIRTUALENV=false
-export TERM=xterm-ghostty
+# Only set Ghostty TERM when Ghostty integration is available
+if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
+  export TERM=xterm-ghostty
+fi
 
 # Atuin
 . "$HOME/.atuin/bin/env"
@@ -200,7 +211,7 @@ eval "$(zoxide init zsh)"
 
 # Terraform completion
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
+complete -o nospace -C "$HOMEBREW_PREFIX/bin/terraform" terraform
 
 # Colors
 export CLICOLOR=1
