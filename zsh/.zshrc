@@ -66,8 +66,11 @@ alias start-ec2="/Users/harmonbhasin/work/securebio/start_ec2.sh"
 alias stop-ec2="/Users/harmonbhasin/work/securebio/stop_ec2.sh"
 alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias list-ec2="/Users/harmonbhasin/work/securebio/list_harmon_instances.sh"
-alias claude="/Users/harmonbhasin/.claude/local/claude"
-alias c="/Users/harmonbhasin/.claude/local/claude"
+# Only use the local Claude binary when not on Intel (Rosetta path differs)
+if [ "$(uname -m)" != "x86_64" ]; then
+  alias claude="/Users/harmonbhasin/.claude/local/claude"
+  alias c="/Users/harmonbhasin/.claude/local/claude"
+fi
 alias d="nvim -c ':ObsidianToday'"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
 
