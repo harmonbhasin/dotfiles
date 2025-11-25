@@ -103,7 +103,7 @@ alias gpom="git push origin main"
 alias gd="git diff"
 alias gds="git diff --staged"
 
-alias l="ls -la"
+alias l="ls -lah"
 alias x="exit"
 
 # RunPod aliases
