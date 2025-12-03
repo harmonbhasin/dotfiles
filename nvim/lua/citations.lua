@@ -17,7 +17,7 @@ M.config = {
 title: {{title}}
 authors: {{authorString}}
 year: {{year}}
-doi: https://doi.org/{{DOI}}
+doi: {{doiorurl}}
 aliases: {{title}}
 ---
 
@@ -103,6 +103,15 @@ local function parse_bibtex_entry(entry_text)
 	if not entry.year and entry.date then
 		-- Extract year from date (format: YYYY-MM-DD or YYYY)
 		entry.year = entry.date:match("^(%d%d%d%d)")
+	end
+
+	-- Handle doiorurl - use doi if available, otherwise url
+	if entry.doi then
+		entry.doiorurl = entry.doi
+	elseif entry.url then
+		entry.doiorurl = entry.url
+	else
+		entry.doiorurl = ""
 	end
 
 	return entry
