@@ -180,8 +180,8 @@ local function create_literature_note(entry)
 	vim.notify("Created literature note: " .. filename, vim.log.levels.INFO)
 end
 
--- Create telescope picker
-function M.pick_citation(opts)
+-- Create telescope picker with custom action
+local function create_picker(opts, on_select)
 	opts = opts or {}
 
 	-- Read BibTeX entries
@@ -218,13 +218,27 @@ function M.pick_citation(opts)
 					actions.close(prompt_bufnr)
 					local selection = action_state.get_selected_entry()
 					if selection then
-						create_literature_note(selection.value)
+						on_select(selection.value)
 					end
 				end)
 				return true
 			end,
 		})
 		:find()
+end
+
+-- Create and open a literature note
+function M.pick_citation(opts)
+	create_picker(opts, create_literature_note)
+end
+
+-- Insert citation key at cursor position
+function M.insert_citation(opts)
+	create_picker(opts, function(entry)
+		local citation = "[[@" .. entry.citekey .. "]]"
+		-- Insert at cursor position
+		vim.api.nvim_put({ citation }, "c", true, true)
+	end)
 end
 
 -- Setup function

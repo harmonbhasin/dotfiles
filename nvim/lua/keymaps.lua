@@ -126,6 +126,10 @@ if path_exists(zotero_bib_path) then
 	vim.keymap.set("n", "<Leader>np", function()
 		require("citations").pick_citation()
 	end, { desc = "Create literature note from citation" })
+
+	vim.keymap.set("n", "<Leader>ni", function()
+		require("citations").insert_citation()
+	end, { desc = "Insert citation key at cursor" })
 end
 
 -- Telescope
