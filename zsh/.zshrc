@@ -191,9 +191,14 @@ export TVM_LIBRARY_PATH=/Users/harmonbhasin/programming/software/tvm/build
 export TVM_HOME=/Users/harmonbhasin/programming/software/tvm/build
 export PYTHONPATH=$TVM_HOME/python:$PYTHONPATH
 export PIP_REQUIRE_VIRTUALENV=false
-# Only set Ghostty TERM when Ghostty integration is available
+# Only set Ghostty TERM when Ghostty integration is available and terminfo exists
 if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
-  export TERM=xterm-ghostty
+  if infocmp xterm-ghostty &>/dev/null; then
+    export TERM=xterm-ghostty
+  else
+    # Fall back to xterm-256color if xterm-ghostty terminfo is not installed
+    export TERM=xterm-256color
+  fi
 fi
 
 # Atuin
