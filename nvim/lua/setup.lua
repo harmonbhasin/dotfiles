@@ -10,6 +10,15 @@ vim.cmd("colorscheme ir_black")
 -- Override WinSeparator highlight after colorscheme loads
 vim.api.nvim_set_hl(0, 'WinSeparator', { fg = '#ffffff', bold = true })
 
+-- Highlight @TODO
+vim.api.nvim_set_hl(0, "TodoHighlight", { fg = "#FF8C00", bold = true })
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+  pattern = "*",
+  callback = function()
+    vim.fn.matchadd("TodoHighlight", "\\c@TODO")
+  end,
+})
+
 -- java
 --require("java").setup()
 vim.lsp.config('jdtls', {})
