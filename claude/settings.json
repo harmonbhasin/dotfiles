@@ -38,7 +38,8 @@
   "enabledPlugins": {
     "performance-optimizer@claude-code-templates": true,
     "ai-ml-toolkit@claude-code-templates": true,
-    "code-simplifier@claude-plugins-official": true
+    "code-simplifier@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
