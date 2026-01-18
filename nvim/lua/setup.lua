@@ -408,6 +408,11 @@ vim.lsp.config('mlir_lsp_server', {
 })
 vim.lsp.enable('mlir_lsp_server')
 
+vim.lsp.config('marksman', {
+	capabilities = capabilities,
+})
+vim.lsp.enable('marksman')
+
 -- TREE SITTER CONFIG
 require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the listed parsers MUST always be installed)

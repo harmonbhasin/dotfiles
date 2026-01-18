@@ -141,6 +141,7 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 vim.keymap.set("n", "<leader>fc", function()
 	builtin.lsp_document_symbols({ symbols = { "class", "function", "method" } })
 end, { desc = "Find classes and functions in document" })
+vim.keymap.set("n", "<leader>fm", builtin.lsp_document_symbols, { desc = "Find document symbols" })
 
 -- R code block insertion
 vim.keymap.set("n", "<leader>rn", function()
