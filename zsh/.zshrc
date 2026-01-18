@@ -52,7 +52,7 @@ export EDITOR="nvim"
 
 # Vi mode (equivalent to fish_vi_key_bindings)
 bindkey -v
-bindkey '^ ' autosuggest-accept
+bindkey '^x' autosuggest-accept
 
 # ===== ALIASES =====
 # Personal aliases
