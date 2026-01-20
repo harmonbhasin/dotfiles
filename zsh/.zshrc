@@ -70,6 +70,7 @@ alias list-ec2="/Users/harmonbhasin/work/securebio/list_harmon_instances.sh"
 if [ "$(uname -m)" != "x86_64" ]; then
   alias claude="/Users/harmonbhasin/.claude/local/claude"
   alias c="/Users/harmonbhasin/.claude/local/claude"
+  alias cr="/Users/harmonbhasin/.claude/local/claude --resume"
 fi
 alias d="nvim -c ':ObsidianToday'"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
