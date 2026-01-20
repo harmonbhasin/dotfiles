@@ -22,6 +22,9 @@ export HISTFILESIZE=-1     # Unlimited commands in the history file
 export HISTTIMEFORMAT="%d/%m/%y %T " # Timestamp format
 # Synchronize history across multiple sessions (e.g., tmux, multiple tabs); Set the cursor to steady bar (|) cursor
 export PROMPT_COMMAND='history -a; history -c; history -r;echo -ne "\e[6 q"'
+# Locale for proper Unicode/UTF-8 support
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 # Get colors in terminal
 export CLICOLOR=1
 # Set default editor
