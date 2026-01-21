@@ -1,6 +1,7 @@
 ---
 name: plan-reviewer
 description: Expert systems design specialist. Proactively reviews proposals for quality, security, and maintainability. Use after writing a proposal for implementing code to get a review.
+model: opus
 tools: Read, Grep, Glob, Bash
 ---
 
