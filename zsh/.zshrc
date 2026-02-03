@@ -68,9 +68,9 @@ alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias list-ec2="/Users/harmonbhasin/work/securebio/list_harmon_instances.sh"
 # Only use the local Claude binary when not on Intel (Rosetta path differs)
 if [ "$(uname -m)" != "x86_64" ]; then
-  alias claude="/Users/harmonbhasin/.claude/local/claude"
-  alias c="/Users/harmonbhasin/.claude/local/claude"
-  alias cr="/Users/harmonbhasin/.claude/local/claude --resume"
+  alias c=claude
+  alias cr="claude --resume"
+  alias crf="claude --resume --fork-session"
 fi
 alias d="nvim -c ':ObsidianToday'"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
@@ -78,6 +78,7 @@ alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
 # Tmux aliases
 alias t=tmux
 alias ta="tmux attach"
+alias tl="tmux ls"
 
 # Git aliases
 alias gwa="git worktree add"
@@ -111,6 +112,15 @@ alias x="exit"
 alias runpodtouch="runpodctl create pod --gpuType 'NVIDIA RTX A4500' --imageName 'runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04' --ports '22/tcp' --ports '8888/http' --volumeSize 50 --containerDiskSize 30 --volumePath '/workspace' --secureCloud"
 alias runpodcp="runpodctl get pod | awk 'NR==2 {print \$1}' | pbcopy && runpodctl get pod"
 alias runpodrm="runpodctl remove pod"
+
+# Git alias completions
+_gwr() {
+  local -a worktrees
+  worktrees=(${(f)"$(git worktree list --porcelain 2>/dev/null | awk '/^worktree / {print $2}')"})
+  _describe 'worktree' worktrees
+}
+compdef _gwr gwr
+compdef _git gwa
 
 # ===== EXTERNAL INTEGRATIONS =====
 # NVM Configuration
@@ -235,3 +245,11 @@ source <(COMPLETE=zsh jj)
 #export RIPGREP_CONFIG_PATH="$HOME/dotfiles/.ripgreprc"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/harmonbhasin/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
