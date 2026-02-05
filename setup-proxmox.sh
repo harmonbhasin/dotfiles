@@ -38,7 +38,6 @@ apt install -y \
     vim \
     gh \
     ripgrep \
-    fzf \
     tmux \
     htop \
     lsof \
@@ -48,12 +47,24 @@ apt install -y \
     strace \
     zoxide \
     tree \
-    fd-find
+    fd-find \
+    git-delta
+
+#################
+# fzf (latest from GitHub for --bash support)
+#################
+
+FZF_VERSION=$(curl -s https://api.github.com/repos/junegunn/fzf/releases/latest | jq -r '.tag_name')
+curl -LO "https://github.com/junegunn/fzf/releases/download/${FZF_VERSION}/fzf-${FZF_VERSION#v}-linux_amd64.tar.gz"
+tar -xzf "fzf-${FZF_VERSION#v}-linux_amd64.tar.gz"
+mv fzf /usr/local/bin/fzf
+rm "fzf-${FZF_VERSION#v}-linux_amd64.tar.gz"
 
 #################
 # Locale
 #################
 
+sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen en_US.UTF-8
 update-locale LANG=en_US.UTF-8
 
@@ -105,6 +116,8 @@ mkdir -p ~/.config
 ln -sf "$DOTFILES/nvim" ~/.config/nvim
 ln -sf "$DOTFILES/tmux/.tmux.conf" ~/.tmux.conf
 ln -sf "$DOTFILES/git/.gitconfig" ~/.gitconfig
+# Source dotfiles bashrc from system bashrc (append if not already there)
+grep -qF "source ~/dotfiles/bash/.bashrc" ~/.bashrc || echo "source ~/dotfiles/bash/.bashrc" >> ~/.bashrc
 
 echo "=== Setup complete ==="
 echo "Run 'source ~/.bashrc' or start a new shell"
