@@ -56,6 +56,11 @@
             "type": "command",
             "command": "$HOME/dotfiles/claude/hooks/block-push-protected-branches.sh",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/claude/hooks/block-rm-commands.sh",
+            "timeout": 10
           }
         ]
       }
