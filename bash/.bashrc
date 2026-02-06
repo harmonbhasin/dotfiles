@@ -153,5 +153,8 @@ alias vl="nvim --listen /tmp/nvim"
 alias vc='nvim $(git diff --name-only HEAD)'
 
 
+# Claude aliases
+alias cdd="IS_SANDBOX=1 claude --dangerously-skip-permissions"
+
 # zoxide; needs to be at bottom of file if i'm remembering correctly
 #eval "$(zoxide init bash)"
