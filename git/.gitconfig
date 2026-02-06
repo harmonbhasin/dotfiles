@@ -32,3 +32,7 @@
 	path = /home/ec2-user/dotfiles/git/.gitconfig-remote
 [pull]
 	rebase = true
+
+# For proxmox/root instances
+[includeIf "gitdir:/root/"]
+	path = /root/dotfiles/git/.gitconfig-proxmox
