@@ -52,6 +52,11 @@
             "type": "command",
             "command": "$HOME/dotfiles/claude/hooks/block-rm-commands.sh",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/claude/hooks/require-squash-merge.sh",
+            "timeout": 10
           }
         ]
       }
