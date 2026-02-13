@@ -36,7 +36,7 @@
     ],
     "deny": []
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "PreToolUse": [
