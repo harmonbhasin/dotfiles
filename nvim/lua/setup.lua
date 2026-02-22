@@ -206,8 +206,10 @@ table.insert(vimgrep_arguments, "!**/.git/*")
 require("telescope").setup({
 	defaults = {
 		vimgrep_arguments = vimgrep_arguments,
-		--layout_strategy = "vertical",
-		--layout_config = { height = 0.5 },
+		sorting_strategy = "ascending",
+		layout_config = {
+			prompt_position = "top",
+		},
 		mappings = {
 			i = {
 				["<c-d>"] = actions.delete_buffer,
