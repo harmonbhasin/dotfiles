@@ -94,7 +94,20 @@ local plugins = {
 			})
 		end,
 	},
-	"nvim-treesitter/nvim-treesitter", -- Syntax highlighting
+	{
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		build = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter").install({
+				"c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
+				"r", "typescript", "javascript", "json",
+			})
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function() pcall(vim.treesitter.start) end,
+			})
+		end,
+	},
 	"nvim-lua/lsp-status.nvim", -- Status bar
 	-- Manage LSP, DAP, Linters, Formatters
 	{

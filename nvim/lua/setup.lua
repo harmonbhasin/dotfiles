@@ -415,38 +415,4 @@ vim.lsp.config('marksman', {
 })
 vim.lsp.enable('marksman')
 
--- TREE SITTER CONFIG
-require("nvim-treesitter").setup({
-	-- A list of parser names, or "all" (the listed parsers MUST always be installed)
-	ensure_installed = {
-		"c",
-		"lua",
-		"vim",
-		"vimdoc",
-		"query",
-		"markdown",
-		"markdown_inline",
-		"r",
-		"typescript",
-		"javascript",
-		"json",
-	},
-	markdown = {
-		enable = true,
-		-- configuration here or nothing for defaults
-	},
-
-	-- Install parsers synchronously (only applied to `ensure_installed`)
-	sync_install = false,
-
-	-- Automatically install missing parsers when entering buffer
-	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-	auto_install = false,
-
-	---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-	-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-	highlight = {
-		enable = true,
-	},
-})
+-- TREE SITTER CONFIG moved to plugins.lua (main branch API for nvim 0.12+)
