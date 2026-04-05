@@ -161,6 +161,15 @@ vim.keymap.set("n", "<leader>bn", function()
 	vim.cmd("startinsert")
 end, { desc = "Insert bash code block" })
 
+-- plain code block insertion
+vim.keymap.set("n", "<leader>cn", function()
+	local lines = { "```", "", "```" }
+	local row = vim.api.nvim_win_get_cursor(0)[1]
+	vim.api.nvim_buf_set_lines(0, row, row, false, lines)
+	vim.api.nvim_win_set_cursor(0, { row + 2, 0 })
+	vim.cmd("startinsert")
+end, { desc = "Insert code block" })
+
 -- Date navigation for YYYY-MM-DD markdown files
 local function navigate_date_files(direction)
 	-- Get all markdown files in current buffer's directory that match YYYY-MM-DD pattern
