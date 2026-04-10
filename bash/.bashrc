@@ -44,6 +44,15 @@ shopt -s histappend
 ## Source
 # Git autocomplete
 source /usr/share/bash-completion/completions/git
+# Load environment variables from ~/.env
+envsource() {
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    if [[ ! "$line" =~ ^# && -n "$line" ]]; then
+      export "${line%%=*}"="${line#*=}"
+    fi
+  done < "$1"
+}
+[ -f ~/.env ] && envsource ~/.env
 
 ## Bind
 # Load inputrc
