@@ -280,6 +280,13 @@ local plugins = {
 	--	"nvim-java/nvim-java",
 	--	lazy = true,
 	--},
+	{
+		dir = "~/Documents/writer-neovim-plugin",
+		config = function()
+			require("writer").setup()
+		end,
+		lazy = false,
+	},
 }
 
 require("lazy").setup(plugins)

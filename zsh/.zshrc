@@ -35,6 +35,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+# Hetzner completions
+fpath+=(~/.config/hcloud/completion/zsh)
+
 # Completion system
 autoload -U compinit
 compinit
@@ -107,6 +110,13 @@ alias gds="git diff --staged"
 
 alias l="ls -lah"
 alias x="exit"
+
+# Hetzner VM aliases
+alias hup="/Users/harmonbhasin/Documents/hdev/spin-up.sh"
+alias hdown="/Users/harmonbhasin/Documents/hdev/spin-down.sh"
+alias hls="/Users/harmonbhasin/Documents/hdev/list.sh"
+alias hstop="/Users/harmonbhasin/Documents/hdev/stop.sh"
+alias hstart="/Users/harmonbhasin/Documents/hdev/start.sh"
 
 # RunPod aliases
 alias runpodtouch="runpodctl create pod --gpuType 'NVIDIA RTX A4500' --imageName 'runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04' --ports '22/tcp' --ports '8888/http' --volumeSize 50 --containerDiskSize 30 --volumePath '/workspace' --secureCloud"
@@ -256,3 +266,10 @@ esac
 
 # OpenClaw Completion
 source "/Users/harmonbhasin/.openclaw/completions/openclaw.zsh"
+
+# >>> b2 autocomplete >>>
+# This section is managed by b2 . Manual edit may break automated updates.
+if [[ -z "$_comps" ]] && [[ -t 0 ]]; then autoload -Uz compinit && compinit -i -D; fi
+source /Users/harmonbhasin/.zsh/completion/_b2
+
+# <<< b2 autocomplete <<<
