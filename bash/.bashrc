@@ -53,6 +53,10 @@ envsource() {
   done < "$1"
 }
 [ -f ~/.env ] && envsource ~/.env
+# Auto-authenticate gh CLI if GH_TOKEN is set but gh isn't logged in
+if [ -n "$GH_TOKEN" ] && ! gh auth status &>/dev/null; then
+  echo "$GH_TOKEN" | gh auth login --with-token 2>/dev/null
+fi
 
 ## Bind
 # Load inputrc
