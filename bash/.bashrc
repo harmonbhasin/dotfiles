@@ -64,7 +64,7 @@ bind -f ~/dotfiles/bash/.inputrc
 
 ## Eval
 # fzf aliases
-eval "$(fzf --bash)"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 #################
 # Custom commands
