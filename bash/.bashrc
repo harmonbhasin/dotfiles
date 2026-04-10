@@ -70,23 +70,21 @@ mkdir -p -p "$r" && pushd "$r"
 }
 
 # Claude yolo
-ccv() {
+c() {
   # 1. Environment variables to set just for the `claude` invocation
   local -a env_vars=(
     ENABLE_BACKGROUND_TASKS=true
     FORCE_AUTO_BACKGROUND_TASKS=true
     CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=true
     CLAUDE_CODE_ENABLE_UNIFIED_READ_TOOL=true
+    IS_SANDBOX=1
   )
 
   # 2. Collect extra CLI flags for `claude`
-  local -a claude_args=()
+  local -a claude_args=(--dangerously-skip-permissions)
 
   case "$1" in
-    -y)   claude_args+=(--dangerously-skip-permissions); shift ;;
-    -r)   claude_args+=(--resume);                       shift ;;
-    -ry|-yr)
-          claude_args+=(--resume --dangerously-skip-permissions); shift ;;
+    -r)   claude_args+=(--resume); shift ;;
   esac
 
   # 3. Run `claude` with env vars and any remaining args
@@ -103,6 +101,7 @@ parse_git_branch() {
 #################
 
 # General aliases
+alias z=cd
 alias l='ls -lah'
 alias clear="clear -x"
 alias x="exit"
