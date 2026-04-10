@@ -44,6 +44,19 @@ shopt -s histappend
 ## Source
 # Git autocomplete
 source /usr/share/bash-completion/completions/git
+# Load environment variables from ~/.env
+envsource() {
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    if [[ ! "$line" =~ ^# && -n "$line" ]]; then
+      export "${line%%=*}"="${line#*=}"
+    fi
+  done < "$1"
+}
+[ -f ~/.env ] && envsource ~/.env
+# Auto-authenticate gh CLI if GH_TOKEN is set but gh isn't logged in
+if [ -n "$GH_TOKEN" ] && ! gh auth status &>/dev/null; then
+  echo "$GH_TOKEN" | gh auth login --with-token 2>/dev/null
+fi
 
 ## Bind
 # Load inputrc
@@ -51,7 +64,7 @@ bind -f ~/dotfiles/bash/.inputrc
 
 ## Eval
 # fzf aliases
-eval "$(fzf --bash)"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 #################
 # Custom commands
@@ -70,23 +83,21 @@ mkdir -p -p "$r" && pushd "$r"
 }
 
 # Claude yolo
-ccv() {
+c() {
   # 1. Environment variables to set just for the `claude` invocation
   local -a env_vars=(
     ENABLE_BACKGROUND_TASKS=true
     FORCE_AUTO_BACKGROUND_TASKS=true
     CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=true
     CLAUDE_CODE_ENABLE_UNIFIED_READ_TOOL=true
+    IS_SANDBOX=1
   )
 
   # 2. Collect extra CLI flags for `claude`
-  local -a claude_args=()
+  local -a claude_args=(--dangerously-skip-permissions)
 
   case "$1" in
-    -y)   claude_args+=(--dangerously-skip-permissions); shift ;;
-    -r)   claude_args+=(--resume);                       shift ;;
-    -ry|-yr)
-          claude_args+=(--resume --dangerously-skip-permissions); shift ;;
+    -r)   claude_args+=(--resume); shift ;;
   esac
 
   # 3. Run `claude` with env vars and any remaining args
@@ -103,6 +114,7 @@ parse_git_branch() {
 #################
 
 # General aliases
+alias z=cd
 alias l='ls -lah'
 alias clear="clear -x"
 alias x="exit"
