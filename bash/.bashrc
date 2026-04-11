@@ -98,6 +98,7 @@ c() {
 
   case "$1" in
     -r)   claude_args+=(--resume); shift ;;
+    -rf)  claude_args+=(--resume --fork-session); shift ;;
   esac
 
   # 3. Run `claude` with env vars and any remaining args
@@ -166,6 +167,8 @@ alias vc='nvim $(git diff --name-only HEAD)'
 
 # Claude aliases
 alias cdd="IS_SANDBOX=1 claude --dangerously-skip-permissions"
+alias cr="c -r"
+alias crf="c -rf"
 
 # zoxide; needs to be at bottom of file if i'm remembering correctly
 eval "$(zoxide init bash)"
