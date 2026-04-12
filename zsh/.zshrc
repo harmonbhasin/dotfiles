@@ -37,6 +37,7 @@ SAVEHIST=10000
 
 # Hetzner completions
 fpath+=(~/.config/hcloud/completion/zsh)
+fpath+=(/Users/harmonbhasin/Documents/hdev)
 
 # Completion system
 autoload -U compinit
@@ -110,13 +111,6 @@ alias gds="git diff --staged"
 
 alias l="ls -lah"
 alias x="exit"
-
-# Hetzner VM aliases
-alias hup="/Users/harmonbhasin/Documents/hdev/spin-up.sh"
-alias hdown="/Users/harmonbhasin/Documents/hdev/spin-down.sh"
-alias hls="/Users/harmonbhasin/Documents/hdev/list.sh"
-alias hstop="/Users/harmonbhasin/Documents/hdev/stop.sh"
-alias hstart="/Users/harmonbhasin/Documents/hdev/start.sh"
 
 # RunPod aliases
 alias runpodtouch="runpodctl create pod --gpuType 'NVIDIA RTX A4500' --imageName 'runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04' --ports '22/tcp' --ports '8888/http' --volumeSize 50 --containerDiskSize 30 --volumePath '/workspace' --secureCloud"
