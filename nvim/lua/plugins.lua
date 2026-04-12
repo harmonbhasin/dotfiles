@@ -282,6 +282,7 @@ local plugins = {
 	--},
 	{
 		dir = "~/Documents/writer-neovim-plugin",
+		cond = vim.fn.isdirectory(vim.fn.expand("~/Documents")) == 1,
 		config = function()
 			require("writer").setup()
 		end,
