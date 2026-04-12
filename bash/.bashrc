@@ -99,6 +99,7 @@ c() {
   case "$1" in
     -r)   claude_args+=(--resume); shift ;;
     -rf)  claude_args+=(--resume --fork-session); shift ;;
+    -co)  claude_args+=(--continue); shift ;;
   esac
 
   # 3. Run `claude` with env vars and any remaining args
@@ -166,7 +167,7 @@ alias vc='nvim $(git diff --name-only HEAD)'
 
 
 # Claude aliases
-alias cdd="IS_SANDBOX=1 claude --dangerously-skip-permissions"
+alias cco="c -co"
 alias cr="c -r"
 alias crf="c -rf"
 

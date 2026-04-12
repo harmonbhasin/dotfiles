@@ -73,6 +73,7 @@ alias list-ec2="/Users/harmonbhasin/work/securebio/list_harmon_instances.sh"
 # Only use the local Claude binary when not on Intel (Rosetta path differs)
 if [ "$(uname -m)" != "x86_64" ]; then
   alias c=claude
+  alias cco="claude --continue"
   alias cr="claude --resume"
   alias crf="claude --resume --fork-session"
 fi

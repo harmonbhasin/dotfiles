@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# gao (get-agent-output) — extract agent/task output from Claude Code JSONL logs
+# Usage: gao <search-string>
+#        gao "Mock community datasets" > output.md
+# Setup: ln -sf ~/dotfiles/bin/gao ~/.local/bin/gao
+
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+  echo "Usage: gao <search-string>" >&2
+  exit 1
+fi
+
+query="$1"
+
+rg --no-filename "$query" ~/.claude | rg '<summary>' | head -1 | jq -r '.content'
