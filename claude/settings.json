@@ -56,10 +56,15 @@
       "mcp__attio__list-lists",
       "mcp__attio__list-attribute-definitions",
       "mcp__attio__search-records",
-      "mcp__attio__update-record"
+      "mcp__attio__update-record",
+      "Bash(ping:*)",
+      "Bash(hdev:*)",
+      "Bash(mkdir:*)",
+      "Bash(brew search:*)",
+      "Bash(brew install:*)"
     ],
     "deny": [],
-    "defaultMode": "plan"
+    "defaultMode": "default"
   },
   "model": "opus[1m]",
   "enableAllProjectMcpServers": true,
