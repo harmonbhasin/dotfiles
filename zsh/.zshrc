@@ -259,9 +259,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# OpenClaw Completion
-source "/Users/harmonbhasin/.openclaw/completions/openclaw.zsh"
-
 # >>> b2 autocomplete >>>
 # This section is managed by b2 . Manual edit may break automated updates.
 if [[ -z "$_comps" ]] && [[ -t 0 ]]; then autoload -Uz compinit && compinit -i -D; fi
