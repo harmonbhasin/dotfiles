@@ -35,13 +35,17 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-# Hetzner completions
+# ===== COMPLETIONS =====
+
+# Completion system for zsh
+autoload -U compinit && compinit
+# Completion system for zsh using bash
+autoload -U +X bashcompinit && bashcompinit
+
 fpath+=(~/.config/hcloud/completion/zsh)
 fpath+=(/Users/harmonbhasin/Documents/hdev)
-
-# Completion system
-autoload -U compinit
-compinit
+complete -o nospace -C "$HOMEBREW_PREFIX/bin/terraform" terraform
+complete -C "$HOMEBREW_PREFIX/bin/aws_completer" aws
 
 # ===== PLUGIN LOADING =====
 # Load zsh-autocomplete first (must be early, before compdef calls)
@@ -124,61 +128,9 @@ _gwr() {
   worktrees=(${(f)"$(git worktree list --porcelain 2>/dev/null | awk '/^worktree / {print $2}')"})
   _describe 'worktree' worktrees
 }
+
 compdef _gwr gwr
 compdef _git gwa
-
-# ===== EXTERNAL INTEGRATIONS =====
-# NVM Configuration
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" 
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-
-# Load all function files
-for file in $HOME/dotfiles/zsh/functions/*.zsh; do
-  [ -f "$file" ] && source "$file"
-done
-
-# Execute greeting on startup (equivalent to fish_greeting)
-#[ -f "$HOME/dotfiles/zsh/functions/greeting.zsh" ] && greeting
-
-# Starship prompt if installed
-if command -v starship &>/dev/null; then
-  eval "$(starship init zsh)"
-fi
-
-# Source local env file
-if [ -f "$HOME/.local/bin/env.zsh" ]; then
-  source "$HOME/.local/bin/env.zsh"
-fi
-
-# Conda initialization
-__conda_setup="$('/Users/harmonbhasin/programming/software/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/harmonbhasin/programming/software/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/harmonbhasin/programming/software/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/harmonbhasin/programming/software/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-# Disable conda's auto prompt modification (Starship handles it)
-export CONDA_CHANGEPS1=false
-
-# Source env
-envsource ~/.env
-
-# Yazi integration
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
 
 # go to root of project in git dir; https://blog.meain.io/2023/navigating-around-in-shell/
 r () {
@@ -201,12 +153,64 @@ osync() {
 	echo "Sync complete!"
 }
 
+# ===== EXTERNAL INTEGRATIONS =====
+# NVM Configuration
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" 
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+# Load all function files
+for file in $HOME/dotfiles/zsh/functions/*.zsh; do
+  [ -f "$file" ] && source "$file"
+done
+
+# Starship prompt if installed
+if command -v starship &>/dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+# Source local env file
+if [ -f "$HOME/.local/bin/env.zsh" ]; then
+  source "$HOME/.local/bin/env.zsh"
+fi
+
+# Source env
+envsource ~/.env
+
+# Conda initialization
+__conda_setup="$('/Users/harmonbhasin/programming/software/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/harmonbhasin/programming/software/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/harmonbhasin/programming/software/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/harmonbhasin/programming/software/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+# Disable conda's auto prompt modification (Starship handles it)
+export CONDA_CHANGEPS1=false
+
+# Yazi integration
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 # Additional PATH exports
 export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 export TVM_LIBRARY_PATH=/Users/harmonbhasin/programming/software/tvm/build
 export TVM_HOME=/Users/harmonbhasin/programming/software/tvm/build
 export PYTHONPATH=$TVM_HOME/python:$PYTHONPATH
 export PIP_REQUIRE_VIRTUALENV=false
+export PATH="$PATH:/Users/harmonbhasin/.lmstudio/bin"
+
 # Only set Ghostty TERM when Ghostty integration is available and terminfo exists
 if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
   if infocmp xterm-ghostty &>/dev/null; then
@@ -221,9 +225,6 @@ fi
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 
-# LM Studio
-export PATH="$PATH:/Users/harmonbhasin/.lmstudio/bin"
-
 # OCaml/Opam
 [[ ! -r '/Users/harmonbhasin/.opam/opam-init/init.zsh' ]] || source '/Users/harmonbhasin/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 
@@ -233,9 +234,6 @@ eval "$(zoxide init zsh)"
 # GHCup
 [ -f "/Users/harmonbhasin/.ghcup/env" ] && . "/Users/harmonbhasin/.ghcup/env"
 
-# Terraform completion
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C "$HOMEBREW_PREFIX/bin/terraform" terraform
 
 # Colors
 export CLICOLOR=1

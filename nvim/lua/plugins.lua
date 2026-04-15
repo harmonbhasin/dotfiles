@@ -100,11 +100,22 @@ local plugins = {
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter").install({
-				"c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
-				"r", "typescript", "javascript", "json",
+				"c",
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"markdown",
+				"markdown_inline",
+				"r",
+				"typescript",
+				"javascript",
+				"json",
 			})
 			vim.api.nvim_create_autocmd("FileType", {
-				callback = function() pcall(vim.treesitter.start) end,
+				callback = function()
+					pcall(vim.treesitter.start)
+				end,
 			})
 		end,
 	},
@@ -186,6 +197,7 @@ local plugins = {
 	},
 	{
 		"LukeGoodsell/nextflow-vim", -- Nextlfow
+		lazy = true,
 	},
 	{
 		"quarto-dev/quarto-nvim", -- QUARTO
@@ -219,8 +231,7 @@ local plugins = {
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
 	},
-	{ "sindrets/diffview.nvim" },
-	{ "EdenEast/nightfox.nvim" },
+	{ "sindrets/diffview.nvim", lazy = true },
 	{
 		"cameron-wags/rainbow_csv.nvim",
 		config = true,
@@ -286,7 +297,7 @@ local plugins = {
 		config = function()
 			require("writer").setup()
 		end,
-		lazy = false,
+		lazy = true,
 	},
 }
 
