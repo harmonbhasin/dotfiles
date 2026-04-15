@@ -66,7 +66,7 @@
     "deny": [],
     "defaultMode": "default"
   },
-  "model": "claude-sonnet-4-20250514",
+  "model": "opus[1m]",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "PreToolUse": [

@@ -44,6 +44,8 @@ shopt -s histappend
 ## Source
 # Git autocomplete
 source /usr/share/bash-completion/completions/git
+# Aws
+complete -C '/usr/local/bin/aws_completer' aws
 # Load environment variables from ~/.env
 envsource() {
   while IFS= read -r line || [[ -n "$line" ]]; do
