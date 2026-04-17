@@ -12,7 +12,7 @@ REMINDER = (
     "instead - proceed autonomously. (2) If experiment results were produced this "
     "session, log them in EXPERIMENT_LOG.md. (3) If code changed, document it in "
     "CHANGELOG.md. (4) If `git status` shows uncommitted changes, commit them "
-    "yourself (no user confirmation needed). If there's still pending work you were "
+    "yourself (no user confirmation needed) and push. If there's still pending work you were "
     "about to suggest, go ahead and do it, then log to EXPERIMENT_LOG.md / "
     "CHANGELOG.md and commit before stopping."
 )
