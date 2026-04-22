@@ -14,7 +14,9 @@ Design principles (apply during code review and implementation):
 
 Use descriptive, self-explanatory names. A reader should understand what a variable holds or a function does without tracing through the code.
 
-Separate data-fetching from decision logic. Functions that interpret data should be pure and never make external calls. Design for testability: small functions, no hidden dependencies, easy to test in isolation.
+Separate data-fetching from decision logic. Functions that interpret data should be pure and never make external calls. Design for testability: small functions, no hidden dependencies, easy to test in isolation. Use dependency injection so external systems (DBs, APIs, clocks) can be swapped for fakes in tests.
+
+Prefer small, modular files over large ones. Split by responsibility; if a file is doing several unrelated things, break it up.
 
 ## Data Modeling & External APIs
 
@@ -53,6 +55,8 @@ Don't make design decisions unilaterally. Surface trade-offs, propose options, a
 1. **Document the feature**: goal, behavior, success criteria
 2. **Break into testable pieces**: each piece builds on the last, maps to one PR
 3. **Plan with the agent**: iterate until solid. Ask: "How will you test this?" and "What patterns should this follow?"
+4. **Consider alternatives**: before picking an approach, sketch 2–3 different abstractions or system designs and compare trade-offs.
+5. **Research first**: unless told otherwise, research the subject (docs, prior art, existing code) before designing or implementing.
 
 Tips: be specific, point to existing patterns ("follow the pattern in X" beats explaining from scratch), keep pieces small.
 
