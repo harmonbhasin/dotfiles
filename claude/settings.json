@@ -64,7 +64,7 @@
       "Bash(brew install:*)"
     ],
     "deny": [],
-    "defaultMode": "default"
+    "defaultMode": "auto"
   },
   "model": "opus[1m]",
   "enableAllProjectMcpServers": true,
@@ -98,5 +98,6 @@
   "skipDangerousModePermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754413237616
-  }
+  },
+  "skipAutoPermissionPrompt": true
 }
