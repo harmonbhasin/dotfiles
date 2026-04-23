@@ -74,6 +74,7 @@ alias start-ec2="/Users/harmonbhasin/work/securebio/start_ec2.sh"
 alias stop-ec2="/Users/harmonbhasin/work/securebio/stop_ec2.sh"
 alias grab-ec2="/Users/harmonbhasin/work/securebio/grab_ec2.sh"
 alias list-ec2="/Users/harmonbhasin/work/securebio/list_harmon_instances.sh"
+alias helium='open -a Helium --args --remote-debugging-port=9222'
 # Only use the local Claude binary when not on Intel (Rosetta path differs)
 if [ "$(uname -m)" != "x86_64" ]; then
   alias c=claude
@@ -83,6 +84,12 @@ if [ "$(uname -m)" != "x86_64" ]; then
 fi
 alias d="nvim -c ':ObsidianToday'"
 alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
+
+# Codex
+alias q=codex
+chat() {
+  codex --dangerously-bypass-approvals-and-sandbox "$@"
+}
 
 # Tmux aliases
 alias t=tmux

@@ -94,10 +94,10 @@
     "ralph-loop@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754413237616
-  },
-  "skipAutoPermissionPrompt": true
+  }
 }
