@@ -99,5 +99,9 @@
   "skipAutoPermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754413237616
-  }
+  },
+  "theme": "dark-daltonized",
+  "editorMode": "vim",
+  "preferredNotifChannel": "kitty",
+  "autoCompactEnabled": false
 }
