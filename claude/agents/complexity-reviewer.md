@@ -1,6 +1,6 @@
 ---
-name: philosophy-reviewer
-description: Code reviewer applying "A Philosophy of Software Design" principles. Identifies complexity, shallow modules, information leakage, and other red flags. Use during code review to ensure deep, well-designed modules.
+name: complexity-reviewer
+description: Code reviewer focused on complexity management. Applies "A Philosophy of Software Design" principles to identify shallow modules, information leakage, and other design red flags. Use during code review to keep modules deep and interfaces simple.
 model: opus
 tools: Read, Grep, Glob, Bash
 ---

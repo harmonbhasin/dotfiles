@@ -32,7 +32,7 @@ Test cases should represent real-world examples, not synthetic data. If you're t
 
 ## Pre-Commit Review
 
-Before committing, run the `philosophy-reviewer` agent and the `code-reviewer` agent on the changes. The philosophy reviewer checks for unnecessary complexity, shallow modules, information leakage, and other design red flags. The code reviewer checks for correctness, security, and maintainability. Address any issues they raise before committing.
+Before committing, run the `complexity-reviewer` agent, the `code-reviewer` agent, and the `code-simplifier` agent on the changes. The complexity reviewer checks for unnecessary complexity, shallow modules, information leakage, and other design red flags. The code reviewer checks for correctness, security, and maintainability. Address any issues they raise before committing.
 
 ## Agent Shorthand
 

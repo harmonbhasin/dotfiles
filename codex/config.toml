@@ -1,14 +1,14 @@
-model = "gpt-5.4"
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+personality = "pragmatic"
 service_tier = "fast"
-
-[notice.model_migrations]
-"gpt-5.3-codex" = "gpt-5.4"
+web_search = "live"
 
 [features]
+shell_snapshot = true
 codex_hooks = true
 
-
-[mcp_servers.chrome_devtools]
+[mcp_servers.chrome-devtools]
 command = "cmd"
 args = [
     "/c",
@@ -19,3 +19,13 @@ args = [
     "http://127.0.0.1:9222"
 ]
 enabled = true
+
+[mcp_servers.chrome-devtools.tools.take_snapshot]
+approval_mode = "approve"
+
+[tui.model_availability_nux]
+"gpt-5.5" = 3
+
+[agents]
+max_threads = 10
+max_depth = 2
