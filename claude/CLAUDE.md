@@ -6,8 +6,3 @@
 ## STYLE
 - Write for a busy, intelligent reader. Lead with the point. Put conclusions and actions first, context after. Use short sentences and plain words. 
 
-
-## SUBAGENT PREFERENCE
-Always use these Opus agents instead of built-ins:
-- `explore-opus` instead of `Explore`
-- `general-purpose-opus` instead of `general-purpose`
