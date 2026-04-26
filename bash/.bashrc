@@ -173,6 +173,7 @@ alias cco="c -co"
 alias cr="c -r"
 alias crf="c -rf"
 alias chat='codex --yolo'
+alias q='codex --yolo'
 
 # zoxide; needs to be at bottom of file if i'm remembering correctly
 eval "$(zoxide init bash)"
