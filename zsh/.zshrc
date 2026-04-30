@@ -49,18 +49,21 @@ complete -C "$HOMEBREW_PREFIX/bin/aws_completer" aws
 
 # ===== PLUGIN LOADING =====
 # Load zsh-autocomplete first (must be early, before compdef calls)
-source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+#source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 # Load other plugins
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 #source "$HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+zstyle ':completion:*' menu select
+setopt AUTO_LIST
+setopt AUTO_MENU
 
 # Editor
 export EDITOR="nvim"
 
-# Vi mode (equivalent to fish_vi_key_bindings)
+# Vi mode 
 bindkey -v
-bindkey '^x' autosuggest-accept
+bindkey '^ ' autosuggest-accept
 
 # ===== ALIASES =====
 # Personal aliases
@@ -228,6 +231,10 @@ if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
   fi
 fi
 
+# Set up fzf key bindings and fuzzy completion (before Atuin so Atuin owns Ctrl+R)
+source <(fzf --zsh)
+bindkey '^I' expand-or-complete
+
 # Atuin
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
@@ -244,9 +251,6 @@ eval "$(zoxide init zsh)"
 
 # Colors
 export CLICOLOR=1
-
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
 
 # Set up jj key bindings
 source <(COMPLETE=zsh jj)
