@@ -3,16 +3,15 @@ model_reasoning_effort = "high"
 personality = "pragmatic"
 service_tier = "fast"
 web_search = "live"
+plan_mode_reasoning_effort="xhigh"
 
 [features]
 shell_snapshot = true
 codex_hooks = true
 
 [mcp_servers.chrome-devtools]
-command = "cmd"
+command = "npx"
 args = [
-    "/c",
-    "npx",
     "-y",
     "chrome-devtools-mcp@latest",
     "--browserUrl",
