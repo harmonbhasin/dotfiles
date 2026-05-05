@@ -90,6 +90,7 @@ alias llm-conf="cd ~/Library/Application\ Support/io.datasette.llm/"
 
 # Codex
 alias q=codex
+alias p=pi
 chat() {
   codex --dangerously-bypass-approvals-and-sandbox "$@"
 }
