@@ -6,10 +6,10 @@ local config = wezterm.config_builder()
 config.audible_bell = "Disabled"
 config.window_decorations = "RESIZE"
 config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
-	bottom = 0,
+	left = "0.5cell",
+	right = "0.5cell",
+	top = "0.5cell",
+	bottom = "0.5cell",
 }
 
 config.font = wezterm.font("Hack Nerd Font Mono")

@@ -311,7 +311,6 @@ local plugins = {
 				debounce_ms = 300,
 			})
 		end,
-		lazy = true,
 	},
 }
 
