@@ -275,3 +275,4 @@ if [[ -z "$_comps" ]] && [[ -t 0 ]]; then autoload -Uz compinit && compinit -i -
 source /Users/harmonbhasin/.zsh/completion/_b2
 
 # <<< b2 autocomplete <<<
+export PATH="$HOME/.local/bin:$PATH"
