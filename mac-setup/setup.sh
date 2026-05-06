@@ -7,10 +7,21 @@ brew install oxide
 brew install jj
 brew install tmux
 brew install gh
+brew install tree-sitter
+brew install rg
+brew install delta
+
+
+mkdir ~/.nvm
+ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+nvm install 22
+nvm use 22
 
 curl -fsSL https://claude.ai/install.sh | bash
 npm i -g @openai/codex
 
+npm install -g tree-sitter-cli
 mkdir -p ~/.config
 mkdir -p ~/.claude
 mkdir -p ~/.codex
