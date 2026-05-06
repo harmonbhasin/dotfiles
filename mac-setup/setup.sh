@@ -22,6 +22,11 @@ curl -fsSL https://claude.ai/install.sh | bash
 npm i -g @openai/codex
 
 npm install -g tree-sitter-cli
+
+brew install glide
+glide launch
+
+
 mkdir -p ~/.config
 mkdir -p ~/.claude
 mkdir -p ~/.codex
