@@ -292,14 +292,6 @@ local plugins = {
 	--	lazy = true,
 	--},
 	{
-		dir = "~/Documents/writer-neovim-plugin",
-		cond = vim.fn.isdirectory(vim.fn.expand("~/Documents")) == 1,
-		config = function()
-			require("writer").setup()
-		end,
-		lazy = true,
-	},
-	{
 		"selimacerbas/markdown-preview.nvim",
 		dependencies = { "selimacerbas/live-server.nvim" },
 		config = function()
