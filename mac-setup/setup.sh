@@ -14,6 +14,7 @@ brew install rg
 brew install delta
 brew install raycast
 brew install glide
+brew install zsh-autosuggestions
 glide launch
 
 mkdir ~/.nvm
