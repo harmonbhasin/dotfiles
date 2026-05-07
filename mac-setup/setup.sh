@@ -1,3 +1,5 @@
+ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
+
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 brew install fzf
@@ -10,11 +12,12 @@ brew install gh
 brew install tree-sitter
 brew install rg
 brew install delta
-
+brew install raycast
+brew install glide
+glide launch
 
 mkdir ~/.nvm
  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-
 nvm install 22
 nvm use 22
 
@@ -22,10 +25,6 @@ curl -fsSL https://claude.ai/install.sh | bash
 npm i -g @openai/codex
 
 npm install -g tree-sitter-cli
-
-brew install glide
-glide launch
-
 
 mkdir -p ~/.config
 mkdir -p ~/.claude
