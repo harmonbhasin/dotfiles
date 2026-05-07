@@ -186,7 +186,7 @@ if [ -f "$HOME/.local/bin/env.zsh" ]; then
 fi
 
 # Source env
-envsource ~/.env
+[ -f ~/.env ] && envsource ~/.env
 
 # Conda initialization
 __conda_setup="$('/Users/harmonbhasin/programming/software/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -237,7 +237,7 @@ source <(fzf --zsh)
 bindkey '^I' expand-or-complete
 
 # Atuin
-. "$HOME/.atuin/bin/env"
+[ -f "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 
 # OCaml/Opam
@@ -272,7 +272,7 @@ esac
 # >>> b2 autocomplete >>>
 # This section is managed by b2 . Manual edit may break automated updates.
 if [[ -z "$_comps" ]] && [[ -t 0 ]]; then autoload -Uz compinit && compinit -i -D; fi
-source /Users/harmonbhasin/.zsh/completion/_b2
+[ -f /Users/harmonbhasin/.zsh/completion/_b2 ] && source /Users/harmonbhasin/.zsh/completion/_b2
 
 # <<< b2 autocomplete <<<
 export PATH="$HOME/.local/bin:$PATH"
