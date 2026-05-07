@@ -17,6 +17,8 @@ brew install glide
 brew install zsh-autosuggestions
 glide launch
 
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 mkdir ~/.nvm
  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 nvm install 22
