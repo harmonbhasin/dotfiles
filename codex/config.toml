@@ -22,8 +22,11 @@ enabled = true
 [mcp_servers.chrome-devtools.tools.take_snapshot]
 approval_mode = "approve"
 
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-used", "session-id", "fast-mode", "thread-title", "task-progress"]
+
 [tui.model_availability_nux]
-"gpt-5.5" = 3
+"gpt-5.5" = 4
 
 [agents]
 max_threads = 10
