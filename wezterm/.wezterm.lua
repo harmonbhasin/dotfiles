@@ -12,7 +12,19 @@ config.window_padding = {
 	bottom = "0.5cell",
 }
 
-config.font = wezterm.font("Hack Nerd Font Mono")
+local function font_exists(name)
+	local h = io.popen('fc-list "' .. name .. '" 2>/dev/null')
+	if h then
+		local result = h:read("*a")
+		h:close()
+		return result ~= "" and result ~= nil
+	end
+	return false
+end
+
+if font_exists("Hack Nerd Font Mono") then
+	config.font = wezterm.font("Hack Nerd Font Mono")
+end
 config.font_size = 11
 config.enable_tab_bar = false
 config.colors = {
