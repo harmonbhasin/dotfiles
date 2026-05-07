@@ -15,6 +15,7 @@ brew install delta
 brew install raycast
 brew install glide
 brew install zsh-autosuggestions
+brew install starship
 glide launch
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
