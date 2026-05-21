@@ -250,6 +250,206 @@ function M.insert_citation(opts)
 	end)
 end
 
+-- Format a bib entry as a markdown reference line
+local function format_reference(entry)
+	local parts = {}
+	if entry.authorString and entry.authorString ~= "" then
+		table.insert(parts, entry.authorString)
+	end
+	if entry.title and entry.title ~= "" then
+		local title = entry.title
+		if entry.doiorurl and entry.doiorurl ~= "" then
+			local url = entry.doiorurl
+			if url:match("^10%.") then
+				url = "https://doi.org/" .. url
+			end
+			title = "[" .. title .. "](" .. url .. ")"
+		end
+		table.insert(parts, '"' .. title .. '"')
+	end
+	if entry.year and entry.year ~= "" then
+		table.insert(parts, "(" .. entry.year .. ")")
+	end
+	if entry.journal and entry.journal ~= "" then
+		table.insert(parts, "*" .. entry.journal .. "*")
+	end
+	return table.concat(parts, ". ") .. "."
+end
+
+local function split_authors(author_string)
+	if not author_string or author_string == "" then
+		return {}
+	end
+
+	local authors = {}
+	for author in (author_string .. " and "):gmatch("(.-)%s+and%s+") do
+		author = author:gsub("^%s*(.-)%s*$", "%1")
+		if author ~= "" then
+			table.insert(authors, author)
+		end
+	end
+	if #authors == 0 then
+		table.insert(authors, author_string)
+	end
+
+	return authors
+end
+
+local function author_last_name(author)
+	author = author:gsub("^%s*(.-)%s*$", "%1")
+	if author:find(",") then
+		return author:match("^%s*([^,]+)") or author
+	end
+
+	local particles = {
+		["da"] = true,
+		["de"] = true,
+		["del"] = true,
+		["der"] = true,
+		["di"] = true,
+		["du"] = true,
+		["la"] = true,
+		["le"] = true,
+		["van"] = true,
+		["von"] = true,
+	}
+	local words = {}
+	for word in author:gmatch("%S+") do
+		table.insert(words, word)
+	end
+	if #words == 0 then
+		return author
+	end
+	if #words >= 2 and particles[words[#words - 1]:lower()] then
+		return words[#words - 1] .. " " .. words[#words]
+	end
+	return words[#words]
+end
+
+local function citation_label(entry)
+	local authors = split_authors(entry.authorString or entry.author)
+	local year = entry.year or "n.d."
+	if #authors == 0 then
+		return (entry.title and entry.title ~= "" and entry.title or entry.citekey) .. " " .. year
+	end
+	if #authors == 1 then
+		return author_last_name(authors[1]) .. " " .. year
+	end
+	if #authors == 2 then
+		return author_last_name(authors[1]) .. " and " .. author_last_name(authors[2]) .. " " .. year
+	end
+	return author_last_name(authors[1]) .. " et al. " .. year
+end
+
+local function markdown_anchor(text)
+	return text
+		:lower()
+		:gsub("[^%w%s%-]", "")
+		:gsub("%s+", "-")
+		:gsub("%-+", "-")
+		:gsub("^%-", "")
+		:gsub("%-$", "")
+end
+
+-- Scan buffer for @citekeys, rewrite them as natural citation links, and append a references section
+function M.resolve_citations()
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	local full_text = table.concat(lines, "\n")
+
+	-- Collect unique citekeys from @key patterns (skip emails)
+	local seen = {}
+	local citekeys = {}
+	for key in full_text:gmatch("@([%w_%-]+)") do
+		if not key:match("^%d") -- skip @online, @article etc. (bib entry types)
+			and not seen[key]
+			and not full_text:match(key .. "[%w_%-%.]*@") -- skip if part of an email
+		then
+			seen[key] = true
+			table.insert(citekeys, key)
+		end
+	end
+
+	if #citekeys == 0 then
+		vim.notify("No @citekey references found in buffer", vim.log.levels.WARN)
+		return
+	end
+
+	-- Build lookup from bib file
+	local entries = read_bib_file(M.config.bib_file)
+	local by_key = {}
+	for _, entry in ipairs(entries) do
+		by_key[entry.citekey] = entry
+	end
+
+	-- Resolve each citekey
+	local refs = {}
+	local missing = {}
+	local resolved = {}
+	for i, key in ipairs(citekeys) do
+		local entry = by_key[key]
+		if entry then
+			local label = citation_label(entry)
+			local anchor = "ref-" .. markdown_anchor(key)
+			resolved[key] = {
+				anchor = anchor,
+				label = label,
+			}
+			table.insert(refs, string.format('%d. <a id="%s"></a>%s', i, anchor, format_reference(entry)))
+		else
+			table.insert(missing, key)
+		end
+	end
+
+	if #refs == 0 then
+		vim.notify("No matching bib entries found for: " .. table.concat(missing, ", "), vim.log.levels.WARN)
+		return
+	end
+
+	-- Remove existing references section if present
+	local ref_line = nil
+	for i, line in ipairs(lines) do
+		if line:match("^## References%s*$") or line:match("^# References%s*$") then
+			ref_line = i
+			break
+		end
+	end
+	if ref_line then
+		vim.api.nvim_buf_set_lines(0, ref_line - 1, -1, false, {})
+		lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	end
+
+	for i, line in ipairs(lines) do
+		line = line:gsub("%[%[@([%w_%-]+)%]%]", function(key)
+			local citation = resolved[key]
+			if citation then
+				return string.format("[%s](#%s)", citation.label, citation.anchor)
+			end
+			return "[[@" .. key .. "]]"
+		end)
+		lines[i] = line:gsub("@([%w_%-]+)", function(key)
+			local citation = resolved[key]
+			if citation then
+				return string.format("[%s](#%s)", citation.label, citation.anchor)
+			end
+			return "@" .. key
+		end)
+	end
+	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+
+	-- Append references section
+	local ref_lines = { "", "# References", "" }
+	for _, ref in ipairs(refs) do
+		table.insert(ref_lines, ref)
+	end
+	vim.api.nvim_buf_set_lines(0, -1, -1, false, ref_lines)
+
+	local msg = string.format("Added %d reference(s)", #refs)
+	if #missing > 0 then
+		msg = msg .. ". Missing: " .. table.concat(missing, ", ")
+	end
+	vim.notify(msg, vim.log.levels.INFO)
+end
+
 -- Setup function
 function M.setup(user_config)
 	M.config = vim.tbl_deep_extend("force", M.config, user_config or {})
