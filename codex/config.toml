@@ -7,7 +7,7 @@ plan_mode_reasoning_effort="xhigh"
 
 [features]
 shell_snapshot = true
-codex_hooks = true
+hooks = true
 
 [mcp_servers.chrome-devtools]
 command = "npx"
