@@ -160,6 +160,10 @@ alias gd="git diff"
 __git_complete gd _git_diff
 alias gds="git diff --staged"
 
+repos() {
+  gh repo list --limit 10 --json nameWithOwner,url --jq '.[] | "\(.nameWithOwner)\t\(.url)"'
+}
+
 # Editor aliases
 alias vi=nvim
 alias v=nvim
