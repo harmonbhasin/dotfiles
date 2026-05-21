@@ -2,6 +2,7 @@
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
 export EDITOR="nvim"
 export PIP_REQUIRE_VIRTUALENV=true
 

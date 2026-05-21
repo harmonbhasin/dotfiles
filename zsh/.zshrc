@@ -37,6 +37,8 @@ SAVEHIST=10000
 
 # ===== COMPLETIONS =====
 
+fpath+=(~/.zsh/completion)
+
 # Completion system for zsh
 autoload -U compinit && compinit
 # Completion system for zsh using bash
