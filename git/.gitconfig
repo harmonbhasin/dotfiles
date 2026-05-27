@@ -7,7 +7,7 @@
 	postBuffer = 524288000
 
 [core]
-  pager = delta
+  pager = hunk pager
 	editor = nvim
 
 [interactive]
