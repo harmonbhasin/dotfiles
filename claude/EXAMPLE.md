@@ -16,7 +16,23 @@ Use descriptive, self-explanatory names. A reader should understand what a varia
 
 Separate data-fetching from decision logic. Functions that interpret data should be pure and never make external calls. Design for testability: small functions, no hidden dependencies, easy to test in isolation. Use dependency injection so external systems (DBs, APIs, clocks) can be swapped for fakes in tests.
 
-Prefer small, modular files over large ones. Split by responsibility; if a file is doing several unrelated things, break it up.
+Prefer cohesive files with predictable flow over premature splitting. Split a file only when it has more than one clear responsibility or when keeping it together makes the public boundary harder to understand.
+
+### Readability Structure
+
+When a file grows, first improve its internal structure:
+- Put the public API first, then the main workflow, then helper functions.
+- Use light section comments for scanability when they clarify the flow, such as `# Public models`, `# Main workflow`, `# Parsing`, or `# Helpers`.
+- Do not add decorative banners or comments that repeat what the function names already say.
+
+Every module should start with an orienting docstring. It should briefly explain:
+- what boundary the file owns,
+- what it consumes,
+- what it produces,
+- how the public classes or functions connect,
+- and a small concrete example when the boundary is data-shaped.
+
+When adding or changing public classes in a module, update the relevant docstring so a reader can understand the class relationships in natural language before reading method bodies. Prefer existing project vocabulary from the PR plan, interface spec, and surrounding code. If a new term is necessary, define it at the boundary where it first appears; otherwise use the established name instead of creating a parallel abstraction.
 
 ## Data Modeling & External APIs
 
@@ -29,6 +45,14 @@ Before building something new, check whether existing API calls or data sources 
 ## Testing
 
 Test cases should represent real-world examples, not synthetic data. If you're testing against external behavior, use realistic inputs that exercise the actual edge cases.
+
+Tests should explain the behavior they protect in concrete project terms. For each test, include a short docstring or comment that says what case the test represents and what must remain true. Prefer domain language over generic testing language.
+
+Good:
+`"""A markdown file with frontmatter is rejected because metadata comes from the path."""`
+
+Avoid:
+`"""Catches regressions in parser validation."""`
 
 ## Pre-Commit Review
 
