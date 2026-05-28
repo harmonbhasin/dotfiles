@@ -30,9 +30,15 @@
 	path = /home/ec2-user/dotfiles/git/.gitconfig-remote
 [includeif "gitdir:/tmp/"]
 	path = /home/ec2-user/dotfiles/git/.gitconfig-remote
+
 [pull]
 	rebase = true
 
 # For proxmox/root instances
 [includeIf "gitdir:/root/"]
 	path = /root/dotfiles/git/.gitconfig-proxmox
+
+# For lambda labs
+[includeif "gitdir:/home/ubuntu/"]
+	path = /home/ubuntu/dotfiles/git/.gitconfig-remote
+
