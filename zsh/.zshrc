@@ -178,6 +178,9 @@ for file in $HOME/dotfiles/zsh/functions/*.zsh; do
   [ -f "$file" ] && source "$file"
 done
 
+# Project scaffolds
+[ -f "$HOME/dotfiles/scaffolds/sp.sh" ] && source "$HOME/dotfiles/scaffolds/sp.sh"
+
 # Starship prompt if installed
 if command -v starship &>/dev/null; then
   eval "$(starship init zsh)"

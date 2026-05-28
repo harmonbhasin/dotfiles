@@ -1,0 +1,43 @@
+# Merge the sections below into the `pyproject.toml` produced by `uv init`.
+# This is a fragment, not a complete file — paste into your project's pyproject.toml
+# alongside the [project] and [build-system] tables that uv generated.
+#
+# After merging:
+#   uv sync
+#   uv run pre-commit install
+
+[dependency-groups]
+dev = [
+    "mypy",
+    "pre-commit",
+    "pytest",
+    "ruff",
+]
+
+# --- Ruff ---
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # flake8-simplify
+    "N",   # pep8-naming
+]
+
+# --- Mypy ---
+[tool.mypy]
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+# --- Pytest ---
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

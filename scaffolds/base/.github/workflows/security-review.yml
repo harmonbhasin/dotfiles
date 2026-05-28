@@ -1,0 +1,28 @@
+name: Security Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 2
+
+      - name: Run Claude Security Review
+        uses: anthropics/claude-code-security-review@main
+        with:
+          comment-pr: true
+          claude-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude-model: claude-sonnet-4-6
+          exclude-directories: 'node_modules,.next,out,build,public,notes,e2e/fixtures,convex/_generated'
+          claudecode-timeout: '15'

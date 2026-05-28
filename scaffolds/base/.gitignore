@@ -1,0 +1,12 @@
+# Local agent configuration
+CLAUDE.local.md
+AGENTS.override.md
+
+# Local git worktrees
+.worktrees/
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.sample

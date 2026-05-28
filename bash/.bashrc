@@ -68,6 +68,9 @@ bind -f ~/dotfiles/bash/.inputrc
 # fzf aliases
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# Project scaffolds
+[ -f "$HOME/dotfiles/scaffolds/sp.sh" ] && source "$HOME/dotfiles/scaffolds/sp.sh"
+
 #################
 # Custom commands
 #################
