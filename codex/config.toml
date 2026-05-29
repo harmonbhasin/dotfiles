@@ -1,5 +1,5 @@
 model = "gpt-5.5"
-model_reasoning_effort = "high"
+model_reasoning_effort = "low"
 personality = "pragmatic"
 service_tier = "fast"
 web_search = "live"
@@ -31,3 +31,12 @@ status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-use
 [agents]
 max_threads = 10
 max_depth = 2
+
+[projects."/home/ubuntu/gpu-setup"]
+trust_level = "trusted"
+
+[projects."/home/ubuntu/cbrn-classifiers"]
+trust_level = "trusted"
+
+[projects."/home/ubuntu"]
+trust_level = "trusted"
