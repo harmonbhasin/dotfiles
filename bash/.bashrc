@@ -5,13 +5,13 @@
 #################
 
 ## Prompt
-# Define colors
-GREEN="\[\033[0;32m\]"
-BLUE="\[\033[0;34m\]"
-YELLOW="\[\033[0;33m\]"
+# Define colors (ir_black palette, 24-bit truecolor)
+BLUE="\[\033[38;2;150;203;254m\]"   # ir_black blue   #96CBFE (keywords)
+GREEN="\[\033[38;2;168;255;96m\]"   # ir_black green  #A8FF60 (strings)
+YELLOW="\[\033[38;2;255;255;182m\]" # ir_black yellow #FFFFB6 (types)
 NC="\[\033[0m\]" # No Color
-# The PS1 prompt variable
-PS1="${GREEN}\u@\h${NC}:${BLUE}\w${YELLOW}\$(parse_git_branch)${NC}\n❯ "
+# The PS1 prompt variable: user@host=blue, path=green (brightest, scanned most), branch=yellow
+PS1="${BLUE}\u@\h${NC}:${GREEN}\w${YELLOW}\$(parse_git_branch)${NC}\n❯ "
 
 ## Exporting
 # Less settings
