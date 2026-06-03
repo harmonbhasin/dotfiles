@@ -5,7 +5,7 @@
   "terminal": {
     "showTerminalProgress": true
   },
-  "defaultThinkingLevel": "xhigh",
+  "defaultThinkingLevel": "minimal",
   "theme": "dark",
   "packages": [
     "npm:pi-vim"
