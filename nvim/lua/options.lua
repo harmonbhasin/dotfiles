@@ -29,3 +29,26 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Set conceallevel for obsidian (conditionally set in setup.lua)
 vim.opt.conceallevel = 1
+
+-- Make `gf` work in Python projects that use a `src/` layout.
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		local current_file = vim.api.nvim_buf_get_name(0)
+		local start_dir = current_file ~= "" and vim.fs.dirname(current_file) or vim.fn.getcwd()
+		local root_markers = vim.fs.find({ "pyproject.toml", "setup.py", "setup.cfg", ".git" }, {
+			path = start_dir,
+			upward = true,
+		})
+		local root = root_markers[1] and vim.fs.dirname(root_markers[1]) or nil
+
+		if root then
+			local src_dir = root .. "/src"
+			if vim.fn.isdirectory(src_dir) == 1 then
+				vim.opt_local.path:append(src_dir)
+			end
+		end
+
+		vim.opt_local.suffixesadd:append(".py")
+	end,
+})
