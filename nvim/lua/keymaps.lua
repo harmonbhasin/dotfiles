@@ -252,5 +252,8 @@ vim.keymap.set("n", "<leader>dp", function()
 end, { desc = "Previous date file" })
 
 -- LSP diagnostics
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+vim.keymap.set("n", "grr", vim.lsp.buf.references, { desc = "Go to references" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostic under cursor" })
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Diagnostics to location list" })
