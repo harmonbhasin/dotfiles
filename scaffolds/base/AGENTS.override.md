@@ -76,6 +76,12 @@ Before committing, run the `complexity-reviewer` agent, the `code-reviewer` agen
 
 Docs go in the right place: README (quick-start), docs/onboarding.md (first day), docs/developers.md (reference).
 
+Keep onboarding/first-run docs to one successful path from zero to a concrete result. Move branches, tuning, exhaustive config, environment variants, and troubleshooting out unless they are required for that first success.
+
+Put durable operational knowledge in developer/operator reference: setup variants, command tables, config knobs, inspection commands, failure modes, and tuning guidance.
+
+When shortening docs, preserve useful detail by relocating it to the right doc and linking to it at the point of need.
+
 Use realistic examples: code samples, inputs, and scenarios that could actually occur in this codebase, not toy `foo`/`bar` placeholders. If you're unsure whether an example is realistic, ask.
 
 Write docs for the current design, not its history. Don't mention what changed, flag deprecated approaches, or hedge for backward compatibility. The reader has never seen the previous design, so docs (and code) should read as if it never existed. Exception: when I explicitly ask you to explain why something is designed the way it is.
