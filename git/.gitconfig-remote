@@ -1,3 +1,9 @@
+# Host-scoped pager override for GH200 (64 KB-page kernel).
+# hunk is a Bun-compiled binary and SIGABRTs on this kernel's 64 KB pages,
+# so use delta here instead. The shared [delta] block still applies.
+[core]
+	pager = delta
+
 # GitHub credential configuration
 [credential "https://github.com"]
 	helper = 

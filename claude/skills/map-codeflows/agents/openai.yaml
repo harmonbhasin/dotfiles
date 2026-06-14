@@ -1,0 +1,4 @@
+interface:
+  display_name: "Map Codeflows"
+  short_description: "Map code structure into plans and flow docs"
+  default_prompt: "Use $map-codeflows to map this codebase into types, boundaries, and call stacks."

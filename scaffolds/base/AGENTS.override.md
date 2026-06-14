@@ -62,6 +62,8 @@ Good:
 Avoid:
 `"""Catches regressions in parser validation."""`
 
+Larger test files should use light section comments to make the behavior story easy to scan. Order tests from normal behavior first, then policy and invariants, then validation and failure cases, then persistence, drift, and recovery behavior; keep test-only fakes and fixture builders at the bottom. Keep sections broad and named after the boundary they cover, such as `# Query generation behavior` or `# Artifact persistence`, and skip a header when it would only add noise.
+
 ## Pre-Commit Review
 
 Before committing, run the `complexity-reviewer` agent, the `code-reviewer` agent, and the `code-simplifier` agent on the changes. The complexity reviewer checks for unnecessary complexity, shallow modules, information leakage, and other design red flags. The code reviewer checks for correctness, security, and maintainability. Address any issues they raise before committing.

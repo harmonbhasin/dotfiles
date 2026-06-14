@@ -65,8 +65,12 @@ fi
 bind -f ~/dotfiles/bash/.inputrc
 
 ## Eval
-# fzf aliases
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# fzf key bindings + completion (Ctrl-R, Ctrl-T, Alt-C)
+if command -v fzf >/dev/null 2>&1 && fzf --bash >/dev/null 2>&1; then
+  eval "$(fzf --bash)"
+else
+  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+fi
 
 # Project scaffolds
 [ -f "$HOME/dotfiles/scaffolds/sp.sh" ] && source "$HOME/dotfiles/scaffolds/sp.sh"
