@@ -23,9 +23,9 @@ Use file length as a review trigger, not a rule. When a module approaches roughl
 ### Readability Structure
 
 When a file grows, first improve its internal structure:
-- Put the public API first, then the main workflow, then helper functions.
-- Use light section comments for scanability when they clarify the flow, such as `# Public models`, `# Main workflow`, `# Parsing`, or `# Helpers`.
-- Do not add decorative banners or comments that repeat what the function names already say.
+- Put the public API first, then the core behavior, then private support code.
+- Use light section comments as compact noun phrases that name the boundary below them, such as `# Public API and data contracts`.
+- Each section label should remain true until the next one. Avoid vague buckets like `# Helpers` and labels that merely repeat function names.
 
 Every module should start with an orienting docstring. It should briefly explain:
 - what boundary the file owns,
