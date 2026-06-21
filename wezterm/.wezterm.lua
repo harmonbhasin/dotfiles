@@ -25,7 +25,7 @@ end
 if font_exists("Hack Nerd Font Mono") then
 	config.font = wezterm.font("Hack Nerd Font Mono")
 end
-config.font_size = 11
+config.font_size = 12
 config.enable_tab_bar = false
 config.colors = {
 	foreground = "#f6f3e8",
