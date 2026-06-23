@@ -55,6 +55,16 @@ Lead the critique with the verdict: "Structure is solid; this is a sentence-leve
 
 These are the properties to assess against. Each one becomes a thing to praise (when present) or flag (when missing). They are heuristics, not laws. Every one of them has legitimate exceptions, and a critique that applies them dogmatically will degrade the user's voice.
 
+### Lead and develop, at every scale
+
+Much of what follows is one idea applied recursively, the **lead-and-development** structure that Joshua Schimel argues for in *Writing Science*: state the point, then support it. A document leads with its thesis and develops it across sections. A section leads with its claim and develops it across paragraphs. A paragraph leads with a topic sentence and develops it across sentences. A sentence leads with the given and develops toward the new.
+
+The practical test is the same at each level: a reader should be able to read only the leads (the first paragraph, then the first sentence of each paragraph) and come away with the argument. The development is there to convince, qualify, and ground; it should never carry information the reader needed up front.
+
+Schimel frames a whole piece as **OCAR**, Opening, Challenge, Action, Resolution: open with the context and characters, name the tension that drives the work, take the action that resolves it, and close with what it means. This is a narrative arc, not the IMRaD template. A paper can satisfy IMRaD section-by-section and still fail as a story if the tension is never set up or never resolved.
+
+One real tradeoff to flag for the user: **open vs. delay.** Leading with the answer (open structure) serves impatient, expert readers who want the result now. Withholding it to build toward a reveal (delay structure) can hook a reader who needs to be drawn in or persuaded that a counterintuitive claim is earned. Default to open for technical and busy-reader writing; reach for delay only deliberately, and only when the payoff justifies the wait.
+
 ### Structure
 
 **The lede lands fast.** A reader who only reads the first paragraph, or even the first sentence, should walk away with the headline. Burying the conclusion may feel suspenseful, but it punishes busy readers, who are most readers.
