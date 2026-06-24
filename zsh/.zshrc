@@ -66,6 +66,12 @@ export EDITOR="nvim"
 # Vi mode 
 bindkey -v
 bindkey '^ ' autosuggest-accept
+bindkey -M viins '^?' backward-delete-char
+bindkey -M viins '^H' backward-delete-char
+bindkey -M viins '^[[3~' delete-char
+bindkey -M vicmd '^?' backward-delete-char
+bindkey -M vicmd '^H' backward-delete-char
+bindkey -M vicmd '^[[3~' delete-char
 
 # ===== ALIASES =====
 # Personal aliases
