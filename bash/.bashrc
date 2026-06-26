@@ -158,7 +158,7 @@ alias gpl="git pull origin"
 alias ga="git add"
 __git_complete ga _git_add
 alias gap="git add --patch"
-alias gclf="git clean -f"
+alias gcl="git clean -fd"
 alias gc="git commit -m"
 alias gca="git commit --amend --no-edit"
 alias gpu="git push origin"
