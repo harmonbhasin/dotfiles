@@ -103,6 +103,9 @@ chat() {
   codex --dangerously-bypass-approvals-and-sandbox "$@"
 }
 
+# Reset source
+alias rcenv="source ~/.zshrc"
+
 # Tmux aliases
 alias t=tmux
 alias ta="tmux attach"
@@ -117,12 +120,14 @@ alias gst="git stash"
 alias gstl="git stash list"
 alias gha="git stash apply"
 alias gs="git status"
+alias gundo="git reset --soft HEAD~1"
 alias gsh="git show"
 alias gr="git restore"
 alias grs="git restore --staged"
 alias grbc="git rebase --continue"
 alias gl="git log --oneline"
 alias gb="git branch"
+alias gbla="git log -1 --"
 alias gpl="git pull origin"
 alias ga="git add"
 alias gap="git add --patch"
