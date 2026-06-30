@@ -204,6 +204,19 @@ local plugins = {
 		lazy = true,
 	},
 	{
+		"lervag/vimtex", -- LaTeX
+		ft = { "tex", "bib" },
+		init = function()
+			vim.g.vimtex_compiler_method = "latexmk"
+			vim.g.vimtex_view_method = "skim"
+		end,
+	},
+	{
+		"SCJangra/table-nvim", -- Markdown tables
+		ft = { "markdown", "quarto" },
+		opts = {},
+	},
+	{
 		"jmbuhr/otter.nvim", --QUARTO
 		lazy = true,
 		config = function()
@@ -234,7 +247,28 @@ local plugins = {
 	{ "sindrets/diffview.nvim", lazy = true },
 	{
 		"cameron-wags/rainbow_csv.nvim",
-		config = true,
+		config = function()
+			require("rainbow_csv").setup()
+
+			local function enable_csv_syntax()
+				vim.bo.syntax = vim.bo.filetype
+			end
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {
+					"csv",
+					"tsv",
+					"csv_semicolon",
+					"csv_whitespace",
+					"csv_pipe",
+					"rfc_csv",
+					"rfc_semicolon",
+				},
+				callback = enable_csv_syntax,
+			})
+
+			enable_csv_syntax()
+		end,
 		ft = {
 			"csv",
 			"tsv",

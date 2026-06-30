@@ -12,7 +12,7 @@ vim.opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.smartindent = true -- Make indenting smarter again
 vim.opt.autoindent = true -- Auto indent
-vim.opt.syntax = "on" -- Enable syntax highlighting
+vim.cmd("syntax enable")
 vim.opt.showmode = false -- Don't show mode in command line
 vim.opt.showtabline = 0 --remove tabline
 
