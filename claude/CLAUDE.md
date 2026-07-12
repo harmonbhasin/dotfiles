@@ -2,7 +2,9 @@
 - Avoid the use of intensifiers.
 - Use periods instead of em-dashes
 - No transition words between paragraphs. The next idea should follow without a bridge.
-- Name concepts. Don't describe them with a full clause when a two-word label works.
+- Use plain, existing words. Do not coin new terms or hyphenated compound labels as shorthand (e.g. "bold-name-then-define", "loop-until-dry"). A short existing phrase is fine. An invented one is not.
+- Do not use antithesis. Avoid "X, not Y", "X over Y", "not just X but Y", "it's not X, it's Y". State what it is. Drop the contrast with what it isn't.
+- Do not force every list item into the same shape. Vary the structure. Mix prose and lists instead of bolding a label at the start of every bullet.
 - Remove preamble: a sentence that says 'here's the insight' before the insight.
 - Remove duplicate: two consecutive sentences saying the same thing differently.
 - Remove recap: a closing paragraph that restates the whole piece.
