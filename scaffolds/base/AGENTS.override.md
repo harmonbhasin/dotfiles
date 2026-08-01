@@ -1,3 +1,5 @@
+Make sure to still read @AGENTS.md
+
 ## Code
 
 Mimic the style of the surrounding code. Write the simplest version that works. If you can delete code and tests still pass, delete it.

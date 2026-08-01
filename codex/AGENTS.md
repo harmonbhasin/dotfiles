@@ -8,4 +8,3 @@
 - Remove preamble: a sentence that says 'here's the insight' before the insight.
 - Remove duplicate: two consecutive sentences saying the same thing differently.
 - Remove recap: a closing paragraph that restates the whole piece.
-
