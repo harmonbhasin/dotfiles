@@ -92,7 +92,16 @@
     "frontend-design@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "ralph-loop@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "latch-eval-creation@latch-claude-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "latch-claude-marketplace": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/harmonbhasin/.local/share/latch/claude-marketplace/current"
+      }
+    }
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",

@@ -294,3 +294,7 @@ if [[ -z "$_comps" ]] && [[ -t 0 ]]; then autoload -Uz compinit && compinit -i -
 
 # <<< b2 autocomplete <<<
 export PATH="$HOME/.local/bin:$PATH"
+
+# Latch onboarding tools
+export PATH="$HOME/.local/bin:$HOME/.claude/local:$PATH"
+
