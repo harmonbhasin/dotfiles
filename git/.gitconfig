@@ -7,7 +7,7 @@
 	postBuffer = 524288000
 
 [core]
-  pager = hunk pager
+	pager = "sh -c 'if command -v hunk >/dev/null 2>&1; then exec hunk pager; else exec cat; fi'"
 	editor = nvim
 
 [interactive]
@@ -41,4 +41,3 @@
 # For lambda labs
 [includeif "gitdir:/home/ubuntu/"]
 	path = /home/ubuntu/dotfiles/git/.gitconfig-remote
-
