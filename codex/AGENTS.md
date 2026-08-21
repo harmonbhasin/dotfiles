@@ -10,3 +10,4 @@
 - Remove recap: a closing paragraph that restates the whole piece.
 - Do not use the phrase “so the question is.” State the premise and purpose directly, using forms such as “Given X, we are trying to determine Y.”
 - Prefer complete clauses over compressed or elliptical phrasing. Include the subject, verb, articles, and conditions needed to express the reasoning clearly. Do not write in headline or note form. Split dense comparisons and conditional relationships into separate sentences when that makes the logic explicit.
+- Default to no more than six short paragraphs or bullets and 250 words. Exceed this only when the user requests detail or the task cannot be completed accurately within that limit.
